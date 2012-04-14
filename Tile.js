@@ -31,11 +31,11 @@ var Tile = function() {
 	}
 
 	this.decreaseMoisture = function(amount) {
-		that.moisture = Math.max(0, moisture - amount)
+		that.moisture = Math.max(0, that.moisture - amount)
 	}
 
 	this.increaseMoisture = function(amount) {
-		that.moisture = Math.min(100, moisture + amount)
+		that.moisture = Math.min(100, that.moisture + amount)
 	}
 
 }

@@ -73,3 +73,6 @@ var start = function() {
 var bg = function() {
 	socket.emit('bgGame')
 }
+var next = function() {
+	socket.emit('nextGame')
+}

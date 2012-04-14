@@ -76,6 +76,11 @@ io.sockets.on('connection', function(socket) {
 			game.bg()
 		}
 	})
+	socket.on('nextGame', function() {
+		if (player.isHost()) {
+			game.nextTick()
+		}
+	})
 
 	socket.on('build', function(data) {
 		console.log(player.getName())
