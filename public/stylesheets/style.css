@@ -13,16 +13,12 @@ body {
 	background-repeat: repeat-x;
 }
 
-#gameWrapper {
-	margin-left: auto;
-	margin-right: auto;
-	width: 1200px;
-	height: 840px;
-	background: url('/images/splash_screen.jpg');
+.dialog, .hide {
+	display: none;
 }
 
-.dialog {
-	display: none;
+.noHeight {
+	height: 0px;
 }
 
 .ui-dialog {
@@ -56,13 +52,21 @@ input {
 	display: block;
 }
 
-#resources {
+#gameWrapper {
+	margin-left: auto;
+	margin-right: auto;
+	width: 1200px;
+	height: 840px;
+	background: url('/images/splash_screen.jpg');
+}
+
+#uiWrapper {
 	position: absolute;
 	top: 10px;
 	right: 10px;
 }
 
-#resources div {
+#uiWrapper div {
 	width: 180px;
 	height: 48px;
 	line-height: 48px;
@@ -78,18 +82,18 @@ input {
 	border-radius: 10px;
 }
 
-#resources #health, #resources #environment {
+#uiWrapper .noImage {
 	background-image: none;
 }
 
-#sun {
+#uiWrapper #sun {
 	background-position: 0 96px;
 }
 
-#water {
+#uiWrapper #water {
 	background-position: 0 0px;
 }
 
-#nutrients {
+#uiWrapper #nutrients {
 	background-position: 0 48px;
 }
