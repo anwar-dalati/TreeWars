@@ -5,6 +5,8 @@ var Player = function() {
 	var buildings = null
 
 	this.create = function(name) {
+		console.log('Created player %s', name)
+
 		that.name = name
 		that.buildings = require('./Buildings.js').Buildings()
 
