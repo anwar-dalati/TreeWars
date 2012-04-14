@@ -3,9 +3,12 @@ var BattleField = function() {
 	var that = this
 	var battleField = []
 
-	this.fieldLength = 32
+	this.fieldLength = 33
 	this.airHeight = 10
 	this.groundDepth = 4
+
+	var sunStrength = 10
+	var springActive = false
 
 	this.create = function() {
 		console.log('create BattleField...')
@@ -25,6 +28,19 @@ var BattleField = function() {
 				that.setBattleTile(x,y,tile)
 			}
 		}
+	}
+
+	this.isAvailable = function(x) {
+		console.log(that.getBattleTile(x, that.airHeight).getPlayerName())
+		if (typeof that.getBattleTile(x, that.airHeight).getPlayerName() != 'undefined') {
+			return false
+		}
+
+		return true
+	}
+
+	this.markTileAsUsed = function(playerName, x) {
+		that.getBattleTile(x, that.airHeight).setPlayerName(playerName)
 	}
 
 	this.getBattleTile = function(x,y) {
@@ -57,6 +73,18 @@ var BattleField = function() {
 		}
 
 		return tiles
+	}
+
+	this.setSunshineActive = function(active) {
+		if (active) {
+			sunStrength = 20
+		} else {
+			sunStrength = 10
+		}
+	}
+
+	this.setSpringActive = function(active) {
+		springActive = active
 	}
 }
 

@@ -6,6 +6,7 @@ var Game = function() {
 	var environment = null
 	var battleField = null
 	var ticks = 0
+	var trees = []
 
 	var increaseMoistureByRain = 5
 
@@ -42,10 +43,35 @@ var Game = function() {
 		return that.environment
 	}
 
+	this.placeTree = function(x, player) {
+		if (!that.battleField.isAvailable(x)) {
+			console.log('There is already placed a tree here')
+			return false
+		}
+
+		if (typeof trees[player.getName()] != 'undefined') {
+			console.log('You have already placed your tree')
+			return false
+		}
+
+		console.log('player %s placed tree at %s', player.getName(), x)
+		that.battleField.markTileAsUsed(player.getName(), x)
+		trees[player.getName()] = require('./Tree.js').Tree()
+		return true
+	}
+
 	this.gameLoop = function() {
 		if (++ticks % 5 == 0) {
 			console.log('tick %s', ticks)
 		}
+
+		// environment updates needed to do every tick
+		if (that.environment.getRainTicks()) {
+			that.rain();
+		}
+		that.sunshine(that.environment.getSunshineTicks() > 0)
+		that.spring(that.environment.getSpringTicks() > 0)
+		that.environment.decreaseTicks();
 
 		// update player's tree resources and stuff
 		for (var i = 0; i < players.length; i++) {
@@ -59,13 +85,21 @@ var Game = function() {
 			// just for testing purposes
 			// TODO: send the battlefield to the clients on every tick
 			players[i].getSocket().emit('battleField', {battleField: that.battleField.toArray()})
-		}
 
-		if (that.environment.getRainTicks()) {
-			that.rain();
+			var envState = null
+			var envTicks = 0
+			if (that.environment.getSunshineTicks() > 0) {
+				envState = 'Sunshine'
+				envTicks = that.environment.getSunshineTicks()
+			} else if (that.environment.getSpringTicks() > 0) {
+				envState = 'Spring'
+				envTicks = that.environment.getSpringTicks()
+			} else if (that.environment.getRainTicks() > 0) {
+				envState = 'Rain'
+				envTicks = that.environment.getRainTicks()
+			}
+			players[i].getSocket().emit('updateCurrentEnvironment', {state: envState, ticks: envTicks})
 		}
-
-		that.environment.decreaseTicks();
 	}
 
 	this.rain = function() {
@@ -75,6 +109,20 @@ var Game = function() {
 				that.battleField.getBattleTile(x, y).increaseMoisture(increaseMoistureByRain);
 			}
 		}
+	}
+
+	this.sunshine = function(active) {
+		if (active) {
+			console.log('its shining')
+		}
+		that.battleField.setSunshineActive(active)
+	}
+
+	this.spring = function(active) {
+		if (active) {
+			console.log('its spring')
+		}
+		that.battleField.setSpringActive(active)
 	}
 
 	this.bg = function() {
@@ -124,7 +172,8 @@ var Game = function() {
 			players[i].getSocket().emit('updatePlayerResources', {
 				healthPoints: players[i].getTree().getHealthPoints(),
 				sun: players[i].getTree().getSun(),
-				water: players[i].getTree().getWater()
+				water: players[i].getTree().getWater(),
+				nutrients: players[i].getTree().getNutrients()
 			})
 		}
 	}

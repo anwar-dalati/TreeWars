@@ -61,7 +61,15 @@ $(function() {
 
 	socket.on('updatePlayerResources', function(data) {
 		console.log(data)
-		$('#resources').html('Health Points: ' + data.healthPoints + ' Sun: ' + data.sun + ' Water: ' + data.water)
+		$('#resources #health').html('Health: ' + data.healthPoints)
+		$('#resources #sun').html('Sun: ' +  data.sun)
+		$('#resources #water').html('Water: ' + data.water)
+		$('#resources #nutrients').html('Nutrients: ' + data.nutrients)
+	})
+
+	socket.on('updateCurrentEnvironment', function(data) {
+		console.log('Environment: ' + (data.state ? data.state : 'None active') + ' Left: ' + data.ticks)
+		$('#resources #environment').html((data.state ? data.state : 'None active') + ' (' + data.ticks + ')')
 	})
 
 	startDialog()
@@ -80,4 +88,7 @@ var bg = function() {
 }
 var next = function() {
 	socket.emit('nextGame')
+}
+var placeTree = function(x) {
+	socket.emit('placeTreeGame', {x:x})
 }

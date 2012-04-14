@@ -1,9 +1,8 @@
 var Tree = function() {
 
 	var that = this
-	var treeHeigth = 0
-	var treeWidth = 0
-	var roots = []
+	var treeHeigth = 3
+	var treeWidth = 3
 	var rootDensity = 0
 	var leafDensity = 0
 	var rootWidth = 0
@@ -11,6 +10,7 @@ var Tree = function() {
 	var healthPoints = 10
 	var sun = 0
 	var water = 0
+	var nutrients = 0
 
 	this.extendTreeHeigth = function() {
 		treeHeigth++
@@ -22,6 +22,7 @@ var Tree = function() {
 	}
 
 	this.extendTreeWidth = function() {
+		treeWidth++
 		treeWidth++
 		console.log('extended tree width to %s', treeWidth)
 	}
@@ -37,11 +38,6 @@ var Tree = function() {
 
 	this.getLeafDensity = function() {
 		return leafDensity
-	}
-
-	this.placeRoot = function(x, y) {
-		roots.push({x: x, y: y})
-		console.log('placed root to x: %s, y: %s', x, y)
 	}
 
 	this.extendRootDensity = function() {
@@ -74,12 +70,20 @@ var Tree = function() {
 		return water
 	}
 
+	this.getNutrients = function() {
+		return nutrients
+	}
+
 	this.changeSun = function(amount) {
 		sun += amount
 	}
 
 	this.changeWater = function(amount) {
 		water += amount
+	}
+
+	this.changeNutrients = function(amount) {
+		nutrients += amount
 	}
 }
 
