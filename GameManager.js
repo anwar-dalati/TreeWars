@@ -10,7 +10,7 @@ var GameManager = function() {
 		return game.getCode()
 	}
 
-	this.joinGame = function(code) {
+	this.joinGame = function(code, player) {
 		var game = null
 		for (var i = 0; i < games.length; i++) {
 			if (games[i].getCode() == code) {
@@ -20,6 +20,7 @@ var GameManager = function() {
 		}
 
 		if (game !== null) {
+			game.join(player)
 			console.log('join game with code %s', code)
 		}
 	}

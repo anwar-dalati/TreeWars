@@ -45,13 +45,22 @@ var gameManager = require('./GameManager.js').GameManager()
 
 io.sockets.on('connection', function(socket) {
 	console.log('connection')
-	playerManager.addPlayer()
 
-	socket.on('createGame', function() {
+	var player = null
+
+	socket.on('createGame', function(data) {
 		var code = gameManager.createGame()
-		socket.emit('createGameCode', {code: code})
+		player = playerManager.addPlayer(data.playerName)
+		socket.emit('createGameCode', {
+			code: code
+		})
 	})
 	socket.on('joinGame', function(data) {
-		gameManager.joinGame(data.code)
+		player = playerManager.addPlayer(data.playerName)
+		gameManager.joinGame(data.code, player)
+	})
+
+	socket.on('build', function(data) {
+		console.log(player.getName())
 	})
 })

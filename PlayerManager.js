@@ -1,8 +1,10 @@
-
 var PlayerManager = function() {
 
-	this.addPlayer = function() {
-		console.log('player added')
+	var that = this
+
+	this.addPlayer = function(name) {
+		var player = require('./Player.js').Player(name)
+		return player
 	}
 }
 
