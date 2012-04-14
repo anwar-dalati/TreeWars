@@ -9,6 +9,12 @@ var ImageManager = function()
 	
 	var backgroundImage = null;
 	
+	this.preloadAllImages = function()
+	{
+		
+	}
+	
+	
 	this.preloadImage =  function(imageUrl, identifier, position, width, height)
 	{
 		//images[identifier] = new Image();
@@ -87,5 +93,9 @@ var ImageManager = function()
 			})
 		})
 	}
+	
+	module.exports.ImageManager = function() {
+	return new ImageManager();
+}
 	
 }
