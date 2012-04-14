@@ -45,10 +45,18 @@ $(function() {
 		console.log('game code: %s', data.code)
 		tw.gameCode = data.code
 	})
+	socket.on('joinGameSuccess', function(data) {
+		console.log('joining game with code %s %s', $('#joinGameCode').val(), data.success ? 'succeeded' : 'failed')
+		if (data.success) {
+			tw.gameCode = $('#joinGameCode').val()
+		} else {
+			joinDialog()
+		}
+	})
 
 	startDialog()
 })
 
-	var test = function() {
-		socket.emit('build', {playerName: tw.playerName})
-	}
+var test = function() {
+	socket.emit('build', {playerName: tw.playerName})
+}

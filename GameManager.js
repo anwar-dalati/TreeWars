@@ -38,6 +38,8 @@ var GameManager = function() {
 		if (game !== null) {
 			game.join(player)
 		}
+
+		return game !== null
 	}
 }
 
