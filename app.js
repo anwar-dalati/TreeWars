@@ -58,7 +58,8 @@ io.sockets.on('connection', function(socket) {
 	})
 	socket.on('joinGame', function(data) {
 		player = playerManager.addPlayer(data.playerName)
-		gameManager.joinGame(data.code, player)
+		var success = gameManager.joinGame(data.code, player)
+		socket.emit('joinGameSuccess', {success: success})
 	})
 
 	socket.on('build', function(data) {
