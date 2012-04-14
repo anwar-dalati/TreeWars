@@ -4,7 +4,7 @@ var Tile = function() {
 
 	var moisture = 0
 	var playerName = null
-	var type = 0 // 0 = Air, 1 = Ground
+	var type = null // 0 = Air, 1 = Ground
 
 	this.getMoisture = function() {
 		return that.moisture
@@ -31,11 +31,11 @@ var Tile = function() {
 	}
 
 	this.decreaseMoisture = function(amount) {
-		that.moisture = Math.max(0, moisture - amount)
+		that.moisture = Math.max(0, that.moisture - amount)
 	}
 
 	this.increaseMoisture = function(amount) {
-		that.moisture = Math.min(100, moisture + amount)
+		that.moisture = Math.min(100, that.moisture + amount)
 	}
 
 }

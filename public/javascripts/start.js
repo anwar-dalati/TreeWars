@@ -55,6 +55,15 @@ $(function() {
 		}
 	})
 
+	socket.on('battleField', function(data) {
+		console.log(data.battleField[0][0])
+	})
+
+	socket.on('updatePlayerResources', function(data) {
+		console.log(data)
+		$('#resources').html('Health Points: ' + data.healthPoints + ' Sun: ' + data.sun + ' Water: ' + data.water)
+	})
+
 	startDialog()
 })
 
@@ -65,4 +74,10 @@ var test = function() {
 }
 var start = function() {
 	socket.emit('startGame')
+}
+var bg = function() {
+	socket.emit('bgGame')
+}
+var next = function() {
+	socket.emit('nextGame')
 }
