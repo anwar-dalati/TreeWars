@@ -3,11 +3,13 @@ var Game = function() {
 	var that = this
 	var code = 0
 	var players = []
+	var environment = null
 
 	this.create = function(code) {
 		console.log('create game with code %s', code)
 
 		that.code = code
+		that.environment = require('./Environment.js').Environment()
 
 		return that
 	}
@@ -19,6 +21,10 @@ var Game = function() {
 
 	this.getCode = function() {
 		return that.code
+	}
+
+	this.getEnvironment = function() {
+		return that.environment
 	}
 }
 

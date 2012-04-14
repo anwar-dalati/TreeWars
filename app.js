@@ -47,20 +47,21 @@ io.sockets.on('connection', function(socket) {
 	console.log('connection')
 
 	var player = null
+	var game = null
 
 	socket.on('createGame', function(data) {
 		var code = gameManager.getNewCode()
 		gameManager.createGame(code)
 		player = playerManager.addPlayer(data.playerName)
-		gameManager.joinGame(code, player)
+		game = gameManager.joinGame(code, player)
 		socket.emit('createGameCode', {
 			code: code
 		})
 	})
 	socket.on('joinGame', function(data) {
 		player = playerManager.addPlayer(data.playerName)
-		var success = gameManager.joinGame(data.code, player)
-		socket.emit('joinGameSuccess', {success: success})
+		game = gameManager.joinGame(data.code, player)
+		socket.emit('joinGameSuccess', {success: game !== null})
 	})
 
 	socket.on('build', function(data) {
@@ -91,5 +92,31 @@ io.sockets.on('connection', function(socket) {
 	socket.on('buildExtendRootWidth', function() {
 		console.log('extend root width of player %s', player.getName())
 		player.getBuildings().extendRootWidth()
+	})
+
+	// environment callc
+	socket.on('summonRain', function() {
+		console.log('summoning rain by %s', player.getName())
+		game.getEnvironment().rain()
+	})
+	socket.on('summonSunshine', function() {
+		console.log('summoning sunshine by %s', player.getName())
+		game.getEnvironment().sunshine()
+	})
+	socket.on('summonSpring', function() {
+		console.log('summoning spring by %s', player.getName())
+		game.getEnvironment().spring()
+	})
+	socket.on('summonColdSnap', function() {
+		console.log('summoning cold snap by %s', player.getName())
+		game.getEnvironment().coldSnap()
+	})
+	socket.on('summonDrouth', function() {
+		console.log('summoning drouth by %s', player.getName())
+		game.getEnvironment().drouth()
+	})
+	socket.on('summonStorm', function() {
+		console.log('summoning storm by %s', player.getName())
+		game.getEnvironment().storm()
 	})
 })

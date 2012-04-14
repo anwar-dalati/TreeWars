@@ -38,7 +38,7 @@ var GameManager = function() {
 			game.join(player)
 		}
 
-		return game !== null
+		return game
 	}
 }
 
