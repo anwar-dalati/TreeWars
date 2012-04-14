@@ -3,7 +3,7 @@ var BattleField = function() {
 	var that = this
 	var battleField = []
 
-	this.fieldLength = 32
+	this.fieldLength = 33
 	this.airHeight = 10
 	this.groundDepth = 4
 
