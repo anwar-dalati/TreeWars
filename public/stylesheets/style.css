@@ -1,12 +1,17 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-}
-
-a {
-  color: #00B7FF;
-}
-
 .dialog {
 	display: none;
+}
+
+#resources {
+	position: relative;
+	left: 960px;
+	top: 10px;
+}
+
+#gameWrapper {
+	margin-left: auto;
+	margin-right: auto;
+	width: 1200px;
+	height: 840px;
+	border: 1px solid;
 }
