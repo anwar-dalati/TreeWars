@@ -33,7 +33,7 @@ function SquareField (width, height, squareSideLength)
 	this.Square.prototype.drawSquare = function()
 	{
 		//draw image belonging to square
-		//jQuery.animate()	
+		$("test").animate()	
 	}
 	
 	this.Square.prototype.changeImage = function(image)
