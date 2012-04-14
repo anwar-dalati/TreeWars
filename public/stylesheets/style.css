@@ -2,6 +2,17 @@
 	display: none;
 }
 
+* {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+	background:#5ac7ff url('/images/background/normal.jpg') center bottom;
+	background-repeat: repeat-x;
+}
+
 #resources {
 	position: relative;
 	left: 960px;
@@ -13,5 +24,40 @@
 	margin-right: auto;
 	width: 1200px;
 	height: 840px;
-	border: 1px solid;
+	background: url('../images/splash_screen.jpg');
+}
+
+.dialog {
+	display: none;
+}
+
+.ui-dialog {
+	-moz-box-shadow: 0 0 10px #000;
+	-webkit-box-shadow: 0 0 10px #000;
+	box-shadow: 0 0 10px #000;
+}
+
+.ui-widget.ui-widget-content, .ui-widget .ui-state-default, .ui-widget .ui-widget-content .ui-state-default, .ui-widget .ui-widget-header .ui-state-default {
+	background: #fff url('/images/dialog.jpg') repeat-x;
+	border: none;
+}
+
+.ui-widget .ui-widget-header, .ui-widget .ui-widget-content {
+	background: none;
+	border: none;
+}
+
+.ui-widget.ui-dialog .ui-dialog-titlebar {
+	padding: 10px;
+}
+
+.ui-widget.ui-dialog .ui-dialog-content {
+	padding: 30px 20px 10px 20px;
+	color: #808080;
+}
+
+input {
+	margin: 10px 0 0 0;
+	padding: 5px;
+	display: block;
 }
