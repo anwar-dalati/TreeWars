@@ -4,6 +4,8 @@ var Player = function() {
 	var name
 
 	this.create = function(name) {
+		console.log('Created player %s', name)
+
 		that.name = name
 
 		return that
