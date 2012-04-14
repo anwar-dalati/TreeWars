@@ -82,7 +82,7 @@ io.sockets.on('connection', function(socket) {
 		}
 	})
 	socket.on('placeTreeGame', function(data) {
-		game.placeTree(data.x, player)
+		game.placeTree(player, data.x)
 	})
 
 	socket.on('build', function(data) {

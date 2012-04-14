@@ -43,9 +43,9 @@ var Game = function() {
 		return that.environment
 	}
 
-	this.placeTree = function(x, player) {
+	this.placeTree = function(player, x) {
 		if (!that.battleField.isAvailable(x)) {
-			console.log('There is already placed a tree here')
+			console.log('You cant place your tree here')
 			return false
 		}
 
@@ -55,9 +55,17 @@ var Game = function() {
 		}
 
 		console.log('player %s placed tree at %s', player.getName(), x)
-		that.battleField.markTileAsUsed(player.getName(), x)
+		that.battleField.markTileAsUsed(player, x)
 		trees[player.getName()] = require('./Tree.js').Tree()
+
+		that.placeRoot(player, x, that.battleField.airHeight)
+		that.placeRoot(player, x+1, that.battleField.airHeight)
+
 		return true
+	}
+
+	this.placeRoot = function(player, x, y) {
+		that.battleField.getBattleTile(x,y).setPlayerName(player.getName())
 	}
 
 	this.gameLoop = function() {
@@ -96,7 +104,7 @@ var Game = function() {
 	}
 
 	this.bg = function() {
-		var line = ''
+		var line = 'y \\ x '
 		for (var x = 0; x < that.battleField.fieldLength; x++) {
 			line += that.lpad(x, 5) + ' '
 		}
@@ -104,17 +112,51 @@ var Game = function() {
 
 		var content;
 		for (var y = 0; y < that.battleField.airHeight + that.battleField.groundDepth; y++) {
-			line = ''
+			line = that.lpad(y, 5) + ' '
 			for (var x = 0; x < that.battleField.fieldLength; x++) {
-				if (that.battleField.getBattleTile(x,y).getType()) {
-					content = that.battleField.getBattleTile(x,y).getMoisture();
-				} else {
-					content = '.';
+				// present Players
+				content = that.getPresentPlayersAtCoord(x,y)
+				if (typeof content == 'object') {
+					content = content.join(',')
+					if (!content.length) {
+						line += that.lpad('-', 5) + ' '
+						continue
+					}
 				}
+				if (typeof content == 'undefined') {
+					line += that.lpad('-', 5) + ' '
+					continue
+				}
+
+				// Moisture
+//				if (that.battleField.getBattleTile(x,y).getType()) {
+//					content = that.battleField.getBattleTile(x,y).getMoisture();
+//				} else {
+//					content = '.';
+//				}
+
 				line += that.lpad(content, 5) + ' '
 			}
 			console.log(line)
 		}
+	}
+
+	this.getPresentPlayersAtCoord = function(x,y) {
+		if (that.battleField.getBattleTile(x,y).getType()) {
+			return that.battleField.getBattleTile(x,y).getPlayerName()
+		}
+		var players = []
+		var playerName
+		for (var bx = 0; bx < that.battleField.fieldLength; bx++) {
+			playerName = that.battleField.getBattleTile(bx, that.battleField.airHeight - 1).getPlayerName()
+			if (typeof playerName != 'undefined') {
+				var tree = trees[playerName]
+				if ((x - bx) < tree.getTreeWidth() - 1 && (bx - x) < tree.getTreeWidth() - 1 && y > that.battleField.airHeight - tree.getTreeHeigth() - 1) {
+					players.push(playerName)
+				}
+			}
+		}
+		return players
 	}
 
 	this.lpad = function(str, length, pad) {
