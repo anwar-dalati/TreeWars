@@ -61,7 +61,10 @@ $(function() {
 
 	socket.on('updatePlayerResources', function(data) {
 		console.log(data)
-		$('#resources').html('Health Points: ' + data.healthPoints + ' Sun: ' + data.sun + ' Water: ' + data.water)
+		$('#resources #health').html('Health: ' + data.healthPoints)
+		$('#resources #sun').html('Sun: ' +  data.sun)
+		$('#resources #water').html('Water: ' + data.water)
+		$('#resources #nutrients').html('Nutrients: ' + data.nutrients)
 	})
 
 	startDialog()
