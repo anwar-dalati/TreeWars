@@ -59,6 +59,11 @@ $(function() {
 		console.log(data.battleField[0][0])
 	})
 
+	socket.on('updatePlayerResources', function(data) {
+		console.log(data)
+		$('#resources').html('Health Points: ' + data.healthPoints + ' Sun: ' + data.sun + ' Water: ' + data.water)
+	})
+
 	startDialog()
 })
 

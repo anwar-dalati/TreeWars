@@ -4,7 +4,6 @@ var Player = function() {
 	var socket = null
 	var name
 	var tree = null
-	var buildings = null
 	var host = false
 
 	this.create = function(name, socket) {
@@ -13,7 +12,6 @@ var Player = function() {
 		that.socket = socket
 		that.name = name
 		that.tree = require('./Tree.js').Tree()
-		that.buildings = require('./Buildings.js').Buildings()
 
 		return that
 	}
@@ -28,10 +26,6 @@ var Player = function() {
 
 	this.getTree = function() {
 		return that.tree
-	}
-
-	this.getBuildings = function() {
-		return that.buildings
 	}
 
 	this.setHost = function(host) {

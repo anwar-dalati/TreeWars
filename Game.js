@@ -49,11 +49,15 @@ var Game = function() {
 
 		// update player's tree resources and stuff
 		for (var i = 0; i < players.length; i++) {
-//			player[i].getTree().updateSun(battleField)
-//			player[i].getTree().updateWater(battleField)
+			// DUMMY RESOURCE ADDING
+			// TODO: later to be calculated by the ResourceCalculator using the battleField
+			players[i].getTree().changeSun(1)
+			players[i].getTree().changeWater(1)
+
+			that.updatePlayerResources()
 
 			// just for testing purposes
-			// send the battlefield to the clients on every tick
+			// TODO: send the battlefield to the clients on every tick
 			players[i].getSocket().emit('battleField', {battleField: that.battleField.toArray()})
 		}
 
@@ -113,6 +117,16 @@ var Game = function() {
 			str += pad;
 		}
 		return str
+	}
+
+	this.updatePlayerResources = function() {
+		for (var i = 0; i < players.length; i++) {
+			players[i].getSocket().emit('updatePlayerResources', {
+				healthPoints: players[i].getTree().getHealthPoints(),
+				sun: players[i].getTree().getSun(),
+				water: players[i].getTree().getWater()
+			})
+		}
 	}
 }
 
