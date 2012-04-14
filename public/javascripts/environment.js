@@ -16,8 +16,8 @@ var Environment = function() {
 		socket.emit('summonColdSnap')
 	}
 
-	this.drouth = function() {
-		socket.emit('summonDrouth')
+	this.drought = function() {
+		socket.emit('summonDrought')
 	}
 
 	this.storm = function() {

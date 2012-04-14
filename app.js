@@ -130,14 +130,14 @@ io.sockets.on('connection', function(socket) {
 	})
 	socket.on('summonColdSnap', function() {
 		console.log('summoning cold snap by %s', player.getName())
-		game.getEnvironment().coldSnap()
+		game.getEnvironment().setColdSnap()
 	})
-	socket.on('summonDrouth', function() {
+	socket.on('summonDrought', function() {
 		console.log('summoning drouth by %s', player.getName())
-		game.getEnvironment().drouth()
+		game.getEnvironment().setDrought()
 	})
 	socket.on('summonStorm', function() {
 		console.log('summoning storm by %s', player.getName())
-		game.getEnvironment().storm()
+		game.getEnvironment().setStorm()
 	})
 })

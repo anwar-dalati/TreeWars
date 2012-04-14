@@ -67,10 +67,13 @@ var Game = function() {
 
 		// environment updates needed to do every tick
 		if (that.environment.getRainTicks()) {
-			that.rain();
+			that.rain(that.environment.getRainTicks() > 0);
 		}
 		that.sunshine(that.environment.getSunshineTicks() > 0)
 		that.spring(that.environment.getSpringTicks() > 0)
+		that.coldSnap(that.environment.getColdSnapTicks() > 0)
+		that.drought(that.environment.getDroughtTicks() > 0)
+		that.storm(that.environment.getStormTicks() > 0)
 		that.environment.decreaseTicks();
 
 		// update player's tree resources and stuff
@@ -115,14 +118,30 @@ var Game = function() {
 		if (active) {
 			console.log('its shining')
 		}
-		that.battleField.setSunshineActive(active)
 	}
 
 	this.spring = function(active) {
 		if (active) {
 			console.log('its spring')
 		}
-		that.battleField.setSpringActive(active)
+	}
+
+	this.coldSnap = function(active) {
+		if (active) {
+			console.log('its cold')
+		}
+	}
+
+	this.drought = function(active) {
+		if (active) {
+			console.log('its droughn')
+		}
+	}
+
+	this.storm = function(active) {
+		if (active) {
+			console.log('its stormy')
+		}
 	}
 
 	this.bg = function() {
