@@ -7,6 +7,9 @@ var BattleField = function() {
 	this.airHeight = 10
 	this.groundDepth = 4
 
+	var sunStrength = 10
+	var springActive = false
+
 	this.create = function() {
 		console.log('create BattleField...')
 		var width = that.fieldLength - 1
@@ -70,6 +73,18 @@ var BattleField = function() {
 		}
 
 		return tiles
+	}
+
+	this.setSunshineActive = function(active) {
+		if (active) {
+			sunStrength = 20
+		} else {
+			sunStrength = 10
+		}
+	}
+
+	this.setSpringActive = function(active) {
+		springActive = active
 	}
 }
 

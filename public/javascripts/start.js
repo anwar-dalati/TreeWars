@@ -67,6 +67,11 @@ $(function() {
 		$('#resources #nutrients').html('Nutrients: ' + data.nutrients)
 	})
 
+	socket.on('updateCurrentEnvironment', function(data) {
+		console.log('Environment: ' + (data.state ? data.state : 'None active') + ' Left: ' + data.ticks)
+		$('#resources #environment').html((data.state ? data.state : 'None active') + ' (' + data.ticks + ')')
+	})
+
 	startDialog()
 })
 

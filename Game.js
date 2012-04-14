@@ -65,6 +65,14 @@ var Game = function() {
 			console.log('tick %s', ticks)
 		}
 
+		// environment updates needed to do every tick
+		if (that.environment.getRainTicks()) {
+			that.rain();
+		}
+		that.sunshine(that.environment.getSunshineTicks() > 0)
+		that.spring(that.environment.getSpringTicks() > 0)
+		that.environment.decreaseTicks();
+
 		// update player's tree resources and stuff
 		for (var i = 0; i < players.length; i++) {
 			// DUMMY RESOURCE ADDING
@@ -77,13 +85,21 @@ var Game = function() {
 			// just for testing purposes
 			// TODO: send the battlefield to the clients on every tick
 			players[i].getSocket().emit('battleField', {battleField: that.battleField.toArray()})
-		}
 
-		if (that.environment.getRainTicks()) {
-			that.rain();
+			var envState = null
+			var envTicks = 0
+			if (that.environment.getSunshineTicks() > 0) {
+				envState = 'Sunshine'
+				envTicks = that.environment.getSunshineTicks()
+			} else if (that.environment.getSpringTicks() > 0) {
+				envState = 'Spring'
+				envTicks = that.environment.getSpringTicks()
+			} else if (that.environment.getRainTicks() > 0) {
+				envState = 'Rain'
+				envTicks = that.environment.getRainTicks()
+			}
+			players[i].getSocket().emit('updateCurrentEnvironment', {state: envState, ticks: envTicks})
 		}
-
-		that.environment.decreaseTicks();
 	}
 
 	this.rain = function() {
@@ -93,6 +109,20 @@ var Game = function() {
 				that.battleField.getBattleTile(x, y).increaseMoisture(increaseMoistureByRain);
 			}
 		}
+	}
+
+	this.sunshine = function(active) {
+		if (active) {
+			console.log('its shining')
+		}
+		that.battleField.setSunshineActive(active)
+	}
+
+	this.spring = function(active) {
+		if (active) {
+			console.log('its spring')
+		}
+		that.battleField.setSpringActive(active)
 	}
 
 	this.bg = function() {
