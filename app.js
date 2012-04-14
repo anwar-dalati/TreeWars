@@ -65,4 +65,18 @@ io.sockets.on('connection', function(socket) {
 	socket.on('build', function(data) {
 		console.log(player.getName())
 	})
+
+	//  build calls
+	socket.on('buildExtendHeigth', function() {
+		console.log('extend heigth of player %s', player.getName())
+		player.getBuildings().extendHeigth()
+	})
+	socket.on('buildExtendWidth', function() {
+		console.log('extend width of player %s', player.getName())
+		player.getBuildings().extendWidth()
+	})
+	socket.on('buildPlaceRoot', function(data) {
+		console.log('place root of player %s to x: %s, y: %s', player.getName(), data.x, data.y)
+		player.getBuildings().placeRoot(data.x, data.y)
+	})
 })

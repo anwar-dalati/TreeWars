@@ -2,15 +2,21 @@ var Player = function() {
 
 	var that = this
 	var name
+	var buildings = null
 
 	this.create = function(name) {
 		that.name = name
+		that.buildings = require('./Buildings.js').Buildings()
 
 		return that
 	}
 
 	this.getName = function() {
 		return that.name
+	}
+
+	this.getBuildings = function() {
+		return that.buildings
 	}
 }
 
