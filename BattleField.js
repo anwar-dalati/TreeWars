@@ -27,6 +27,19 @@ var BattleField = function() {
 		}
 	}
 
+	this.isAvailable = function(x) {
+		console.log(that.getBattleTile(x, that.airHeight).getPlayerName())
+		if (typeof that.getBattleTile(x, that.airHeight).getPlayerName() != 'undefined') {
+			return false
+		}
+
+		return true
+	}
+
+	this.markTile = function(playerName, x) {
+		that.getBattleTile(x, that.airHeight).setPlayerName(playerName)
+	}
+
 	this.getBattleTile = function(x,y) {
 		return battleField[x][y]
 	}

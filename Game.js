@@ -6,6 +6,7 @@ var Game = function() {
 	var environment = null
 	var battleField = null
 	var ticks = 0
+	var trees = []
 
 	var increaseMoistureByRain = 5
 
@@ -40,6 +41,23 @@ var Game = function() {
 
 	this.getEnvironment = function() {
 		return that.environment
+	}
+
+	this.placeTree = function(x, player) {
+		if (!that.battleField.isAvailable(x)) {
+			console.log('There is already placed a tree here')
+			return false
+		}
+
+		if (typeof trees[player.getName()] != 'undefined') {
+			console.log('You have already placed your tree')
+			return false
+		}
+
+		console.log('player %s placed tree at %s', player.getName(), x)
+		that.battleField.markTile(player.getName(), x)
+		trees[player.getName()] = require('./Tree.js').Tree()
+		return true
 	}
 
 	this.gameLoop = function() {

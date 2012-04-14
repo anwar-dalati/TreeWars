@@ -81,3 +81,6 @@ var bg = function() {
 var next = function() {
 	socket.emit('nextGame')
 }
+var placeTree = function(x) {
+	socket.emit('placeTreeGame', {x:x})
+}
