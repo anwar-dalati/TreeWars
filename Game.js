@@ -68,6 +68,18 @@ var Game = function() {
 		that.battleField.getBattleTile(x,y).setPlayerName(player.getName())
 	}
 
+	this.growRoot = function(player, x, y) {
+
+	}
+
+	this.strengthRoot = function(player) {
+
+	}
+
+	this.branchRoot = function(player) {
+
+	}
+
 	this.gameLoop = function() {
 		if (++ticks % 5 == 0) {
 			console.log('tick %s', ticks)
@@ -175,6 +187,13 @@ var Game = function() {
 				if (typeof content == 'undefined') {
 					line += that.lpad('-', 5) + ' '
 					continue
+				}
+
+				// Root
+				if (that.battleField.getBattleTile(x,y).getType()) {
+					content = that.battleField.getBattleTile(x,y).getMoisture();
+				} else {
+					content = '.';
 				}
 
 				// Moisture

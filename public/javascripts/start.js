@@ -92,3 +92,6 @@ var next = function() {
 var placeTree = function(x) {
 	socket.emit('placeTreeGame', {x:x})
 }
+var growRoot = function(x,y) {
+	socket.emit('growRoot', {x:x, y:y})
+}

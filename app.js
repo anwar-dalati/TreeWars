@@ -84,6 +84,9 @@ io.sockets.on('connection', function(socket) {
 	socket.on('placeTreeGame', function(data) {
 		game.placeTree(player, data.x)
 	})
+	socket.on('growRootGame', function(data) {
+		game.growRoot(player, data.x, data.y)
+	})
 
 	socket.on('build', function(data) {
 		console.log(player.getName())
