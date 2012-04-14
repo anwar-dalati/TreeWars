@@ -3,11 +3,13 @@ var Game = function() {
 	var that = this
 	var code = 0
 	var players = []
+	var battleField = null
 
-	this.create = function(code) {
+	this.create = function(code, battleField) {
 		console.log('create game with code %s', code)
 
 		that.code = code
+		that.battleField = battleField
 
 		return that
 	}
@@ -22,7 +24,7 @@ var Game = function() {
 	}
 }
 
-module.exports.Game = function(code) {
+module.exports.Game = function(code, battleField) {
 	var game = new Game();
-	return game.create(code);
+	return game.create(code, battleField);
 }
