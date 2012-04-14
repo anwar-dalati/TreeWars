@@ -4,10 +4,10 @@ var Game = function() {
 	var code = 0
 	var players = []
 
-	this.create = function() {
-		that.code = Math.round(Math.random() * (999999 - 100000) + 100000);
+	this.create = function(code) {
+		console.log('create game with code %s', code)
 
-		console.log('create game with code %s', that.code)
+		that.code = code
 
 		return that
 	}
@@ -22,7 +22,7 @@ var Game = function() {
 	}
 }
 
-module.exports.Game = function() {
+module.exports.Game = function(code) {
 	var game = new Game();
-	return game.create();
+	return game.create(code);
 }
