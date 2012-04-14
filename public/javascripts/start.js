@@ -55,6 +55,10 @@ $(function() {
 		}
 	})
 
+	socket.on('battleField', function(data) {
+		console.log(data.battleField[0][0])
+	})
+
 	startDialog()
 })
 

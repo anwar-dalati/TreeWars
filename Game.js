@@ -47,6 +47,16 @@ var Game = function() {
 			console.log('tick %s', ticks)
 		}
 
+// update player's tree resources and stuff
+		for (var i = 0; i < players.length; i++) {
+//			player[i].getTree().updateSun(battleField)
+//			player[i].getTree().updateWater(battleField)
+
+			// just for testing purposes
+			// send the battlefield to the clients on every tick
+			players[i].getSocket().emit('battleField', {battleField: that.battleField.toArray()})
+		}
+
 		if (that.environment.getRainTicks()) {
 			that.rain();
 		}

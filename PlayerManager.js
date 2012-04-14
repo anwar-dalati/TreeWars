@@ -2,8 +2,8 @@ var PlayerManager = function() {
 
 	var that = this
 
-	this.addPlayer = function(name) {
-		var player = require('./Player.js').Player(name)
+	this.addPlayer = function(name, socket) {
+		var player = require('./Player.js').Player(name, socket)
 		return player
 	}
 }
