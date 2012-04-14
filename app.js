@@ -54,6 +54,8 @@ io.sockets.on('connection', function(socket) {
 		gameManager.createGame(code)
 		player = playerManager.addPlayer(data.playerName)
 		game = gameManager.joinGame(code, player)
+		player.setHost(true)
+
 		socket.emit('createGameCode', {
 			code: code
 		})
@@ -62,6 +64,12 @@ io.sockets.on('connection', function(socket) {
 		player = playerManager.addPlayer(data.playerName)
 		game = gameManager.joinGame(data.code, player)
 		socket.emit('joinGameSuccess', {success: game !== null})
+	})
+	socket.on('startGame', function() {
+		if (player.isHost()) {
+			console.log('game started by %s', player.getName())
+			game.start()
+		}
 	})
 
 	socket.on('build', function(data) {
