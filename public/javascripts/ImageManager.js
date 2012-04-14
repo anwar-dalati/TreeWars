@@ -78,12 +78,14 @@ var ImageManager = function()
 				var positionIndex = 0;
 				for (positionIndex = 0; positionIndex < images[i].positions.length; positionIndex = positionIndex + 1)
 				{	
-					$('<img id="'+ images[i].id+ '" src="' + images[i].src + '" style="position:absolute; top: 'images[i].positions[positionIndex].y'; left: 'images[i].positions[positionIndex].x';" />').appendTo('#gameWrapper');								
+					$('<img id="'+ images[i].id+'" src="' +	 images[i].src + 
+					'" style="position:absolute; top:' + images[i].positions[positionIndex].y+
+					'; left: '+images[i].positions[positionIndex].x+';" />').appendTo('#gameWrapper');								
 				} 
 					//$('#' + images[i].id).animate
 					
 			})
-		}
+		})
 	}
 	
 }

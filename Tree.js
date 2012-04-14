@@ -10,6 +10,7 @@ var Tree = function() {
 	var healthPoints = 10
 	var sun = 0
 	var water = 0
+	var nutrients = 0
 
 	this.extendTreeHeigth = function() {
 		treeHeigth++
@@ -69,12 +70,20 @@ var Tree = function() {
 		return water
 	}
 
+	this.getNutrients = function() {
+		return nutrients
+	}
+
 	this.changeSun = function(amount) {
 		sun += amount
 	}
 
 	this.changeWater = function(amount) {
 		water += amount
+	}
+
+	this.changeNutrients = function(amount) {
+		nutrients += amount
 	}
 }
 

@@ -142,7 +142,8 @@ var Game = function() {
 			players[i].getSocket().emit('updatePlayerResources', {
 				healthPoints: players[i].getTree().getHealthPoints(),
 				sun: players[i].getTree().getSun(),
-				water: players[i].getTree().getWater()
+				water: players[i].getTree().getWater(),
+				nutrients: players[i].getTree().getNutrients()
 			})
 		}
 	}
