@@ -18,7 +18,7 @@ body {
 	margin-right: auto;
 	width: 1200px;
 	height: 840px;
-	background: url('../images/splash_screen.jpg');
+	background: url('/images/splash_screen.jpg');
 }
 
 .dialog {
@@ -71,14 +71,14 @@ input {
 	background-color: #fff;
 	font-weight: bold;
 	color: #808080;
-	background-image: url(../images/ressources.png);
+	background-image: url('/images/ressources.png');
 	-moz-border-radius: 10px;
 	-webkit-border-radius: 10px;
 	-khtml-border-radius: 10px;
 	border-radius: 10px;
 }
 
-#resources #health {
+#resources #health, #resources #environment {
 	background-image: none;
 }
 
