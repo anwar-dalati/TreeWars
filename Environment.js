@@ -1,9 +1,25 @@
 var Environment = function() {
 
 	var that = this
+	var rainTicks = 0
+	var sunshineTicks = 0
 
-	this.rain = function() {
+	this.getRainTicks = function() {
+		return rainTicks
+	}
+
+	this.getSunshineTicks = function() {
+		return sunshineTicks
+	}
+
+	this.decreaseTicks = function() {
+		rainTicks = Math.max(0, --rainTicks)
+		sunshineTicks = Math.max(0, --sunshineTicks)
+	}
+
+	this.setRain = function() {
 		console.log('rain summoned')
+		rainTicks = 10
 	}
 
 	this.sunshine = function() {
