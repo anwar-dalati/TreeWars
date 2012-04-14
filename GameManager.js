@@ -8,8 +8,6 @@ var GameManager = function() {
 		var game = require('./Game.js').Game(code, battleField)
 
 		games.push(game)
-
-		return game.getCode()
 	}
 
 	this.getNewCode = function() {

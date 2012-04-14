@@ -71,6 +71,11 @@ io.sockets.on('connection', function(socket) {
 			game.start()
 		}
 	})
+	socket.on('bgGame', function() {
+		if (player.isHost()) {
+			game.bg()
+		}
+	})
 
 	socket.on('build', function(data) {
 		console.log(player.getName())
@@ -105,7 +110,7 @@ io.sockets.on('connection', function(socket) {
 	// environment callc
 	socket.on('summonRain', function() {
 		console.log('summoning rain by %s', player.getName())
-		game.getEnvironment().rain()
+		game.getEnvironment().setRain()
 	})
 	socket.on('summonSunshine', function() {
 		console.log('summoning sunshine by %s', player.getName())

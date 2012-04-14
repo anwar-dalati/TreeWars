@@ -4,7 +4,7 @@ var Tile = function() {
 
 	var moisture = 0
 	var playerName = null
-	var type = 0 // 0 = Air, 1 = Ground
+	var type = null // 0 = Air, 1 = Ground
 
 	this.getMoisture = function() {
 		return that.moisture

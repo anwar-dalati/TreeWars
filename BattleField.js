@@ -3,20 +3,23 @@ var BattleField = function() {
 	var that = this
 	var battleField = []
 
-	var fieldLength = 32
-	var airHeight = 10
-	var groundDepth = 4
+	this.fieldLength = 32
+	this.airHeight = 10
+	this.groundDepth = 4
 
 	this.create = function() {
 		console.log('create BattleField...')
-		var width = fieldLength - 1
-		var height = airHeight + groundDepth - 1
+		var width = that.fieldLength - 1
+		var height = that.airHeight + that.groundDepth - 1
 		for (var x = 0; x <= width; x++) {
 			for (var y = 0; y <= height; y++) {
 				var tile = require('./Tile.js').Tile()
 
-				if (y > airHeight - 1) {
-					tile.setType(1);
+				if (y < that.airHeight) {
+					tile.setType(0)
+				} else {
+					tile.setType(1)
+					tile.setMoisture(50)
 				}
 
 				that.setBattleTile(x,y,tile)

@@ -7,6 +7,8 @@ var Game = function() {
 	var battleField = null
 	var ticks = 0
 
+	var increaseMoistureByRain = 5
+
 	this.create = function(code, battleField) {
 		console.log('create game with code %s', code)
 
@@ -28,6 +30,10 @@ var Game = function() {
 		}, 1000)
 	}
 
+	this.nextTick = function() {
+		that.gameLoop()
+	}
+
 	this.getCode = function() {
 		return that.code
 	}
@@ -41,7 +47,7 @@ var Game = function() {
 			console.log('tick %s', ticks)
 		}
 
-		// update player's tree resources and stuff
+// update player's tree resources and stuff
 		for (var i = 0; i < players.length; i++) {
 //			player[i].getTree().updateSun(battleField)
 //			player[i].getTree().updateWater(battleField)
@@ -50,6 +56,62 @@ var Game = function() {
 			// send the battlefield to the clients on every tick
 			players[i].getSocket().emit('battleField', {battleField: that.battleField.toArray()})
 		}
+
+		if (that.environment.getRainTicks()) {
+			that.rain();
+		}
+
+		that.environment.decreaseTicks();
+	}
+
+	this.rain = function() {
+		for (var x = 0; x <= battleField.fieldLength; x++) {
+			for (var y = battleField.airHeight; y <= battleField.airHeight + battleField.groundDepth; y++) {
+				battleField.getBattleTile(x, y).increaseMoisture(increaseMoistureByRain);
+			}
+		}
+	}
+
+	this.bg = function() {
+		var line = ''
+		for (var x = 0; x < that.battleField.fieldLength; x++) {
+			line += that.lpad(x, 5) + ' '
+		}
+		console.log(line)
+
+		var content;
+		for (var y = 0; y < that.battleField.airHeight + that.battleField.groundDepth; y++) {
+			line = ''
+			for (var x = 0; x < that.battleField.fieldLength; x++) {
+				if (that.battleField.getBattleTile(x,y).getType()) {
+					content = that.battleField.getBattleTile(x,y).getMoisture();
+				} else {
+					content = '.';
+				}
+				line += that.lpad(content, 5) + ' '
+			}
+			console.log(line)
+		}
+	}
+
+	this.lpad = function(str, length, pad) {
+		str = String(str)
+		length = length || 3
+		pad = pad || " "
+		while (str.length < length) {
+			str = pad + str;
+		}
+		return str
+	}
+
+	this.rpad = function(str, length, pad) {
+		str = String(str)
+		length = length || 3
+		pad = pad || " "
+		while (str.length < length) {
+			str += pad;
+		}
+		return str
 	}
 }
 
