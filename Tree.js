@@ -4,11 +4,11 @@ var Tree = function() {
 	var sun = 0
 	var water = 0
 
-	this.updateSun = function(battleField) {
+	this.changeSun = function(battleField) {
 		sun++
 	}
 
-	this.updateWater = function(battleField) {
+	this.changeWater = function(battleField) {
 		water++
 	}
 }

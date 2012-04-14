@@ -47,7 +47,7 @@ var Game = function() {
 			console.log('tick %s', ticks)
 		}
 
-// update player's tree resources and stuff
+		// update player's tree resources and stuff
 		for (var i = 0; i < players.length; i++) {
 //			player[i].getTree().updateSun(battleField)
 //			player[i].getTree().updateWater(battleField)
