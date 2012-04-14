@@ -36,7 +36,7 @@ var BattleField = function() {
 		return true
 	}
 
-	this.markTile = function(playerName, x) {
+	this.markTileAsUsed = function(playerName, x) {
 		that.getBattleTile(x, that.airHeight).setPlayerName(playerName)
 	}
 

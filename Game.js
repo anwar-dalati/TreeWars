@@ -55,7 +55,7 @@ var Game = function() {
 		}
 
 		console.log('player %s placed tree at %s', player.getName(), x)
-		that.battleField.markTile(player.getName(), x)
+		that.battleField.markTileAsUsed(player.getName(), x)
 		trees[player.getName()] = require('./Tree.js').Tree()
 		return true
 	}
