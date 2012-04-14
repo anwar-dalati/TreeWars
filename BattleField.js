@@ -34,6 +34,27 @@ var BattleField = function() {
 		}
 		battleField[x][y] = tile
 	}
+
+	this.toArray = function() {
+		var tiles = []
+
+		for (var x = 0; x < battleField.length; x++) {
+			for (var y = 0; y < battleField[x].length; y++) {
+				var tile = that.getBattleTile(x, y)
+				if (typeof tiles[x] == 'undefined') {
+					tiles[x] = []
+				}
+
+				tiles[x][y] = {
+					moisture: 100,//tile.getMoisture(),
+					playerName: 'test',// tile.getPlayerName(),
+					type: 1// tile.getType()
+				}
+			}
+		}
+
+		return tiles
+	}
 }
 
 module.exports.BattleField = function() {
