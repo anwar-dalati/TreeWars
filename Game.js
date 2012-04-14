@@ -97,19 +97,26 @@ var Game = function() {
 			// TODO: send the battlefield to the clients on every tick
 			players[i].getSocket().emit('battleField', {battleField: that.battleField.toArray()})
 
-			var envState = null
-			var envTicks = 0
-			if (that.environment.getSunshineTicks() > 0) {
-				envState = 'Sunshine'
-				envTicks = that.environment.getSunshineTicks()
-			} else if (that.environment.getSpringTicks() > 0) {
-				envState = 'Spring'
-				envTicks = that.environment.getSpringTicks()
-			} else if (that.environment.getRainTicks() > 0) {
-				envState = 'Rain'
-				envTicks = that.environment.getRainTicks()
+			var envStates = []
+			if (that.environment.getRainTicks() > 0) {
+				envStates.push({name: 'Rain', ticks: that.environment.getRainTicks()})
 			}
-			players[i].getSocket().emit('updateCurrentEnvironment', {state: envState, ticks: envTicks})
+			if (that.environment.getSunshineTicks() > 0) {
+				envStates.push({name: 'Sunshine', ticks: that.environment.getSunshineTicks()})
+			}
+			if (that.environment.getSpringTicks() > 0) {
+				envStates.push({name: 'Spring', ticks: that.environment.getSpringTicks()})
+			}
+			if (that.environment.getColdSnapTicks() > 0) {
+				envStates.push({name: 'Cold Snap', ticks: that.environment.getColdSnapTicks()})
+			}
+			if (that.environment.getDroughtTicks() > 0) {
+				envStates.push({name: 'Drought', ticks: that.environment.getDroughtTicks()})
+			}
+			if (that.environment.getStormTicks() > 0) {
+				envStates.push({name: 'Storm', ticks: that.environment.getStormTicks()})
+			}
+			players[i].getSocket().emit('updateCurrentEnvironment', {states: envStates})
 		}
 	}
 
