@@ -65,9 +65,10 @@ var Game = function() {
 	}
 
 	this.rain = function() {
-		for (var x = 0; x <= battleField.fieldLength; x++) {
-			for (var y = battleField.airHeight; y <= battleField.airHeight + battleField.groundDepth; y++) {
-				battleField.getBattleTile(x, y).increaseMoisture(increaseMoistureByRain);
+		console.log('its raining')
+		for (var x = 0; x < that.battleField.fieldLength; x++) {
+			for (var y = that.battleField.airHeight; y < that.battleField.airHeight + that.battleField.groundDepth; y++) {
+				that.battleField.getBattleTile(x, y).increaseMoisture(increaseMoistureByRain);
 			}
 		}
 	}
