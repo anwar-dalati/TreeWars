@@ -10,10 +10,12 @@ html
 		script(src='/javascripts/jquery-1.7.2.js')
 		script(src='/javascripts/jquery-ui-1.8.18.custom.min.js')
 		script(src='/javascripts/build.js')
+		script(src='/javascripts/environment.js')
 		script
 			var tw = {}
 			var socket = io.connect();
 			var build = new Build();
+			var env = new Environment();
 		script(src='/javascripts/start.js')
 
 	body!= body

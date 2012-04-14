@@ -4,7 +4,8 @@ var GameManager = function() {
 	var games = []
 
 	this.createGame = function(code) {
-		var game = require('./Game.js').Game(code)
+		var battleField = require('./BattleField.js').BattleField()
+		var game = require('./Game.js').Game(code, battleField)
 
 		games.push(game)
 
@@ -38,7 +39,7 @@ var GameManager = function() {
 			game.join(player)
 		}
 
-		return game !== null
+		return game
 	}
 }
 
