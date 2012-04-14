@@ -1,23 +1,41 @@
 var Tile = function() {
 
 	var that = this
+
+	var moisture = 0
 	var playerName = null
-	var status = 0
+	var type = 0 // 0 = Air, 1 = Ground
 
-	this.getName = function() {
-		return playerName
+	this.getMoisture = function() {
+		return that.moisture
 	}
 
-	this.getStatus = function() {
-		return status
+	this.getPlayerName = function() {
+		return that.playerName
 	}
 
-	this.setName = function(playerName) {
-		playerName = playerName
+	this.getType = function() {
+		return that.type
 	}
 
-	this.setStatus = function(status) {
-		status = status
+	this.setMoisture = function(moisture) {
+		that.moisture = moisture
+	}
+
+	this.setPlayerName = function(playerName) {
+		that.playerName = playerName
+	}
+
+	this.setType = function(type) {
+		that.type = type
+	}
+
+	this.decreaseMoisture = function(amount) {
+		that.moisture = Math.max(0, moisture - amount)
+	}
+
+	this.increaseMoisture = function(amount) {
+		that.moisture = Math.min(100, moisture + amount)
 	}
 
 }
