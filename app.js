@@ -68,16 +68,28 @@ io.sockets.on('connection', function(socket) {
 	})
 
 	//  build calls
-	socket.on('buildExtendHeigth', function() {
+	socket.on('buildExtendTreeHeigth', function() {
 		console.log('extend heigth of player %s', player.getName())
-		player.getBuildings().extendHeigth()
+		player.getBuildings().extendTreeHeigth()
 	})
-	socket.on('buildExtendWidth', function() {
+	socket.on('buildExtendTreeWidth', function() {
 		console.log('extend width of player %s', player.getName())
-		player.getBuildings().extendWidth()
+		player.getBuildings().extendTreeWidth()
+	})
+	socket.on('buildExtendLeafDensity', function() {
+		console.log('extend leaf density of player %s', player.getName())
+		player.getBuildings().extendLeafDensity()
 	})
 	socket.on('buildPlaceRoot', function(data) {
 		console.log('place root of player %s to x: %s, y: %s', player.getName(), data.x, data.y)
 		player.getBuildings().placeRoot(data.x, data.y)
+	})
+	socket.on('buildExtendRootDensity', function() {
+		console.log('extend root density of player %s', player.getName())
+		player.getBuildings().extendRootDensity()
+	})
+	socket.on('buildExtendRootWidth', function() {
+		console.log('extend root width of player %s', player.getName())
+		player.getBuildings().extendRootWidth()
 	})
 })

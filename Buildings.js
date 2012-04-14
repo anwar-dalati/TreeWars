@@ -1,29 +1,61 @@
 var Buildings = function() {
 
 	var that = this
-	var heigth = 0
-	var width = 0
+	var treeHeigth = 0
+	var treeWidth = 0
 	var roots = []
+	var rootDensity = 0
+	var leafDensity = 0
+	var rootWidth = 0
 
-	this.extendHeigth = function() {
-		console.log('extended heigth')
+	this.extendTreeHeigth = function() {
+		treeHeigth++
+		console.log('extended tree heigth to %s', treeHeigth)
 	}
 
-	this.getHeigth = function() {
-		return that.heigth
+	this.getTreeHeigth = function() {
+		return treeHeigth
 	}
 
-	this.extendWidth = function() {
-		console.log('extended width')
+	this.extendTreeWidth = function() {
+		treeWidth++
+		console.log('extended tree width to %s', treeWidth)
 	}
 
-	this.getWidth = function() {
-		return that.width
+	this.getTreeWidth = function() {
+		return treeWidth
+	}
+
+	this.extendLeafDensity = function() {
+		leafDensity++
+		console.log('extended leaf density to %s', leafDensity)
+	}
+
+	this.getLeafDensity = function() {
+		return leafDensity
 	}
 
 	this.placeRoot = function(x, y) {
-		console.log('placed root to x: %s, y: %s', x, y)
 		roots.push({x: x, y: y})
+		console.log('placed root to x: %s, y: %s', x, y)
+	}
+
+	this.extendRootDensity = function() {
+		rootDensity++
+		console.log('extended root density to %s', rootDensity)
+	}
+
+	this.getRootDensity = function() {
+		return rootDensity
+	}
+
+	this.extendRootWidth = function() {
+		rootWidth++
+		console.log('extended root width to %s', rootWidth)
+	}
+
+	this.getRootWidth = function() {
+		return rootWidth
 	}
 }
 
