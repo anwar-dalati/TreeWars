@@ -51,6 +51,7 @@ io.sockets.on('connection', function(socket) {
 	socket.on('createGame', function(data) {
 		var code = gameManager.createGame()
 		player = playerManager.addPlayer(data.playerName)
+		gameManager.joinGame(code, player)
 		socket.emit('createGameCode', {
 			code: code
 		})

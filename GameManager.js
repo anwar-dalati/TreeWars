@@ -21,7 +21,6 @@ var GameManager = function() {
 
 		if (game !== null) {
 			game.join(player)
-			console.log('join game with code %s', code)
 		}
 	}
 }
