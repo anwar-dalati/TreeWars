@@ -1,15 +1,15 @@
-.dialog {
-	display: none;
-}
-
 * {
 	margin: 0;
 	padding: 0;
 }
 
+html {
+	background: url('/images/background.jpg');
+}
+
 body {
 	font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-	background:#5ac7ff url('/images/background/normal.jpg') center bottom;
+	background:#5ac7ff url('/images/background/normal.jpg') left bottom;
 	background-repeat: repeat-x;
 }
 
@@ -54,14 +54,6 @@ input {
 	margin: 10px 0 0 0;
 	padding: 5px;
 	display: block;
-}
-
-h1 {
-	width: 1200px;
-	height: 840px;
-	margin:0 auto;
-	background: url(../images/splash_screen.jpg);
-	text-indent: -9999px;
 }
 
 #resources {
