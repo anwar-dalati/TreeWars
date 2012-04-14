@@ -55,3 +55,41 @@ h1 {
 	background: url(../images/splash_screen.jpg);
 	text-indent: -9999px;
 }
+
+#resources {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+}
+
+#resources div {
+	width: 180px;
+	height: 48px;
+	line-height: 48px;
+	margin: 0 0 10px 0;
+	padding: 0 10px;
+	background-color: #fff;
+	font-weight: bold;
+	color: #808080;
+	background-image: url(../images/ressources.png);
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	-khtml-border-radius: 10px;
+	border-radius: 10px;
+}
+
+#resources #health {
+	background-image: none;
+}
+
+#sun {
+	background-position: 0 96px;
+}
+
+#water {
+	background-position: 0 0px;
+}
+
+#nutrients {
+	background-position: 0 48px;
+}
