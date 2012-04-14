@@ -5,6 +5,7 @@ var Game = function() {
 	var players = []
 	var environment = null
 	var battleField = null
+	var ticks = 0
 
 	this.create = function(code, battleField) {
 		console.log('create game with code %s', code)
@@ -21,12 +22,24 @@ var Game = function() {
 		console.log('%s joined game with code %s', player.getName(), that.code)
 	}
 
+	this.start = function() {
+		setInterval(function() {
+			that.gameLoop()
+		}, 1000)
+	}
+
 	this.getCode = function() {
 		return that.code
 	}
 
 	this.getEnvironment = function() {
 		return that.environment
+	}
+
+	this.gameLoop = function() {
+		if (++ticks % 5 == 0) {
+			console.log('tick %s', ticks)
+		}
 	}
 }
 

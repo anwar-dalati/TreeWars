@@ -12,7 +12,7 @@ html
 		script(src='/javascripts/build.js')
 		script(src='/javascripts/environment.js')
 		script
-			var tw = {}
+			var tw = {gameCode: null, host: false, running: false}
 			var socket = io.connect();
 			var build = new Build();
 			var env = new Environment();

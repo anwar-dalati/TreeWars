@@ -44,6 +44,7 @@ $(function() {
 	socket.on('createGameCode', function(data) {
 		console.log('game code: %s', data.code)
 		tw.gameCode = data.code
+		tw.host = true
 	})
 	socket.on('joinGameSuccess', function(data) {
 		console.log('joining game with code %s %s', $('#joinGameCode').val(), data.success ? 'succeeded' : 'failed')
@@ -57,6 +58,11 @@ $(function() {
 	startDialog()
 })
 
+
+// ONLY FOR TESTING
 var test = function() {
 	socket.emit('build', {playerName: tw.playerName})
+}
+var start = function() {
+	socket.emit('startGame')
 }
