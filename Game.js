@@ -7,7 +7,7 @@ var Game = function() {
 	this.create = function(code) {
 		console.log('create game with code %s', code)
 
-		that.code = code;
+		that.code = code
 
 		return that
 	}

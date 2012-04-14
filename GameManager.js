@@ -3,8 +3,7 @@ var GameManager = function() {
 	var that = this
 	var games = []
 
-	this.createGame = function() {
-		var code = that.getNewCode()
+	this.createGame = function(code) {
 		var game = require('./Game.js').Game(code)
 
 		games.push(game)
