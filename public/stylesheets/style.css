@@ -1,3 +1,7 @@
+.dialog {
+	display: none;
+}
+
 * {
 	margin: 0;
 	padding: 0;
@@ -5,12 +9,16 @@
 
 body {
 	font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-	background:#5ac7ff url(../images/background/normal.jpg) center bottom;
+	background:#5ac7ff url('/images/background/normal.jpg') center bottom;
 	background-repeat: repeat-x;
 }
 
-a {
-  color: #00B7FF;
+#gameWrapper {
+	margin-left: auto;
+	margin-right: auto;
+	width: 1200px;
+	height: 840px;
+	background: url('../images/splash_screen.jpg');
 }
 
 .dialog {
@@ -24,7 +32,7 @@ a {
 }
 
 .ui-widget.ui-widget-content, .ui-widget .ui-state-default, .ui-widget .ui-widget-content .ui-state-default, .ui-widget .ui-widget-header .ui-state-default {
-	background: #fff url(../images/dialog.jpg) repeat-x;
+	background: #fff url('/images/dialog.jpg') repeat-x;
 	border: none;
 }
 
