@@ -113,675 +113,677 @@ input {
 
 #uiWrapper #nutrients {
 	background-position: 5px -96px;
-
 }
 
 
-#gameWrapper div {
-	background-image: url('/images/sprite.png');
+#gameWrapper div {background-image: url('/images/sprite.png');
 	width: 60px;
 	height: 60px;
-}
-
-div.tree0Center0{
-	background-position: -120px -120px;
-}
-
-div.tree0Center1{
-	background-position: -180px -120px;
-}
-
-div.tree0Center2{
-	background-position: -240px -120px;
-}
-
-div.tree0Center3{
-	background-position: -120px -180px;
-}
-
-div.tree0Center4{
-	background-position: -180px -180px;
-}
-
-div.tree0Center5{
-	background-position: -240px -180px;
-}
-
-
-
-div.tree1Center0{
-	background-position: -420px -120px;
-}
-
-div.tree1Center1{
-	background-position: -480px -120px;
-}
-
-div.tree1Center2{
-	background-position: -540px -120px;
-}
-
-div.tree1Center3{
-	background-position: -420px -180px;
-}
-
-div.tree1Center4{
-	background-position: -480px -180px;
-}
-
-div.tree1Center5{
-	background-position: -540px -180px;
-}
-
-
-
-div.tree2Center0{
-	background-position: -720px -120px;
-}
-
-div.tree2Center1{
-	background-position: -780px -120px;
-}
-
-div.tree2Center2{
-	background-position: -840px -120px;
-}
-
-div.tree2Center3{
-	background-position: -720px -180px;
-}
-
-div.tree2Center4{
-	background-position: -780px -180px;
-}
-
-div.tree2Center5{
-	background-position: -840px -180px;
-}
-
-
-
-div.tree3Center0{
-	background-position: -1020px -120px;
-}
-
-div.tree3Center1{
-	background-position: -1080px -120px;
-}
-
-div.tree3Center2{
-	background-position: -1140px -120px;
-}
-
-div.tree3Center3{
-	background-position: -1020px -180px;
-}
-
-div.tree3Center4{
-	background-position: -1080px -180px;
-}
-
-div.tree3Center5{
-	background-position: -1140px -180px;
-}
-
-
-
-div.tree4Center0{
-	background-position: -1320px -120px;
-}
-
-div.tree4Center1{
-	background-position: -1380px -120px;
-}
-
-div.tree4Center2{
-	background-position: -1440px -120px;
-}
-
-div.tree4Center3{
-	background-position: -1320px -180px;
-}
-
-div.tree4Center4{
-	background-position: -1380px -180px;
-}
-
-div.tree4Center5{
-	background-position: -1440px -180px;
-}
+	}
+	
+	div.tree0Center0{
+		background-position: -120px -120px; 
+	}
+	
+	div.tree0Center1{
+		background-position: -180px -120px; 
+	}
+	
+	div.tree0Center2{
+		background-position: -240px -120px; 
+	}
+	
+	div.tree0Center3{
+		background-position: -120px -180px; 
+	}
+	
+	div.tree0Center4{
+		background-position: -180px -180px; 
+	}
+	
+	div.tree0Center5{
+		background-position: -240px -180px; 
+	}
+	
+	
+	
+	div.tree1Center0{
+		background-position: -420px -120px; 
+	}
+	
+	div.tree1Center1{
+		background-position: -480px -120px; 
+	}
+	
+	div.tree1Center2{
+		background-position: -540px -120px; 
+	}
+	
+	div.tree1Center3{
+		background-position: -420px -180px; 
+	}
+	
+	div.tree1Center4{
+		background-position: -480px -180px; 
+	}
+	
+	div.tree1Center5{
+		background-position: -540px -180px; 
+	}
+	
+	
+	
+	div.tree2Center0{
+		background-position: -720px -120px; 
+	}
+	
+	div.tree2Center1{
+		background-position: -780px -120px; 
+	}
+	
+	div.tree2Center2{
+		background-position: -840px -120px; 
+	}
+	
+	div.tree2Center3{
+		background-position: -720px -180px; 
+	}
+	
+	div.tree2Center4{
+		background-position: -780px -180px; 
+	}
+	
+	div.tree2Center5{
+		background-position: -840px -180px; 
+	}
+	
+	
+	
+	div.tree3Center0{
+		background-position: -1020px -120px; 
+	}
+	
+	div.tree3Center1{
+		background-position: -1080px -120px; 
+	}
+	
+	div.tree3Center2{
+		background-position: -1140px -120px; 
+	}
+	
+	div.tree3Center3{
+		background-position: -1020px -180px; 
+	}
+	
+	div.tree3Center4{
+		background-position: -1080px -180px; 
+	}
+	
+	div.tree3Center5{
+		background-position: -1140px -180px; 
+	}
 
 
 
-div.tree5Center0{
-	background-position: -1620px -120px;
-}
+	div.tree4Center0{
+		background-position: -1320px -120px; 
+	}
+	
+	div.tree4Center1{
+		background-position: -1380px -120px; 
+	}
+	
+	div.tree4Center2{
+		background-position: -1440px -120px; 
+	}
+	
+	div.tree4Center3{
+		background-position: -1320px -180px; 
+	}
+	
+	div.tree4Center4{
+		background-position: -1380px -180px; 
+	}
+		
+	div.tree4Center5{
+		background-position: -1440px -180px; 
+	}
+	
 
-div.tree5Center1{
-	background-position: -1680px -120px;
-}
 
-div.tree5Center2{
-	background-position: -1740px -120px;
-}
+	div.tree5Center0{
+		background-position: -1620px -120px; 
+	}
+	
+	div.tree5Center1{
+		background-position: -1680px -120px; 
+	}
+	
+	div.tree5Center2{
+		background-position: -1740px -120px; 
+	}
+	
+	div.tree5Center3{
+		background-position: -1620px -180px; 
+	}
+	
+	div.tree5Center4{
+		background-position: -1680px -180px; 
+	}
+	
+	div.tree5Center5{
+		background-position: -1740px -180px; 
+	}
+	
+	
+	
+	
+	div.tree0Left0{
+		background-position: -60px -120px; 
+	}
+	
+	div.tree0Left1{
+		background-position: -60px -180px; 
+	}
+	
+	div.tree0Left2{
+		background-position: -60px -240px; 
+	}
+	
+	div.tree0Right0{
+		background-position: -300px -120px; 
+	}
+	
+	div.tree0Right1{
+		background-position: -300px -180px; 
+	}
+	
+	div.tree0Right2{
+		background-position: -300px -240px; 
+	}
+	
+	div.tree0Top0{
+		background-position: -120px -60px; 
+	}
+	
+	div.tree0Top1{
+		background-position: -180px -60px; 
+	}
+	
+	div.tree0Top2{
+		background-position: -240px -60px; 
+	}
+	
+	div.tree0Bottom0{
+		background-position: -120px -240px; 
+	}
+	
+	div.tree0Bottom1{
+		background-position: -240px -240px; 
+	}	
+	
+	
+	
+	div.tree1Left0{
+		background-position: -360px -120px; 
+	}
+	
+	div.tree1Left1{
+		background-position: -360px -180px; 
+	}
+	
+	div.tree1Left2{
+		background-position: -360px -240px; 
+	}
+	
+	div.tree1Right0{
+		background-position: -600px -120px; 
+	}
+	
+	div.tree1Right1{
+		background-position: -600px -180px; 
+	}
+	
+	div.tree1Right2{
+		background-position: -600px -240px; 
+	}
+	
+	div.tree1Top0{
+		background-position: -420px -60px; 
+	}
+	
+	div.tree1Top1{
+		background-position: -480px -60px; 
+	}
+	
+	div.tree1Top2{
+		background-position: -540px -60px; 
+	}
+	
+	div.tree1Bottom0{
+		background-position: -420px -240px; 
+	}
+	
+	div.tree1Bottom1{
+		background-position: -540px -240px; 
+	}	
+	
 
-div.tree5Center3{
-	background-position: -1620px -180px;
-}
 
-div.tree5Center4{
-	background-position: -1680px -180px;
-}
+	div.tree2Left0{
+		background-position: -660px -120px; 
+	}
+	
+	div.tree2Left1{
+		background-position: -660px -180px; 
+	}
+	
+	div.tree2Left2{
+		background-position: -660px -240px; 
+	}
+	
+	div.tree2Right0{
+		background-position: -900px -120px; 
+	}
+	
+	div.tree2Right1{
+		background-position: -900px -180px; 
+	}
+	
+	div.tree2Right2{
+		background-position: -900px -240px; 
+	}
+	
+	div.tree2Top0{
+		background-position: -720px -60px; 
+	}
+	
+	div.tree2Top1{
+		background-position: -780px -60px; 
+	}
+	
+	div.tree2Top2{
+		background-position: -840px -60px; 
+	}
+	
+	div.tree2Bottom0{
+		background-position: -720px -240px; 
+	}
+	
+	div.tree2Bottom1{
+		background-position: -840px -240px; 
+	}	
+	
 
-div.tree5Center5{
-	background-position: -1740px -180px;
-}
+
+	div.tree3Left0{
+		background-position: -960px -120px; 
+	}
+	
+	div.tree3Left1{
+		background-position: -960px -180px; 
+	}
+	
+	div.tree3Left2{
+		background-position: -960px -240px; 
+	}
+	
+	div.tree3Right0{
+		background-position: -1200px -120px; 
+	}
+	
+	div.tree3Right1{
+		background-position: -1200px -180px; 
+	}
+	
+	div.tree3Right2{
+		background-position: -1200px -240px; 
+	}
+	
+	div.tree3Top0{
+		background-position: -1020px -60px; 
+	}
+	
+	div.tree3Top1{
+		background-position: -1080px -60px; 
+	}
+	
+	div.tree3Top2{
+		background-position: -1140px -60px; 
+	}
+	
+	div.tree3Bottom0{
+		background-position: -1020px -240px; 
+	}
+	
+	div.tree3Bottom1{
+		background-position: -1140px -240px; 
+	}	
+	
 
 
+	div.tree4Left0{
+		background-position: -1260px -120px; 
+	}
+	
+	div.tree4Left1{
+		background-position: -1260px -180px; 
+	}
+	
+	div.tree4Left2{
+		background-position: -1260px -240px; 
+	}
+	
+	div.tree4Right0{
+		background-position: -1500px -120px; 
+	}
+	
+	div.tree4Right1{
+		background-position: -1500px -180px; 
+	}
+	
+	div.tree4Right2{
+		background-position: -1500px -240px; 
+	}
+	
+	div.tree4Top0{
+		background-position: -1320px -60px; 
+	}
+	
+	div.tree4Top1{
+		background-position: -1380px -60px; 
+	}
+	
+	div.tree4Top2{
+		background-position: -1440px -60px; 
+	}
+	
+	div.tree4Bottom0{
+		background-position: -1320px -240px; 
+	}
+	
+	div.tree4Bottom1{
+		background-position: -1440px -240px; 
+	}	
+	
+
+
+	div.tree5Left0{
+		background-position: -1560px -120px; 
+	}
+	
+	div.tree5Left1{
+		background-position: -1560px -180px; 
+	}
+	
+	div.tree5Left2{
+		background-position: -1560px -240px; 
+	}
+	
+	div.tree5Right0{
+		background-position: -1800px -120px; 
+	}
+	
+	div.tree5Right1{
+		background-position: -1800px -180px; 
+	}
+	
+	div.tree5Right2{
+		background-position: -1800px -240px; 
+	}
+	
+	div.tree5Top0{
+		background-position: -1620px -60px; 
+	}
+	
+	div.tree5Top1{
+		background-position: -1680px -60px; 
+	}
+	
+	div.tree5Top2{
+		background-position: -1740px -60px; 
+	}
+	
+	div.tree5Bottom0{
+		background-position: -1620px -240px; 
+	}
+	
+	div.tree5Bottom1{
+		background-position: -1740px -240px; 
+	}	
+	
+
+
+
+	div.treeDroughtLeft0{
+		background-position: -1560px -420px; 
+	}
+	
+	div.treeDroughtLeft1{
+		background-position: -1560px -480px; 
+	}
+	
+	div.treeDroughtLeft2{
+		background-position: -1560px -540px; 
+	}
+	
+	div.treeDroughtRight0{
+		background-position: -1800px -420px; 
+	}
+	
+	div.treeDroughtRight1{
+		background-position: -1800px -480px; 
+	}
+	
+	div.treeDroughtRight2{
+		background-position: -1800px -540px; 
+	}
+	
+	div.treeDroughtTop0{
+		background-position: -1620px -360px; 
+	}
+	
+	div.treeDroughtTop1{
+		background-position: -1680px -360px; 
+	}
+	
+	div.treeDroughtTop2{
+		background-position: -1740px -360px; 
+	}
+	
+	div.treeDroughtBottom0{
+		background-position: -1620px -540px; 
+	}
+	
+	div.treeDroughtBottom1{
+		background-position: -1740px -540px; 
+	}	
+	
+	div.treeDroughtCenter0{
+		background-position: -1620px -420px; 
+	}
+	
+	div.treeDroughtCenter1{
+		background-position: -1680px -420px; 
+	}
+	
+	div.treeDroughtCenter2{
+		background-position: -1740px -420px; 
+	}
+	
+	div.treeDroughtCenter3{
+		background-position: -1620px -480px; 
+	}
+	
+	div.treeDroughtCenter4{
+		background-position: -1680px -480px; 
+	}
+	
+	div.treeDroughtCenter5{
+		background-position: -1740px -480px; 
+	}
+	
+#gameWrapper.div.treeDroughtTrunk{
+		background-position:  -1680px -480px; 
+		}
+		
+		
+		
+		
 #gameWrapper.div.tree0Trunk0{
-	background-position: -60px -300px;
-	height: 120px;
-}
-
+		background-position: -60px -300px;
+		height = 120;
+	}	
+	
 #gameWrapper.div.tree0Trunk1{
-	background-position: -120px -300px;
-	height: 120px;
-}
-
+		background-position: -120px -300px;
+		height = 120;
+	}
+		
 #gameWrapper.div.tree0Trunk2{
-	background-position: -180px -300px;
-	height: 120px;
-}
-
+		background-position: -180px -300px;
+		height = 120;
+	}	
+	
 #gameWrapper.div.tree0Trunk3{
-	background-position: -240px -300px;
-	height: 120px;
-}
-
+		background-position: -240px -300px;
+		height = 120;
+	}	
+	
 #gameWrapper.div.tree0Trunk4{
-	background-position: -300px -300px;
-	height: 120px;
-}
-
+		background-position: -300px -300px;
+		height = 120;
+	}	
+	
 #gameWrapper.div.tree0Trunk5{
-	background-position: -360px -300px;
-	height: 120px;
-}
-
-
-
+		background-position: -360px -300px;
+		height = 120;
+	}
+	
+	
+	
 #gameWrapper.div.tree1Trunk0{
-	background-position: -420px -300px;
-	height: 120px;
-}
-
+		background-position: -420px -300px;
+		height = 120;
+	}	
+	
 #gameWrapper.div.tree1Trunk1{
-	background-position: -480px -300px;
-	height: 120px;
-}
-
+		background-position: -480px -300px;
+		height = 120;
+	}
+		
 #gameWrapper.div.tree1Trunk2{
-	background-position: -540px -300px;
-	height: 120px;
-}
-
+		background-position: -540px -300px;
+		height = 120;
+	}	
+	
 #gameWrapper.div.tree1Trunk3{
-	background-position: -600px -300px;
-	height: 120px;
-}
-
+		background-position: -600px -300px;
+		height = 120;
+	}	
+	
 #gameWrapper.div.tree1Trunk4{
-	background-position: -660px -300px;
-	height: 120px;
-}
-
+		background-position: -660px -300px;
+		height = 120;
+	}	
+	
 #gameWrapper.div.tree1Trunk5{
-	background-position: -720px -300px;
-	height: 120px;
-}
-
-
-
+		background-position: -720px -300px;
+		height = 120;
+	}
+	
+	
+	
 
 #gameWrapper.div.tree2Trunk0{
-	background-position: -780px -300px;
-	height: 120px;
-}
-
+		background-position: -780px -300px;
+		height = 120;
+	}	
+	
 #gameWrapper.div.tree2Trunk1{
-	background-position: -840px -300px;
-	height: 120px;
-}
-
+		background-position: -840px -300px;
+		height = 120;
+	}
+		
 #gameWrapper.div.tree2Trunk2{
-	background-position: -900px -300px;
-	height: 120px;
-}
-
+		background-position: -900px -300px;
+		height = 120;
+	}	
+	
 #gameWrapper.div.tree2Trunk3{
-	background-position: -960px -300px;
-	height: 120px;
-}
-
+		background-position: -960px -300px;
+		height = 120;
+	}	
+	
 #gameWrapper.div.tree2Trunk4{
-	background-position: -1020px -300px;
-	height: 120px;
-}
-
+		background-position: -1020px -300px;
+		height = 120;
+	}	
+	
 #gameWrapper.div.tree2Trunk5{
-	background-position: -1080px -300px;
-	height: 120px;
-}
-
+		background-position: -1080px -300px;
+		height = 120;
+	}
+	
 
 #gameWrapper.div.tree3Trunk0{
-	background-position: -1140px -300px;
-	height: 120px;
-}
-
+		background-position: -1140px -300px;
+		height = 120;
+	}	
+	
 #gameWrapper.div.tree3Trunk1{
-	background-position: -1200px -300px;
-	height: 120px;
-}
-
+		background-position: -1200px -300px;
+		height = 120;
+	}
+		
 #gameWrapper.div.tree3Trunk2{
-	background-position: -1260px -300px;
-	height: 120px;
-}
-
+		background-position: -1260px -300px;
+		height = 120;
+	}	
+	
 #gameWrapper.div.tree3Trunk3{
-	background-position: -1320px -300px;
-	height: 120px;
-}
-
+		background-position: -1320px -300px;
+		height = 120;
+	}	
+	
 #gameWrapper.div.tree3Trunk4{
-	background-position: -1380px -300px;
-	height: 120px;
-}
-
+		background-position: -1380px -300px;
+		height = 120;
+	}	
+	
 #gameWrapper.div.tree3Trunk5{
-	background-position: -1440px -300px;
-	height: 120px;
-}
-
+		background-position: -1440px -300px;
+		height = 120;
+	}
+	
 
 
 #gameWrapper.div.tree4Trunk0{
-	background-position: -1500px -300px;
-	height: 120px;
-}
-
+		background-position: -1500px -300px;
+		height = 120;
+	}	
+	
 #gameWrapper.div.tree4Trunk1{
-	background-position: -1560px -300px;
-	height: 120px;
-}
-
+		background-position: -1560px -300px;
+		height = 120;
+	}
+		
 #gameWrapper.div.tree4Trunk2{
-	background-position: -1620px -300px;
-	height: 120px;
-}
-
+		background-position: -1620px -300px;
+		height = 120;
+	}	
+	
 #gameWrapper.div.tree4Trunk3{
-	background-position: -1680px -300px;
-	height: 120px;
-}
-
+		background-position: -1680px -300px;
+		height = 120;
+	}	
+	
 #gameWrapper.div.tree4Trunk4{
-	background-position: -1740px -300px;
-	height: 120px;
-}
-
+		background-position: -1740px -300px;
+		height = 120;
+	}	
+	
 #gameWrapper.div.tree4Trunk5{
-	background-position: -1800px -300px;
-	height: 120px;
-}
-
-
-div.tree0Left0{
-	background-position: -60px -120px;
-}
-
-div.tree0Left1{
-	background-position: -60px -180px;
-}
-
-div.tree0Left2{
-	background-position: -60px -240px;
-}
-
-div.tree0Right0{
-	background-position: -300px -120px;
-}
-
-div.tree0Right1{
-	background-position: -300px -180px;
-}
-
-div.tree0Right2{
-	background-position: -300px -240px;
-}
-
-div.tree0Top0{
-	background-position: -120px -60px;
-}
-
-div.tree0Top1{
-	background-position: -180px -60px;
-}
-
-div.tree0Top2{
-	background-position: -240px -60px;
-}
-
-div.tree0Bottom0{
-	background-position: -120px -240px;
-}
-
-div.tree0Bottom1{
-	background-position: -240px -240px;
-}
-
-
-
-div.tree1Left0{
-	background-position: -360px -120px;
-}
-
-div.tree1Left1{
-	background-position: -360px -180px;
-}
-
-div.tree1Left2{
-	background-position: -360px -240px;
-}
-
-div.tree1Right0{
-	background-position: -600px -120px;
-}
-
-div.tree1Right1{
-	background-position: -600px -180px;
-}
-
-div.tree1Right2{
-	background-position: -600px -240px;
-}
-
-div.tree1Top0{
-	background-position: -420px -60px;
-}
-
-div.tree1Top1{
-	background-position: -480px -60px;
-}
-
-div.tree1Top2{
-	background-position: -540px -60px;
-}
-
-div.tree1Bottom0{
-	background-position: -420px -240px;
-}
-
-div.tree1Bottom1{
-	background-position: -540px -240px;
-}
-
-
-
-div.tree2Left0{
-	background-position: -660px -120px;
-}
-
-div.tree2Left1{
-	background-position: -660px -180px;
-}
-
-div.tree2Left2{
-	background-position: -660px -240px;
-}
-
-div.tree2Right0{
-	background-position: -900px -120px;
-}
-
-div.tree2Right1{
-	background-position: -900px -180px;
-}
-
-div.tree2Right2{
-	background-position: -900px -240px;
-}
-
-div.tree2Top0{
-	background-position: -720px -60px;
-}
-
-div.tree2Top1{
-	background-position: -780px -60px;
-}
-
-div.tree2Top2{
-	background-position: -840px -60px;
-}
-
-div.tree2Bottom0{
-	background-position: -720px -240px;
-}
-
-div.tree2Bottom1{
-	background-position: -840px -240px;
-}
-
-
-
-div.tree3Left0{
-	background-position: -960px -120px;
-}
-
-div.tree3Left1{
-	background-position: -960px -180px;
-}
-
-div.tree3Left2{
-	background-position: -960px -240px;
-}
-
-div.tree3Right0{
-	background-position: -1200px -120px;
-}
-
-div.tree3Right1{
-	background-position: -1200px -180px;
-}
-
-div.tree3Right2{
-	background-position: -1200px -240px;
-}
-
-div.tree3Top0{
-	background-position: -1020px -60px;
-}
-
-div.tree3Top1{
-	background-position: -1080px -60px;
-}
-
-div.tree3Top2{
-	background-position: -1140px -60px;
-}
-
-div.tree3Bottom0{
-	background-position: -1020px -240px;
-}
-
-div.tree3Bottom1{
-	background-position: -1140px -240px;
-}
-
-
-
-div.tree4Left0{
-	background-position: -1260px -120px;
-}
-
-div.tree4Left1{
-	background-position: -1260px -180px;
-}
-
-div.tree4Left2{
-	background-position: -1260px -240px;
-}
-
-div.tree4Right0{
-	background-position: -1500px -120px;
-}
-
-div.tree4Right1{
-	background-position: -1500px -180px;
-}
-
-div.tree4Right2{
-	background-position: -1500px -240px;
-}
-
-div.tree4Top0{
-	background-position: -1320px -60px;
-}
-
-div.tree4Top1{
-	background-position: -1380px -60px;
-}
-
-div.tree4Top2{
-	background-position: -1440px -60px;
-}
-
-div.tree4Bottom0{
-	background-position: -1320px -240px;
-}
-
-div.tree4Bottom1{
-	background-position: -1440px -240px;
-}
-
-
-
-div.tree5Left0{
-	background-position: -1560px -120px;
-}
-
-div.tree5Left1{
-	background-position: -1560px -180px;
-}
-
-div.tree5Left2{
-	background-position: -1560px -240px;
-}
-
-div.tree5Right0{
-	background-position: -1800px -120px;
-}
-
-div.tree5Right1{
-	background-position: -1800px -180px;
-}
-
-div.tree5Right2{
-	background-position: -1800px -240px;
-}
-
-div.tree5Top0{
-	background-position: -1620px -60px;
-}
-
-div.tree5Top1{
-	background-position: -1680px -60px;
-}
-
-div.tree5Top2{
-	background-position: -1740px -60px;
-}
-
-div.tree5Bottom0{
-	background-position: -1620px -240px;
-}
-
-div.tree5Bottom1{
-	background-position: -1740px -240px;
-}
-
-
-
-
-div.treeDroughtLeft0{
-	background-position: -1560px -420px;
-}
-
-div.treeDroughtLeft1{
-	background-position: -1560px -480px;
-}
-
-div.treeDroughtLeft2{
-	background-position: -1560px -540px;
-}
-
-div.treeDroughtRight0{
-	background-position: -1800px -420px;
-}
-
-div.treeDroughtRight1{
-	background-position: -1800px -480px;
-}
-
-div.treeDroughtRight2{
-	background-position: -1800px -540px;
-}
-
-div.treeDroughtTop0{
-	background-position: -1620px -360px;
-}
-
-div.treeDroughtTop1{
-	background-position: -1680px -360px;
-}
-
-div.treeDroughtTop2{
-	background-position: -1740px -360px;
-}
-
-div.treeDroughtBottom0{
-	background-position: -1620px -540px;
-}
-
-div.treeDroughtBottom1{
-	background-position: -1740px -540px;
-}
-
-div.treeDroughtCenter0{
-	background-position: -1620px -420px;
-}
-
-div.treeDroughtCenter1{
-	background-position: -1680px -420px;
-}
-
-div.treeDroughtCenter2{
-	background-position: -1740px -420px;
-}
-
-div.treeDroughtCenter3{
-	background-position: -1620px -480px;
-}
-
-div.treeDroughtCenter4{
-	background-position: -1680px -480px;
-}
-
-div.treeDroughtCenter5{
-	background-position: -1740px -480px;
-}
-
-#gameWrapper.div.treeDroughtTrunk{
-	background-position: -1680px -480px;
-}
+		background-position: -1800px -300px;
+		height = 120;
+	}
