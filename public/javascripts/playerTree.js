@@ -48,7 +48,8 @@ var PlayerTree = function(startPosition, positionChangeToScreenPosition, associa
 
 		if(typeof tw.states != "undefinded")
 		{
-			$('#gameWrapper').css('background-image', 'url(/images/background/normal.jpg)')
+			if($('#gameWrapper').css('background-image') != 'url(/images/background/normal.jpg)')
+				$('#gameWrapper').css('background-image', 'url(/images/background/normal.jpg)')
 			$('#tileWrapper').css('background-image', 'none')
 
 			for (var i = 0; i < tw.states.length; i++) {
