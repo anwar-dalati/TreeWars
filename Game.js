@@ -253,8 +253,10 @@ var Game = function() {
 			playerTree = trees[players[i].getName()]
 			playerTrees.push({
 				playerName: players[i].getName(),
-				height: playerTree.getTreeHeigth(),
-				width: playerTree.getTreeWidth()
+				treeHeight: playerTree.getTreeHeigth(),
+				treeWidth: playerTree.getTreeWidth(),
+				leafDensity: playerTree.getLeafDensity(),
+				rootDensity: playerTree.getRootStrength()
 			})
 		}
 
