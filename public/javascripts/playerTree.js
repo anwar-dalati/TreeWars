@@ -58,9 +58,6 @@ var PlayerTree = function(startLeafDensity, startRootDensity, startPosition, pos
 		//repeat if(width==3) go to last right else go to last.previous right		
 		//draw top1
 		//end&draw at top2 end all		
-		
-			
-		
 	}
 	
 	this.clearTree = function() {
