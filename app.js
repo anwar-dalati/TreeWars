@@ -81,12 +81,18 @@ io.sockets.on('connection', function(socket) {
 			game.nextTick()
 		}
 	})
+	socket.on('placeTreeGame', function(data) {
+		game.placeTree(player, data.x)
+	})
+	socket.on('growRootGame', function(data) {
+		game.growRoot(player, data.x, data.y)
+	})
 
 	socket.on('build', function(data) {
 		console.log(player.getName())
 	})
 
-	//  build calls
+	// build calls
 	socket.on('buildExtendTreeHeigth', function() {
 		console.log('extend heigth of player %s', player.getName())
 		player.getTree().extendTreeHeigth()
@@ -112,29 +118,29 @@ io.sockets.on('connection', function(socket) {
 		player.getTree().extendRootWidth()
 	})
 
-	// environment callc
+	// environment calls
 	socket.on('summonRain', function() {
 		console.log('summoning rain by %s', player.getName())
 		game.getEnvironment().setRain()
 	})
 	socket.on('summonSunshine', function() {
 		console.log('summoning sunshine by %s', player.getName())
-		game.getEnvironment().sunshine()
+		game.getEnvironment().setSunshine()
 	})
 	socket.on('summonSpring', function() {
 		console.log('summoning spring by %s', player.getName())
-		game.getEnvironment().spring()
+		game.getEnvironment().setSpring()
 	})
 	socket.on('summonColdSnap', function() {
 		console.log('summoning cold snap by %s', player.getName())
-		game.getEnvironment().coldSnap()
+		game.getEnvironment().setColdSnap()
 	})
-	socket.on('summonDrouth', function() {
+	socket.on('summonDrought', function() {
 		console.log('summoning drouth by %s', player.getName())
-		game.getEnvironment().drouth()
+		game.getEnvironment().setDrought()
 	})
 	socket.on('summonStorm', function() {
 		console.log('summoning storm by %s', player.getName())
-		game.getEnvironment().storm()
+		game.getEnvironment().setStorm()
 	})
 })

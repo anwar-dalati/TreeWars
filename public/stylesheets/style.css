@@ -1,28 +1,24 @@
-.dialog {
-	display: none;
-}
-
 * {
 	margin: 0;
 	padding: 0;
 }
 
+html {
+	background: url('/images/background.jpg');
+}
+
 body {
 	font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-	background:#5ac7ff url('/images/background/normal.jpg') center bottom;
+	background:#5ac7ff url('/images/background/normal.jpg') left bottom;
 	background-repeat: repeat-x;
 }
 
-#gameWrapper {
-	margin-left: auto;
-	margin-right: auto;
-	width: 1200px;
-	height: 840px;
-	background: url('/images/splash_screen.jpg');
+.dialog, .hide {
+	display: none;
 }
 
-.dialog {
-	display: none;
+.noHeight {
+	height: 0px;
 }
 
 .ui-dialog {
@@ -56,23 +52,21 @@ input {
 	display: block;
 }
 
-h1 {
+#gameWrapper {
+	margin-left: auto;
+	margin-right: auto;
 	width: 1200px;
 	height: 840px;
-	margin:0 auto;
 	background: url('/images/splash_screen.jpg');
-	text-indent: -9999px;
 }
 
-
-
-#resources {
+#uiWrapper {
 	position: absolute;
 	top: 10px;
 	right: 10px;
 }
 
-#resources div {
+#uiWrapper div {
 	width: 180px;
 	height: 48px;
 	line-height: 48px;
@@ -88,19 +82,19 @@ h1 {
 	border-radius: 10px;
 }
 
-#resources #health {
+#uiWrapper .noImage {
 	background-image: none;
 }
 
-#sun {
+#uiWrapper #sun {
 	background-position: 0 96px;
 }
 
-#water {
+#uiWrapper #water {
 	background-position: 0 0px;
 }
 
-#nutrients {
+#uiWrapper #nutrients {
 	background-position: 0 48px;
 }
 

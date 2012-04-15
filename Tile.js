@@ -5,6 +5,9 @@ var Tile = function() {
 	var moisture = 0
 	var playerName = null
 	var type = null // 0 = Air, 1 = Ground
+	var strength
+	var branches
+	var storage
 
 	this.getMoisture = function() {
 		return that.moisture

@@ -3,9 +3,10 @@ var BattleField = function() {
 	var that = this
 	var battleField = []
 
-	this.fieldLength = 32
+	this.fieldLength = 33
 	this.airHeight = 10
 	this.groundDepth = 4
+	this.maxTreeWidth = 19
 
 	this.create = function() {
 		console.log('create BattleField...')
@@ -25,6 +26,22 @@ var BattleField = function() {
 				that.setBattleTile(x,y,tile)
 			}
 		}
+	}
+
+	this.isAvailable = function(x) {
+		var sideWidth = (that.maxTreeWidth - 1) / 2
+		if (x - sideWidth <= 0
+			|| x + sideWidth >= that.fieldLength
+			|| typeof that.getBattleTile(x, that.airHeight).getPlayerName() != 'undefined'
+		) {
+			return false
+		}
+
+		return true
+	}
+
+	this.markTileAsUsed = function(player, x) {
+		that.getBattleTile(x, that.airHeight - 1).setPlayerName(player.getName())
 	}
 
 	this.getBattleTile = function(x,y) {

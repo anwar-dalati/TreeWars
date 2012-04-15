@@ -67,6 +67,16 @@ $(function() {
 		$('#resources #nutrients').html('Nutrients: ' + data.nutrients)
 	})
 
+	socket.on('updateCurrentEnvironment', function(data) {
+		console.log(data)
+		$('#uiWrapper .weather').remove()
+
+		for (var i = 0; i < data.states.length; i++) {
+			var state = data.states[i]
+			$('#uiWrapper').append($('<div class="noImage weather">' + state.name + ' (' + state.ticks + ')' + '</div>'))
+		}
+	})
+
 	startDialog()
 })
 
@@ -83,4 +93,10 @@ var bg = function() {
 }
 var next = function() {
 	socket.emit('nextGame')
+}
+var placeTree = function(x) {
+	socket.emit('placeTreeGame', {x:x})
+}
+var growRoot = function(x,y) {
+	socket.emit('growRoot', {x:x, y:y})
 }
