@@ -1,10 +1,10 @@
 var Tree = function() {
 
 	var that = this
-	var treeHeigth = 3
+	var treeHeigth = 4
 	var treeWidth = 3
 	var rootStrength = 1
-	var leafDensity = 1
+	var leafDensity = 2
 	var rootWidth = 1
 	var rootCount = 0
 
@@ -76,13 +76,13 @@ var Tree = function() {
 	}
 
 	this.changeSun = function(amount) {
-		var max = that.getLeafDensity() * 2 * that.getTreeWidth()
+		var max = that.getLeafDensity() * 2 * that.getTreeWidth() * that.getTreeHeigth()
 		sun = Math.min(sun + amount, max)
 		console.log('changed sun by %s, now %s', amount, sun)
 	}
 
 	this.changeWater = function(amount) {
-		var max = rootCount * 10
+		var max = rootCount * 20
 		water = Math.min(water + amount, max)
 		console.log('changed water by %s, now %s', amount, water)
 	}

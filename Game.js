@@ -227,7 +227,7 @@ var Game = function() {
 			// decrease resources by the cost the tree takes
 			playerTree = trees[players[i].getName()]
 			var sunCost = Math.pow(playerTree.getTreeHeigth() * 0.5, 0.8745)
-			var waterCost = Math.pow(playerTree.getTreeHeigth(), 1.65) / 10
+			var waterCost = playerTree.getTreeHeigth() * playerTree.getTreeWidth() * playerTree.getLeafDensity()
 			playerTree.changeSun(-sunCost)
 			playerTree.changeWater(-waterCost)
 
@@ -331,7 +331,13 @@ var Game = function() {
 			}
 		}
 
-		// TODO: dead?
+		// generate Nutrients
+        var generatedNutrients = that.resourceCalculator.calculateNutrientReward(playerTree.getSun(), playerTree.getWater(), that.environment.getSpringTicks())
+        playerTree.changeNutrients(generatedNutrients)
+        playerTree.changeSun(-generatedNutrients)
+        playerTree.changeWater(-generatedNutrients)
+
+        // TODO: dead?
 
 		that.updatePlayerResources()
 	}
