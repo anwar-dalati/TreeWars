@@ -33,11 +33,6 @@ var Game = function() {
 	}
 
 	this.start = function() {
-		// inform all players that the game is starting
-		for (var i = 0; i < players.length; i++) {
-			players[i].getSocket().emit('startingGame')
-		}
-
 		// player positions hardcoded for now
 		if (players.length == 4) {
 			that.placeTree(players[0], 10)
@@ -51,6 +46,27 @@ var Game = function() {
 		} else if (players.length == 2) {
 			that.placeTree(players[0], 13)
 			that.placeTree(players[1], 19)
+		}
+
+		// inform all players that the game is starting
+		var y = that.battleField.airHeight - 1
+		var startingPoints = []
+
+		for (var x = 0; x < that.battleField.fieldLength; x++) {
+			var tile = that.battleField.getBattleTile(x, y)
+			if (typeof tile.getPlayerName() == 'undefined') {
+				continue
+			}
+
+			startingPoints.push({
+				playerName: tile.getPlayerName(),
+				x: x,
+				y: y
+			})
+		}
+
+		for (var i = 0; i < players.length; i++) {
+			players[i].getSocket().emit('startingGame', {startingPoints: startingPoints})
 		}
 
 		setInterval(function() {
@@ -251,7 +267,7 @@ var Game = function() {
 				envStates.push({name: 'Spring', ticks: that.environment.getSpringTicks()})
 			}
 			if (that.environment.getColdSnapTicks() > 0) {
-				envStates.push({name: 'Cold Snap', ticks: that.environment.getColdSnapTicks()})
+				envStates.push({name: 'ColdSnap', ticks: that.environment.getColdSnapTicks()})
 			}
 			if (that.environment.getDroughtTicks() > 0) {
 				envStates.push({name: 'Drought', ticks: that.environment.getDroughtTicks()})
