@@ -84,7 +84,7 @@ var Tree = function() {
 	}
 
 	this.changeWater = function(amount) {
-		var max = rootCount * 20
+		var max = rootCount * 20 * that.getRootStrength
 		water = Math.min(water + amount, max)
 		console.log('changed water by %s, now %s', amount, water)
 	}
