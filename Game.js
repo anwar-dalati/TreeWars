@@ -257,8 +257,8 @@ var Game = function() {
 			// TODO: send the battlefield to the clients on every tick
 			players[i].getSocket().emit('battleField', {
 				rootDensity: playerTree.getRootWidth(),
-				rootStrength: playerTree.getRootStrength,
-				leafDensity: playerTree.getLeafDensity,
+				rootStrength: playerTree.getRootStrength(),
+				leafDensity: playerTree.getLeafDensity(),
 				battleField: that.battleFieldToArray()
 			})
 

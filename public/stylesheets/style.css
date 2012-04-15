@@ -156,6 +156,7 @@ input {
 	border-radius: 10px;
 	cursor: pointer;
 	position: absolute;
+	z-index:2;
 }
 
 #gameWrapper .button:hover {
@@ -228,208 +229,208 @@ input {
 }
 
 div.rootD0B0{
-	background-position: : -960px -660px;
+	background-position: -960px -660px;
 }
 
 div.rootD1B0{
-	background-position: : -1020px -660px;
+	background-position: -1020px -660px;
 }
 
 div.rootD2B0{
-	background-position: : -1080px -660px;
+	background-position: -1080px -660px;
 }
 
 div.rootD3B0{
-	background-position: : -1140px -660px;
+	background-position: -1140px -660px;
 }
 
 div.rootD4B0{
-	background-position: : -1200px -660px;
+	background-position: -1200px -660px;
 }
 
 div.rootD5B0{
-	background-position: : -1260px -660px;
+	background-position: -1260px -660px;
 }
 
 
 
 div.rootD0B1{
-	background-position: : -960px -720px;
+	background-position: -960px -720px;
 }
 
 div.rootD1B1{
-	background-position: : -1020px -720px;
+	background-position: -1020px -720px;
 }
 
 div.rootD2B1{
-	background-position: : -1080px -720px;
+	background-position: -1080px -720px;
 }
 
 div.rootD3B1{
-	background-position: : -1140px -720px;
+	background-position: -1140px -720px;
 }
 
 div.rootD4B1{
-	background-position: : -1200px -720px;
+	background-position: -1200px -720px;
 }
 
 div.rootD5B1{
-	background-position: : -1260px -720px;
+	background-position: -1260px -720px;
 }
 
 
 div.rootD0B2{
-	background-position: : -960px -780px;
+	background-position: -960px -780px;
 }
 
 div.rootD1B2{
-	background-position: : -1020px -780px;
+	background-position: -1020px -780px;
 }
 
 div.rootD2B2{
-	background-position: : -1080px -780px;
+	background-position: -1080px -780px;
 }
 
 div.rootD3B2{
-	background-position: : -1140px -780px;
+	background-position: -1140px -780px;
 }
 
 div.rootD4B2{
-	background-position: : -1200px -780px;
+	background-position: -1200px -780px;
 }
 
 div.rootD5B2{
-	background-position: : -1260px -780px;
+	background-position: -1260px -780px;
 }
 
 
 div.rootD0B3{
-	background-position: : -960px -840px;
+	background-position: -960px -840px;
 }
 
 div.rootD1B3{
-	background-position: : -1020px -840px;
+	background-position: -1020px -840px;
 }
 
 div.rootD2B3{
-	background-position: : -1080px -840px;
+	background-position: -1080px -840px;
 }
 
 div.rootD3B3{
-	background-position: : -1140px -840px;
+	background-position: -1140px -840px;
 }
 
 div.rootD4B3{
-	background-position: : -1200px -840px;
+	background-position: -1200px -840px;
 }
 
 div.rootD5B3{
-	background-position: : -1260px -840px;
+	background-position: -1260px -840px;
 }
 
 
 
 div.rootD0B4{
-	background-position: : -960px -900px;
+	background-position: -960px -900px;
 }
 
 div.rootD1B4{
-	background-position: : -1020px -900px;
+	background-position: -1020px -900px;
 }
 
 div.rootD2B4{
-	background-position: : -1080px -900px;
+	background-position: -1080px -900px;
 }
 
 div.rootD3B4{
-	background-position: : -1140px -900px;
+	background-position: -1140px -900px;
 }
 
 div.rootD4B4{
-	background-position: : -1200px -900px;
+	background-position: -1200px -900px;
 }
 
 div.rootD5B4{
-	background-position: : -1260px -900px;
+	background-position: -1260px -900px;
 }
 
 
 
 div.rootD0B5{
-	background-position: : -960px -960px;
+	background-position: -960px -960px;
 }
 
 div.rootD1B5{
-	background-position: : -1020px -960px;
+	background-position: -1020px -960px;
 }
 
 div.rootD2B5{
-	background-position: : -1080px -960px;
+	background-position: -1080px -960px;
 }
 
 div.rootD3B5{
-	background-position: : -1140px -960px;
+	background-position: -1140px -960px;
 }
 
 div.rootD4B5{
-	background-position: : -1200px -960px;
+	background-position: -1200px -960px;
 }
 
 div.rootD5B5{
-	background-position: : -1260px -960px;
+	background-position: -1260px -960px;
 }
 
 
 
 
 div.rootD0startL{
-	background-position: : -1320px -660px;
+	background-position: -1320px -660px;
 }
 
 div.rootD1startL{
-	background-position: : -1320px -720px;
+	background-position: -1320px -720px;
 }
 
 div.rootD2startL{
-	background-position: : -1320px -780px;
+	background-position: -1320px -780px;
 }
 
 div.rootD3startL{
-	background-position: : -1320px -840px;
+	background-position: -1320px -840px;
 }
 
 div.rootD4startL{
-	background-position: : -1320px -900px;
+	background-position: -1320px -900px;
 }
 
 div.rootD5startL{
-	background-position: : -1320px -960px;
+	background-position: -1320px -960px;
 }
 
 
 
 div.rootD0startR{
-	background-position: : -1380px -660px;
+	background-position: -1380px -660px;
 }
 
 div.rootD1startR{
-	background-position: : -1380px -720px;
+	background-position: -1380px -720px;
 }
 
 div.rootD2startR{
-	background-position: : -1380px -780px;
+	background-position: -1380px -780px;
 }
 
 div.rootD3startR{
-	background-position: : -1380px -840px;
+	background-position: -1380px -840px;
 }
 
 div.rootD4startR{
-	background-position: : -1380px -900px;
+	background-position: -1380px -900px;
 }
 
 div.rootD5startR{
-	background-position: : -1380px -960px;
+	background-position: -1380px -960px;
 }
 
 

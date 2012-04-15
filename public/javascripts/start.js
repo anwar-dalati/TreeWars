@@ -111,6 +111,9 @@ $(function() {
 		tw.startingPoints = data.startingPoints
 		
 		playerTrees.push(new PlayerTree(2,2,10,0, 3, 4, 0));
+		playerTrees.push(new PlayerTree(2,2,14,0, 3, 4, 1));
+		playerTrees.push(new PlayerTree(2,2,18,0, 3, 4, 2));
+		playerTrees.push(new PlayerTree(2,2,22,0, 3, 4, 3));
 
 		$('#wait_dialog').dialog('close')
 		$('#gameWrapper').css('background-image', 'none')
@@ -138,7 +141,10 @@ $(function() {
 		console.log(data.battleField[0][0])
 
 		playerTrees[0].clearTree();
-		playerTrees[0].drawTree();		
+		playerTrees[0].drawTree();	
+		playerTrees[1].drawTree();	
+		playerTrees[2].drawTree();	
+		playerTrees[3].drawTree();	
 
 		for (var x = 0; x < data.battleField.length; x++) {
 			for (var y = 0; y < data.battleField[x].length; y++) {
@@ -146,11 +152,13 @@ $(function() {
 				var rootDensity = data.rootDensity
 				var rootStrength = data.rootStrength
 				var leafDensity = data.leafDensity
+				
 				// tile.playerNames
 				//$('<img id="img_x_y" src="" class="tree0Center0" />')
 				$('#img_x_y').attr('class', 'tree0Center0')
 
 				if (tile.type == 1 && typeof tile.playerNames != 'undefined' && typeof tile.playerNames != 'object') { // ground
+					$('#tileWrapper').append('<div style="top:'+y*60+'px; left:'+x*60+ 'px;" class="rootD'+rootStrength+'B'+rootDensity+ '"></div>')
 					console.log('root at x: %s, y: %s', x, y)
 				}
 			}
