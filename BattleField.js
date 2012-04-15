@@ -7,6 +7,8 @@ var BattleField = function() {
 	this.airHeight = 10
 	this.groundDepth = 4
 	this.maxTreeWidth = 19
+	this.maxTreeHeight = 10
+	this.maxLeafDensity = 5
 
 	this.create = function() {
 		console.log('create BattleField...')

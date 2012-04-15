@@ -162,6 +162,11 @@ $(function() {
 
 		//pTree.drawTree();
 		playerTrees[0].clearTree();
+
+		for ( var i = 0; i < data.trees.length; i++) {
+			playerTrees[i].setValues(data.trees[i].playerName, data.trees[i].treeHeight, data.trees[i].treeWidth, data.trees[i].leafDensity, data.trees[i].rootDensity);
+		}
+
 		playerTrees[0].drawTree();
 		playerTrees[1].drawTree();
 		playerTrees[2].drawTree();
@@ -179,7 +184,7 @@ $(function() {
 				$('#img_x_y').attr('class', 'tree0Center0')
 
 				if (tile.type == 1 && typeof tile.playerNames != 'undefined' && typeof tile.playerNames != 'object') { // ground
-					$('#tileWrapper').append('<div style="top:'+y*60+'px; left:'+x*60+ 'px;" class="rootD'+rootStrength+'B'+rootDensity+ '"></div>')
+					$('#tileWrapper').append('<div style="top:'+y*60+'px; left:'+x*60+ 'px;" class="rootD'+(rootStrength - 1)+'B'+(rootDensity - 1)+ '"></div>')
 					console.log('root at x: %s, y: %s', x, y)
 				}
 			}
@@ -197,6 +202,7 @@ $(function() {
 	// TODO: implement weather icons
 	socket.on('updateCurrentEnvironment', function(data) {
 		console.log(data)
+		tw.states = data.states
 		for (var i = 0; i < data.states.length; i++) {
 			var state = data.states[i]
 			$('#uiWrapper #weather .weather.' + state.name).html(state.ticks > 0 ? state.ticks : '')
