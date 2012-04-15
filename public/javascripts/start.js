@@ -1,5 +1,7 @@
 $(function() {
 
+	var playerTrees = [];
+
 	soundManager.url = '../swf/';
 	soundManager.flashVersion = 8;
 	soundManager.useFlashBlock = false;
@@ -15,8 +17,9 @@ $(function() {
 			url: '../sounds/evening-in-the-forest.mp3'
 		});
 
-		twitter.play();
-		music.play();
+		//twitter.play();
+		//music.play();
+
 	});
 
 	$('#sound').click(function() {
@@ -104,8 +107,14 @@ $(function() {
 	})
 
 	//var pTree = new PlayerTree(2,2,10,0, 3, 4, 0);
+	//PlayerTree(2,2,10,0, 3, 4, 0);
 	socket.on('startingGame', function(data) {
 		tw.startingPoints = data.startingPoints
+
+		playerTrees.push(new PlayerTree(2,2,10,0, 3, 4, 0));
+		playerTrees.push(new PlayerTree(2,2,14,0, 3, 4, 1));
+		playerTrees.push(new PlayerTree(2,2,18,0, 3, 4, 2));
+		playerTrees.push(new PlayerTree(2,2,22,0, 3, 4, 3));
 
 		$('#wait_dialog').dialog('close')
 		$('#gameWrapper').css('background-image', 'none')
@@ -133,6 +142,11 @@ $(function() {
 		console.log(data)
 
 		//pTree.drawTree();
+		playerTrees[0].clearTree();
+		playerTrees[0].drawTree();
+		playerTrees[1].drawTree();
+		playerTrees[2].drawTree();
+		playerTrees[3].drawTree();
 
 		for (var x = 0; x < data.battleField.length; x++) {
 			for (var y = 0; y < data.battleField[x].length; y++) {
@@ -140,11 +154,13 @@ $(function() {
 				var rootDensity = data.rootDensity
 				var rootStrength = data.rootStrength
 				var leafDensity = data.leafDensity
+
 				// tile.playerNames
 				//$('<img id="img_x_y" src="" class="tree0Center0" />')
 				$('#img_x_y').attr('class', 'tree0Center0')
 
 				if (tile.type == 1 && typeof tile.playerNames != 'undefined' && typeof tile.playerNames != 'object') { // ground
+					$('#tileWrapper').append('<div style="top:'+y*60+'px; left:'+x*60+ 'px;" class="rootD'+rootStrength+'B'+rootDensity+ '"></div>')
 					console.log('root at x: %s, y: %s', x, y)
 				}
 			}
@@ -154,9 +170,9 @@ $(function() {
 	socket.on('updatePlayerResources', function(data) {
 		console.log(data)
 		$('#health').html('Health: ' + data.healthPoints)
-		$('#sun').html('Sun: ' +  Math.ceil(data.sun))
-		$('#water').html('Water: ' + Math.ceil(data.water))
-		$('#nutrients').html('Nutrients: ' + Math.ceil(data.nutrients))
+		$('#sun').html('Sun: ' +  Math.floor(data.sun))
+		$('#water').html('Water: ' + Math.floor(data.water))
+		$('#nutrients').html('Nutrients: ' + Math.floor(data.nutrients))
 	})
 
 	// TODO: implement weather icons

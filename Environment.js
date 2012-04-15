@@ -84,7 +84,7 @@ var Environment = function() {
 	}
 
 	this.setDrought = function() {
-		console.log('drouth summoned')
+		console.log('drought summoned')
 		droughtTicks = droughtToTick
 	}
 
