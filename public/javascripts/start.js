@@ -77,6 +77,7 @@ $(function() {
 		}
 
 		$('#wait_dialog .joinedPlayers').html(tw.playerName)
+		$('#wait_dialog .gameCode').html('<strong>' + tw.gameCode + '</strong><br />')
 		$('#wait_dialog').dialog({
 			buttons: buttons
 		})
