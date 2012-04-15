@@ -264,7 +264,7 @@ var Game = function() {
 		for (i = 0; i < players.length; i++) {
 			// decrease resources by the cost the tree takes
 			playerTree = trees[players[i].getName()]
-			var sunCost = Math.pow(playerTree.getTreeHeigth() * 0.5, 0.8745)
+			var sunCost = Math.pow(playerTree.getTreeHeigth() * playerTree.getTreeWidth() / 0.5, 0.8745)
 			var waterCost = playerTree.getTreeHeigth() * playerTree.getTreeWidth() * playerTree.getLeafDensity()
 			playerTree.changeSun(-sunCost)
 			playerTree.changeWater(-waterCost)

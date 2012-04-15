@@ -1146,3 +1146,16 @@ div.treeDroughtCenter5{
 	background-position: -1800px -300px;
 	height : 120px;
 }
+
+#gameWrapper div.shadow0 {
+	background-position: -1380px -420px;
+}
+
+#gameWrapper div.shadow1 {
+	background-position: -1440px -420px;
+}
+
+#gameWrapper div.shadow2 {
+	background-position: -1500px -420px;
+}
+
