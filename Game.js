@@ -139,7 +139,7 @@ var Game = function() {
 		var rootStrength = trees[player.getName()].getRootStrength()
 		var tile = that.battleField.getBattleTile(x,y)
 
-		if (!tile.getType() || (typeof tile.getPlayerName() != 'undefined' && tile.getPlayerName() == player.getName()) || (tile.getStrength() > rootStrength)) {
+		if (tile == null || !tile.getType() || (typeof tile.getPlayerName() != 'undefined' && tile.getPlayerName() == player.getName()) || (tile.getStrength() > rootStrength)) {
 			return false
 		}
 
