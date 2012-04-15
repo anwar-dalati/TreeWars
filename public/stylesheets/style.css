@@ -66,20 +66,16 @@ input {
 	right: 10px;
 }
 
-
-#uiWrapper div {
-	width: 180px;
-}
-
 #uiWrapper div, #sound {
 	height: 48px;
 	line-height: 48px;
 	margin: 0 0 10px 0;
-	padding: 0 10px;
+	padding: 0 10px 0 50px;
 	background-color: #fff;
 	font-weight: bold;
 	color: #808080;
 	background-image: url('/images/ressources.png');
+	background-repeat: no-repeat;
 	-moz-border-radius: 10px;
 	-webkit-border-radius: 10px;
 	-khtml-border-radius: 10px;
@@ -90,14 +86,14 @@ input {
 	position: absolute;
 	top: 10px;
 	left: 10px;
-	background-position: 0 48px;
+	background-position: 0 -144px;
 	width: 48px;
 	padding: 0;
 	cursor: pointer;
 }
 
 #uiWrapper div {
-	width: 180px;
+	width: 100px;
 	height: 48px;
 	float: right;
 	margin: 0 0 0 10px;
@@ -108,15 +104,15 @@ input {
 }
 
 #uiWrapper #sun {
-	background-position: 0 144px;
+	background-position: 10px -48px;
 }
 
 #uiWrapper #water {
-	background-position: 0 0px;
+	background-position: 5px 0px;
 }
 
 #uiWrapper #nutrients {
-	background-position: 0 96px;
+	background-position: 5px -96px;
 
 }
 
