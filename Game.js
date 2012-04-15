@@ -269,6 +269,12 @@ var Game = function() {
 			playerTree.changeSun(-sunCost)
 			playerTree.changeWater(-waterCost)
 
+       		//generate Nutrients
+            var generatedNutrients = that.resourceCalculator.calculateNutrientReward(playerTree.getSun(), playerTree.getWater(), that.environment.getSpringTicks())
+            playerTree.changeNutrients(generatedNutrients)
+            playerTree.changeSun(-generatedNutrients)
+            playerTree.changeWater(-generatedNutrients)
+
 			// just for testing purposes
 			// TODO: send the battlefield to the clients on every tick
 			players[i].getSocket().emit('battleField', {
@@ -357,12 +363,6 @@ var Game = function() {
 				}
 			}
 		}
-
-		// generate Nutrients
-        var generatedNutrients = that.resourceCalculator.calculateNutrientReward(playerTree.getSun(), playerTree.getWater(), that.environment.getSpringTicks())
-        playerTree.changeNutrients(generatedNutrients)
-        playerTree.changeSun(-generatedNutrients)
-        playerTree.changeWater(-generatedNutrients)
 
         // TODO: dead?
 

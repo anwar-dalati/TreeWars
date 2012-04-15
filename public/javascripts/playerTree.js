@@ -12,8 +12,6 @@ var PlayerTree = function(startLeafDensity, startRootDensity, startPosition, pos
 	this.height = startHeight;
 	this.PlayerName = associatedPlayer;
 	this.rootPositions = {};
-	
-	that = this;
 		
 	/*
 	 * adds root position in worldCoordinates (converted to screen coords)
@@ -44,6 +42,7 @@ var PlayerTree = function(startLeafDensity, startRootDensity, startPosition, pos
 	
 	this.drawTree = function()
 	{
+		that = this;
 		
 		if(typeof tw.states != "undefinded")
 		{
