@@ -7,6 +7,7 @@ var Tree = function() {
 	var leafDensity = 2
 	var rootWidth = 1
 	var rootCount = 0
+    var weatherPoints = 0
 
 	var healthPoints = 10
 	var sun = 6
@@ -109,6 +110,18 @@ var Tree = function() {
 	this.changeRootsCount = function(amount) {
 		rootCount += amount
 	}
+
+    this.setWeatherPoints = function(amount) {
+        weatherPoints = amount
+    }
+
+    this.changeWeatherPoints = function(amount) {
+        weatherPoints += amount
+    }
+
+    this.getWeatherPoints = function() {
+      return weatherPoints
+    }
 
 	this.countRootsAtBattleField = function(playerName, battleField) {
 		var count = 0
