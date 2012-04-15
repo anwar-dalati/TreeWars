@@ -92,6 +92,10 @@ var Tree = function() {
 	this.setRootStrength = function(strength) {
 		rootStrength = strength
 	}
+
+	this.setRootWidth = function(width) {
+		rootWidth = width
+	}
 }
 
 module.exports.Tree = function() {

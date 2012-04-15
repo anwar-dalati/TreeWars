@@ -71,28 +71,36 @@ var Game = function() {
 	}
 
 	this.growRoot = function(player, x, y) {
-		if (!that.canRootGrowHere(x,y)) {
+		if (!that.canRootGrowHere(player,x,y)) {
 			return false
 		}
 
 		console.log('player %s groth roots to %s:%s', player.getName(), x, y)
+
+		var tile = that.battleField.getBattleTile(x,y)
+		tile.setPlayerName(player.getName())
+		tile.setStrength(trees[player.getName()].getRootStrength())
+		tile.setBranches(trees[player.getName()].getRootWidth())
 	}
 
 	this.canRootGrowHere = function(player, x,y) {
 		var rootStrength = trees[player.getName()].getRootStrength()
 		var tile = that.battleField.getBattleTile(x,y)
+		
 		if (!tile.getType() || (typeof tile.getPlayerName() != 'undefined' && tile.getPlayerName() == player.getName()) || (tile.getStrength() > rootStrength)) {
 			return false
 		}
 
-		tile = that.battleField.getBattleTile(x,that.battleField.airHeight - 1)
-		if (typeof tile.getPlayerName() != 'undefined' && tile.getPlayerName() != player.getName()) {
-			return false
-		}
+		if (y == that.battleField.airHeight) {
+			tile = that.battleField.getBattleTile(x,that.battleField.airHeight - 1)
+			if (typeof tile.getPlayerName() != 'undefined' && tile.getPlayerName() != player.getName()) {
+				return false
+			}
 
-		tile = that.battleField.getBattleTile(x-1,that.battleField.airHeight - 1)
-		if (tile != null && typeof tile.getPlayerName() != 'undefined' && tile.getPlayerName() != player.getName()) {
-			return false
+			tile = that.battleField.getBattleTile(x-1,that.battleField.airHeight - 1)
+			if (tile != null && typeof tile.getPlayerName() != 'undefined' && tile.getPlayerName() != player.getName()) {
+				return false
+			}
 		}
 
 		tile = that.battleField.getBattleTile(x,y-1)
@@ -126,12 +134,13 @@ var Game = function() {
 				tile = that.battleField.getBattleTile(x, y)
 				if (typeof tile.getPlayerName() != 'undefined' && tile.getPlayerName() == player.getName()) {
 					that.battleField.getBattleTile(x, y).increaseStrength(1)
+					trees[player.getName()].setRootStrength(tile.getStrength())
 				};
 			}
 		}
 	}
 
-	this.branchRoot = function(player) {
+	this.branchesRoot = function(player) {
 		console.log('player %s branches the roots', player.getName())
 		var tile
 		for (var x = 0; x < that.battleField.fieldLength; x++) {
@@ -139,6 +148,7 @@ var Game = function() {
 				tile = that.battleField.getBattleTile(x, y)
 				if (typeof tile.getPlayerName() != 'undefined' && tile.getPlayerName() == player.getName()) {
 					that.battleField.getBattleTile(x, y).increaseBranches(1)
+					trees[player.getName()].setRootWidth(tile.getBranches())
 				};
 			}
 		}
@@ -316,7 +326,7 @@ var Game = function() {
 			if (y >= that.battleField.airHeight) {
 				line = ' ' + y
 			} else {
-				line = that.lpad(y, 5) + ' '
+				line = '  ' + y + '   '
 			}
 			for (x = 0; x < that.battleField.fieldLength; x++) {
 				if (y < that.battleField.airHeight && x == that.battleField.fieldLength-1) {

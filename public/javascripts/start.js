@@ -143,3 +143,15 @@ var next = function() {
 var placeTree = function(x) {
 	socket.emit('placeTreeGame', {x:x})
 }
+var growRoot = function(x, y) {
+	socket.emit('growRootGame', {x:x, y:y})
+}
+var strengthRoot = function() {
+	socket.emit('strengthRootGame')
+}
+var brancheRoot = function() {
+	socket.emit('branchesRootGame')
+}
+var batch = function() {
+	socket.emit('batch')
+}

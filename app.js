@@ -47,6 +47,9 @@ io.sockets.on('connection', function(socket) {
 	console.log('connection')
 
 	var player = null
+	var player2 = null
+	var player3 = null
+	var player4 = null
 	var game = null
 
 	socket.on('createGame', function(data) {
@@ -86,6 +89,59 @@ io.sockets.on('connection', function(socket) {
 	})
 	socket.on('growRootGame', function(data) {
 		game.growRoot(player, data.x, data.y)
+	})
+	socket.on('strengthRootGame', function() {
+		game.strengthRoot(player)
+	})
+	socket.on('branchesRootGame', function() {
+		game.branchesRoot(player)
+	})
+	socket.on('batch', function() {
+		var code = gameManager.getNewCode()
+		gameManager.createGame(code)
+		player = playerManager.addPlayer('1', socket)
+		game = gameManager.joinGame(code, player)
+		player.setHost(true)
+		player2 = playerManager.addPlayer('2', socket)
+		game = gameManager.joinGame(code, player2)
+		player3 = playerManager.addPlayer('3', socket)
+		game = gameManager.joinGame(code, player3)
+		player4 = playerManager.addPlayer('4', socket)
+		game = gameManager.joinGame(code, player4)
+		game.placeTree(player2, 13)
+		game.growRoot(player2, 14,11)
+		game.strengthRoot(player2)
+		game.placeTree(player3, 16)
+		game.strengthRoot(player3)
+		game.strengthRoot(player3)
+		game.growRoot(player3, 17,11)
+		game.placeTree(player4, 19)
+		game.growRoot(player4, 19,11)
+		game.strengthRoot(player4)
+		game.strengthRoot(player4)
+		game.strengthRoot(player4)
+		game.strengthRoot(player4)
+		game.placeTree(player, 10)
+		game.strengthRoot(player)
+		game.strengthRoot(player)
+		game.strengthRoot(player)
+		game.bg(player)
+		game.growRoot(player, 11,11)
+		game.growRoot(player, 12,11)
+		game.growRoot(player, 13,11)
+		game.growRoot(player, 14,11)
+		game.growRoot(player, 15,11)
+		game.growRoot(player, 16,11)
+		game.growRoot(player, 17,11)
+		game.growRoot(player, 18,11)
+		game.growRoot(player, 19,11)
+		game.growRoot(player, 20,11)
+		game.bg(player)
+		game.strengthRoot(player2)
+		game.strengthRoot(player2)
+		game.strengthRoot(player2)
+		game.growRoot(player2, 13,11)
+		game.bg(player)
 	})
 
 	socket.on('build', function(data) {
