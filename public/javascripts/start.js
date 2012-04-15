@@ -199,7 +199,6 @@ $(function() {
 		$('#nutrients').html('Nutrients: ' + Math.floor(data.nutrients))
 	})
 
-	// TODO: implement weather icons
 	socket.on('updateCurrentEnvironment', function(data) {
 		console.log(data)
 		tw.states = data.states
@@ -240,4 +239,7 @@ var brancheRoot = function() {
 }
 var batch = function() {
 	socket.emit('batch')
+}
+var initGrid = function() {
+	playerRoots.initGrid()
 }
