@@ -213,15 +213,15 @@ var Game = function() {
 	}
 
 	this.growTreeWidth = function(player) {
-		trees[player.getName()].extendTreeWidth()
+		trees[player.getName()].extendTreeWidth(that.battleField.maxTreeWidth)
 	}
 
 	this.growTreeHeight = function(player) {
-		trees[player.getName()].extendTreeHeigth()
+		trees[player.getName()].extendTreeHeigth(that.battleField.maxTreeHeight)
 	}
 
 	this.growLeafDensity = function(player) {
-		trees[player.getName()].extendLeafDensity()
+		trees[player.getName()].extendLeafDensity(that.battleField.maxLeafDensity)
 	}
 
 	this.gameLoop = function() {
