@@ -8,14 +8,20 @@ var Tree = function() {
 	var rootWidth = 1
 	var rootCount = 0
 
-	var healthPoints = 10
+	var healthPoints = 120
 	var sun = 6
 	var water = 20
 	var nutrients = 0
+	var dead = false
 
 	this.extendTreeHeigth = function(maxTreeHeigth) {
+		var oldMaxHealthPoints = that.getMaxHealthPoints()
+
 		treeHeigth++
 		treeHeigth = Math.min(maxTreeHeigth, treeHeigth)
+
+		that.updateNewHealthPoints(oldMaxHealthPoints)
+
 		console.log('extended tree heigth to %s (max: %s)', treeHeigth, maxTreeHeigth)
 	}
 
@@ -24,8 +30,13 @@ var Tree = function() {
 	}
 
 	this.extendTreeWidth = function(maxTreeWidth) {
+		var oldMaxHealthPoints = that.getMaxHealthPoints()
+
 		treeWidth+=2
 		treeWidth = Math.min(maxTreeWidth, treeWidth)
+
+		that.updateNewHealthPoints(oldMaxHealthPoints)
+
 		console.log('extended tree width to %s', treeWidth)
 	}
 
@@ -65,6 +76,19 @@ var Tree = function() {
 		return healthPoints
 	}
 
+	this.changeHealthPoints = function(amount) {
+		healthPoints += amount
+	}
+
+	this.getMaxHealthPoints = function() {
+		return treeHeigth * treeWidth * 10
+	}
+
+	this.updateNewHealthPoints = function(oldMaxHealthPoints) {
+		var diff = that.getMaxHealthPoints() - oldMaxHealthPoints
+		that.changeHealthPoints(diff)
+	}
+
 	this.getSun = function() {
 		return sun
 	}
@@ -80,12 +104,14 @@ var Tree = function() {
 	this.changeSun = function(amount) {
 		var max = that.getLeafDensity() * 2 * that.getTreeWidth() * that.getTreeHeigth()
 		sun = Math.min(sun + amount, max)
+
 		console.log('changed sun by %s, now %s', amount, sun)
 	}
 
 	this.changeWater = function(amount) {
 		var max = rootCount * 20 * that.getRootStrength()
 		water = Math.min(water + amount, max)
+
 		console.log('changed water by %s, now %s', amount, water)
 	}
 
@@ -124,6 +150,27 @@ var Tree = function() {
 		}
 
 		return count
+	}
+
+	this.damageTree = function() {
+		if (sun < 0) {
+			that.changeHealthPoints(sun)
+			that.changeNutrients(-sun)
+			sun = 0
+		}
+		if (water < 0) {
+			that.changeHealthPoints(water)
+			that.changeNutrients(-water)
+			water = 0
+		}
+	}
+
+	this.setDead = function(dead) {
+		that.dead = dead
+	}
+
+	this.isDead = function() {
+		return that.dead
 	}
 }
 

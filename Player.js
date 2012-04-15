@@ -4,6 +4,7 @@ var Player = function() {
 	var socket = null
 	var name
 	var host = false
+	var dead = false
 
 	this.create = function(name, socket) {
 		console.log('Created player %s', name)
@@ -29,6 +30,15 @@ var Player = function() {
 
 	this.isHost = function() {
 		return that.host
+	}
+
+	this.setDead = function(dead) {
+		that.dead = dead
+		that.socket.emit('youDied')
+	}
+
+	this.isDead = function() {
+		return that.dead
 	}
 }
 

@@ -8,6 +8,7 @@ var Game = function() {
 	var resourceCalculator = null
 	var ticks = 0
 	var trees = []
+	var deadPlayers = 0
 
 	var increaseMoistureByRain = 5
 
@@ -261,6 +262,10 @@ var Game = function() {
 
 		// update player's tree resources and stuff
 		for (i = 0; i < players.length; i++) {
+			if (players[i].isDead()) {
+				continue
+			}
+
 			// decrease resources by the cost the tree takes
 			playerTree = trees[players[i].getName()]
 			var sunCost = Math.pow(playerTree.getTreeHeigth() * playerTree.getTreeWidth() / 0.5, 0.8745)
@@ -303,6 +308,9 @@ var Game = function() {
 					continue
 				}
 				playerTree = trees[tile.getPlayerName()]
+				if (playerTree.isDead()) {
+					continue
+				}
 
 				var absorbedWater = that.resourceCalculator.calculateWaterReward(tile.moisture, playerTree.getRootWidth())
 				playerTree.changeWater(absorbedWater)
@@ -364,6 +372,32 @@ var Game = function() {
 		}
 
         // TODO: dead?
+
+		for (i = 0; i < players.length; i++) {
+			if (players[i].isDead()) {
+				continue
+			}
+
+			// damage trees if gtrkzh tr54uio
+			trees[players[i].getName()].damageTree()
+			if (trees[players[i].getName()].getHealthPoints() < 0) {
+				console.log('player % has died', players[i].getName())
+
+				players[i].setDead(true)
+				deadPlayers++
+				trees[players[i].getName()].setDead(true)
+			}
+		}
+
+		if ((players.length - deadPlayers) <= 1) {
+			for (i = 0; i < players.length; i++) {
+				if (players[i].isDead()) {
+					continue
+				}
+
+				players[i].getSocket().emit('youWon')
+			}
+		}
 
 		that.updatePlayerResources()
 	}
@@ -508,6 +542,10 @@ var Game = function() {
 
 	this.updatePlayerResources = function() {
 		for (var i = 0; i < players.length; i++) {
+			if (players[i].isDead()) {
+				continue
+			}
+
 			var playerTree = trees[players[i].getName()]
 			players[i].getSocket().emit('updatePlayerResources', {
 				healthPoints: playerTree.getHealthPoints(),

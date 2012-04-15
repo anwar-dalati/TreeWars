@@ -85,6 +85,18 @@ $(function() {
 		})
 	}
 
+	var diedDialog = function() {
+		var buttons = {};
+
+		buttons['Ok'] = function() {
+			$(this).dialog('close')
+		}
+
+		$('#died_dialog').dialog({
+			buttons: buttons
+		})
+	}
+
 	socket.on('createGameCode', function(data) {
 		console.log('game code: %s', data.code)
 		tw.gameCode = data.code
@@ -206,7 +218,7 @@ $(function() {
 
 	socket.on('updatePlayerResources', function(data) {
 		console.log(data)
-		$('#health').html('Health: ' + data.healthPoints)
+		$('#health').html('Health: ' + Math.floor(data.healthPoints))
 		$('#sun').html('Sun: ' +  Math.floor(data.sun))
 		$('#water').html('Water: ' + Math.floor(data.water))
 		$('#nutrients').html('Nutrients: ' + Math.floor(data.nutrients))
@@ -219,6 +231,29 @@ $(function() {
 			var state = data.states[i]
 			$('#uiWrapper #weather .weather.' + state.name).html(state.ticks > 0 ? state.ticks : '')
 		}
+	})
+
+	socket.on('youDied', function() {
+		tw.died = true
+
+		$('#growHeight').remove()
+		$('#growWidth').remove()
+		$('#growFoliageDense').remove()
+		$('#growRootsDense').remove()
+		$('#strengthRoots').remove()
+		$('#uiWrapper #weather .weather.Rain').click(function() {})
+		$('#uiWrapper #weather .weather.Sunshine').click(function() {})
+		$('#uiWrapper #weather .weather.Spring').click(function() {})
+		$('#uiWrapper #weather .weather.ColdSnap').click(function() {})
+		$('#uiWrapper #weather .weather.Drought').click(function() {})
+		$('#uiWrapper #weather .weather.Storm').click(function() {})
+		$('#gameWrapper .rootsGrid').click(function() {})
+
+		diedDialog()
+	})
+
+	socket.on('youWon', function() {
+		//
 	})
 
 	startDialog()
