@@ -100,8 +100,28 @@ var Tree = function() {
 		rootWidth = width
 	}
 
+	this.setRootCount = function(count) {
+		rootCount = count
+	}
+
 	this.changeRootsCount = function(amount) {
 		rootCount += amount
+	}
+
+	this.countRootsAtBattleField = function(playerName, battleField) {
+		var count = 0
+		var tile, x, y
+
+		for (x = 0; x < battleField.fieldLength; x++) {
+			for (y = battleField.airHeight; y < battleField.airHeight+battleField.groundDepth; y++) {
+				tile = battleField.getBattleTile(x, y)
+				if (tile != null && typeof tile != 'undefined' && tile.getPlayerName() == playerName) {
+					count++
+				}
+			}
+		}
+
+		return count
 	}
 }
 

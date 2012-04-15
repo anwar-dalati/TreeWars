@@ -232,6 +232,9 @@ var Game = function() {
 		var playerTree = null
 
 		that.battleField.cleanRoots()
+		for (i = 0; i < players.length; i++) {
+			trees[players[i].getName()].setRootCount(trees[players[i].getName()].countRootsAtBattleField(players[i].getName(), that.battleField))
+		}
 
 		// environment updates needed to do every tick
 		if (that.environment.getRainTicks()) {
