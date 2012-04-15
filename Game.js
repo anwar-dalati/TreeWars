@@ -269,7 +269,7 @@ var Game = function() {
 			playerTree.changeSun(-sunCost)
 			playerTree.changeWater(-waterCost)
 
-       		// generate Nutrients
+       		//generate Nutrients
             var generatedNutrients = that.resourceCalculator.calculateNutrientReward(playerTree.getSun(), playerTree.getWater(), that.environment.getSpringTicks())
             playerTree.changeNutrients(generatedNutrients)
             playerTree.changeSun(-generatedNutrients)
