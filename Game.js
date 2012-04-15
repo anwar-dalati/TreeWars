@@ -5,6 +5,7 @@ var Game = function() {
 	var players = []
 	var environment = null
 	var battleField = null
+	var resourceCalculator = null
 	var ticks = 0
 	var trees = []
 
@@ -16,6 +17,7 @@ var Game = function() {
 		that.code = code
 		that.environment = require('./Environment.js').Environment()
 		that.battleField = battleField
+		that.resourceCalculator = require('./ResourceCalculator.js').ResourceCalculator()
 
 		return that
 	}
@@ -200,14 +202,17 @@ var Game = function() {
 
 		var tile = null
 		// ground tile loop
-		for (var x = 0; x < that.battleField.length; x++) {
-			for (var y = 0; y < that.battleField[x].length; y++) {
+		for (var x = 0; x < that.battleField.fieldLength; x++) {
+			for (var y = 0; y < that.battleField.airHeight + that.battleField.groundDepth; y++) {
 				tile = that.battleField.getBattleTile(x, y)
-				if (tile.getType() != 1) { // no ground tile
+				if (tile.getType() != 1 || typeof tile.getPlayerName() == 'undefined') { // no ground tile
 					continue
 				}
+				playerTree = trees[tile.getPlayerName()]
 
-				// TODO: get root and fill its water reserve
+				var absorbedWater = that.resourceCalculator.calculateWaterReward(tile.moisture, playerTree.getRootWidth())
+				playerTree.changeWater(absorbedWater)
+				tile.decreaseMoisture(playerTree.getRootWidth())
 			}
 		}
 
@@ -250,11 +255,10 @@ var Game = function() {
 
 					playerTree = trees[playersAtCoord[i]]
 
-					// TODO: CALCULATION
-					var absorbPercentage = (((playerTree.getLeafDensity() + 1) * 11) + 34)
-					var absorbedLight = splittedLight * (absorbPercentage / 100)
+					var absorbedLight = that.resourceCalculator.calculateSunReward(splittedLight, playerTree.getLeafDensity())
 					playerTree.changeSun(absorbedLight)
 					light -= absorbedLight
+
 					playersAbsorbed.push(playersAtCoord[i])
 				}
 
@@ -264,6 +268,8 @@ var Game = function() {
 				}
 			}
 		}
+
+		// TODO: dead?
 
 		that.updatePlayerResources()
 	}
