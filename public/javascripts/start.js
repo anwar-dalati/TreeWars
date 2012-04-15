@@ -104,8 +104,9 @@ $(function() {
 	})
 
 	var pTree = new PlayerTree(2,2,10,0, 3, 4, 0);
+	socket.on('startingGame', function(data) {
+		tw.startingPoints = data.startingPoints
 
-	socket.on('startingGame', function() {
 		$('#wait_dialog').dialog('close')
 		$('#gameWrapper').css('background-image', 'none')
 
@@ -165,7 +166,7 @@ $(function() {
 
 		for (var i = 0; i < data.states.length; i++) {
 			var state = data.states[i]
-			$('#uiWrapper #weather').append($('<div class="noImage weather">' + state.name + ' (' + state.ticks + ')' + '</div>'))
+			$('#uiWrapper #weather').append($('<img class="weather ' + data.state + '" />'))
 		}
 		if (i > 0) {
 			$('#uiWrapper #weather').attr('class', 'noImage')
