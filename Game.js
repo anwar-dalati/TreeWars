@@ -105,6 +105,7 @@ var Game = function() {
 			console.log('tick %s', ticks)
 		}
 		var i = 0
+		var playerTree = null
 
 		// environment updates needed to do every tick
 		if (that.environment.getRainTicks()) {
@@ -164,7 +165,7 @@ var Game = function() {
 						continue
 					}
 
-					var playerTree = trees[playersAtCoord[i]]
+					playerTree = trees[playersAtCoord[i]]
 
 					// TODO: CALCULATION
 					var absorbPercentage = (((playerTree.getLeafDensity() + 1) * 11) + 34)
@@ -183,6 +184,13 @@ var Game = function() {
 
 		// update player's tree resources and stuff
 		for (i = 0; i < players.length; i++) {
+			// decrease resources by the cost the tree takes
+			playerTree = trees[players[i].getName()]
+			var sunCost = Math.pow(playerTree.getTreeHeigth() * 0.5, 0.8745)
+			var waterCost = Math.pow(playerTree.getTreeHeigth(), 1.65) / 10
+			playerTree.changeSun(-sunCost)
+			playerTree.changeWater(-waterCost)
+
 			that.updatePlayerResources()
 
 			// just for testing purposes
@@ -342,11 +350,12 @@ var Game = function() {
 
 	this.updatePlayerResources = function() {
 		for (var i = 0; i < players.length; i++) {
+			var playerTree = trees[players[i].getName()]
 			players[i].getSocket().emit('updatePlayerResources', {
-				healthPoints: players[i].getTree().getHealthPoints(),
-				sun: players[i].getTree().getSun(),
-				water: players[i].getTree().getWater(),
-				nutrients: players[i].getTree().getNutrients()
+				healthPoints: playerTree.getHealthPoints(),
+				sun: playerTree.getSun(),
+				water: playerTree.getWater(),
+				nutrients: playerTree.getNutrients()
 			})
 		}
 	}

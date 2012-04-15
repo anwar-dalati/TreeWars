@@ -101,10 +101,10 @@ $(function() {
 
 	socket.on('updatePlayerResources', function(data) {
 		console.log(data)
-		$('#resources #health').html('Health: ' + data.healthPoints)
-		$('#resources #sun').html('Sun: ' +  data.sun)
-		$('#resources #water').html('Water: ' + data.water)
-		$('#resources #nutrients').html('Nutrients: ' + data.nutrients)
+		$('#health').html('Health: ' + data.healthPoints)
+		$('#sun').html('Sun: ' +  Math.ceil(data.sun))
+		$('#water').html('Water: ' + Math.ceil(data.water))
+		$('#nutrients').html('Nutrients: ' + Math.ceil(data.nutrients))
 	})
 
 	// TODO: implement weather icons
