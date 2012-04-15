@@ -1,4 +1,6 @@
 $(function() {
+	
+	var playerTrees = [];
 
 	soundManager.url = '../swf/';
 	soundManager.flashVersion = 8;
@@ -76,6 +78,7 @@ $(function() {
 		}
 
 		$('#wait_dialog .joinedPlayers').html(tw.playerName)
+		$('#wait_dialog .gameCode').html('<strong>' + tw.gameCode + '</strong><br />')
 		$('#wait_dialog').dialog({
 			buttons: buttons
 		})
@@ -102,7 +105,12 @@ $(function() {
 		$('#wait_dialog .joinedPlayers').append(', ' + data.playerName)
 	})
 
-	socket.on('startingGame', function() {
+	//PlayerTree(2,2,10,0, 3, 4, 0);
+	socket.on('startingGame', function(data) {
+		tw.startingPoints = data.startingPoints
+		
+		playerTrees.push(new PlayerTree(2,2,10,0, 3, 4, 0));
+
 		$('#wait_dialog').dialog('close')
 		$('#gameWrapper').css('background-image', 'none')
 
@@ -119,12 +127,16 @@ $(function() {
 			build.extendRootDensity()
 		})
 		$('#strengthRoots').removeClass('hide').click(function() {
-			build.extendRootWidth()
+			build.extendRootWidth()			
 		})
+		
+		
 	})
 
 	socket.on('battleField', function(data) {
 		console.log(data.battleField[0][0])
+
+		playerTrees[0].drawTree();		
 
 		for (var x = 0; x < data.battleField.length; x++) {
 			for (var y = 0; y < data.battleField[x].length; y++) {
@@ -158,7 +170,7 @@ $(function() {
 
 		for (var i = 0; i < data.states.length; i++) {
 			var state = data.states[i]
-			$('#uiWrapper #weather').append($('<div class="noImage weather">' + state.name + ' (' + state.ticks + ')' + '</div>'))
+			$('#uiWrapper #weather').append($('<img class="weather ' + data.state + '" />'))
 		}
 		if (i > 0) {
 			$('#uiWrapper #weather').attr('class', 'noImage')
