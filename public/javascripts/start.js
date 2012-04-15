@@ -210,6 +210,7 @@ $(function() {
 		$('#sun').html('Sun: ' +  Math.floor(data.sun))
 		$('#water').html('Water: ' + Math.floor(data.water))
 		$('#nutrients').html('Nutrients: ' + Math.floor(data.nutrients))
+		$('#weatherpoints').html('WPoints: ' + Math.floor(data.weatherPoints))
 	})
 
 	socket.on('updateCurrentEnvironment', function(data) {

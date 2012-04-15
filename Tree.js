@@ -118,6 +118,8 @@ var Tree = function() {
     this.changeWeatherPoints = function(amount) {
         weatherPoints += amount
     }
+    
+    
 
     this.getWeatherPoints = function() {
       return weatherPoints
