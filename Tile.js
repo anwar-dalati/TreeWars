@@ -58,7 +58,7 @@ var Tile = function() {
 	}
 
 	this.decreaseMoisture = function(amount) {
-		that.moisture = Math.max(0, Math.pow(that.moisture, 0.4) * (1 - amount/100) )
+		that.moisture = Math.max(0, that.moisture - Math.pow(that.moisture, 0.4) * (1 - amount/100) )
 	}
 
 	this.increaseMoisture = function(amount) {
