@@ -111,10 +111,10 @@ $(function() {
 	socket.on('startingGame', function(data) {
 		tw.startingPoints = data.startingPoints
 
-		playerTrees.push(new PlayerTree(2,2,10,-5, 3, 4, 0));
-		playerTrees.push(new PlayerTree(2,2,14,-7, 3, 4, 1));
-		playerTrees.push(new PlayerTree(2,2,18,-9, 3, 4, 2));
-		playerTrees.push(new PlayerTree(2,2,22,-11, 3, 4, 3));
+		playerTrees.push(new PlayerTree(0,0,10,0, 3, 4, 0));
+		playerTrees.push(new PlayerTree(0,0,14,0, 3, 4, 1));
+		playerTrees.push(new PlayerTree(0,0,18,0, 3, 4, 2));
+		playerTrees.push(new PlayerTree(0,0,22,0, 3, 4, 3));
 
 		$('#wait_dialog').dialog('close')
 		$('#gameWrapper').css('background-image', 'none')
