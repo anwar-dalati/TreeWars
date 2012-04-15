@@ -182,6 +182,8 @@ var Game = function() {
 		var i = 0
 		var playerTree = null
 
+		that.battleField.cleanRoots()
+
 		// environment updates needed to do every tick
 		if (that.environment.getRainTicks()) {
 			that.rain(that.environment.getRainTicks() > 0);
