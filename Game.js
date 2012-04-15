@@ -188,6 +188,9 @@ var Game = function() {
 				}
 
 				var playersAtCoord = that.getPresentPlayersAtCoord(x, y)
+				if (typeof playersAtCoord != 'object' && typeof playersAtCoord != 'undefined') {
+					playersAtCoord = [].push(playersAtCoord)
+				}
 
 				// skip row in that column which has no tiles
 				if (!playersAtCoord.length) {
