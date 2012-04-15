@@ -46,19 +46,22 @@ var PlayerTree = function(startLeafDensity, startRootDensity, startPosition, pos
 	{
 		if(typeof tw.states != "undefinded")
 		{
+			$('#gameWrapper').css('background-image', 'url(/images/background/normal.jpg)')
+			$('#tileWrapper').css('background-image', 'none')
+			
 			for (var i = 0; i < tw.states.length; i++) {
 				var state = tw.states[i]
-				if(state.Name == "ColdSnap")
+				
+				if(state.name == "ColdSnap" && state.ticks > 0)
 					$('#gameWrapper').css('background-image', 'url(/images/background/snow.jpg)')
-				else if(state.Name == "Drought")
+				else if(state.name == "Drought" && state.ticks > 0)
 					$('#gameWrapper').css('background-image', 'url(/images/background/drought.jpg)')
-				else if(state.Name == "Spring")
+				else if(state.name == "Spring" && state.ticks > 0)
 					$('#gameWrapper').css('background-image', 'url(/images/background/spring.jpg)')
-				if(state.Name == "Rain")
-					$('#tileWrapper').css('background-image', 'url(/images/background/rain.jpg)')
-				else if(state.Name == "Sun")
-					$('#tileWrapper').css('background-image', 'url(/images/background/sun.jpg)')
-					
+				if(state.name == "Rain" && state.ticks > 0)
+					$('#tileWrapper').css('background-image', 'url(/images/background/rain.png)')
+				else if(state.name == "Sunshine" && state.ticks > 0)
+					$('#tileWrapper').css('background-image', 'url(/images/background/sun.png)')
 			}
 		}
 		
