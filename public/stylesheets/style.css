@@ -108,8 +108,45 @@ input {
 	background-position: 0 -480px;
 }
 
-#uiWrapper #weather .img {
+#uiWrapper #weather {
+	width: 200px;
+	padding: 0;
+}
+
+#uiWrapper #weather .weather {
+	background-image: url('/images/ressources.png');
+	width: 48px;
+	height: 48px;
+	margin: 0;
+	padding: 0;
 	float: left;
+	text-align: center;
+	color: #FA1;
+	font-size: 20px;
+}
+
+#uiWrapper #weather .weather.Rain {
+	background-position: 0px -240px;
+}
+
+#uiWrapper #weather .weather.Sunshine {
+	background-position: 0px -288px;
+}
+
+#uiWrapper #weather .weather.Spring {
+	background-position: 0px -336px;
+}
+
+#uiWrapper #weather .weather.ColdSnap {
+	background-position: 0px -192px;
+}
+
+#uiWrapper #weather .weather.Drought {
+	background-position: 0px -432px;
+}
+
+#uiWrapper #weather .weather.Storm {
+	background-position: 0px -384px;
 }
 
 #uiWrapper div {
