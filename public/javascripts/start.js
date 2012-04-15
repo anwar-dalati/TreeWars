@@ -65,18 +65,62 @@ $(function() {
 		})
 	}
 
+	var waitDialog = function() {
+		var buttons = {};
+
+		if (tw.host) {
+			buttons['Start'] = function() {
+				$(this).dialog('close')
+				socket.emit('startGame')
+			}
+		}
+
+		$('#wait_dialog .joinedPlayers').html(tw.playerName)
+		$('#wait_dialog').dialog({
+			buttons: buttons
+		})
+	}
+
 	socket.on('createGameCode', function(data) {
 		console.log('game code: %s', data.code)
 		tw.gameCode = data.code
 		tw.host = true
+		waitDialog()
 	})
 	socket.on('joinGameSuccess', function(data) {
 		console.log('joining game with code %s %s', $('#joinGameCode').val(), data.success ? 'succeeded' : 'failed')
 		if (data.success) {
 			tw.gameCode = $('#joinGameCode').val()
+			waitDialog()
 		} else {
 			joinDialog()
 		}
+	})
+
+	socket.on('playerJoined', function(data) {
+		console.log('player %s joined the game', data.playerName)
+		$('#wait_dialog .joinedPlayers').append(', ' + data.playerName)
+	})
+
+	socket.on('startingGame', function() {
+		$('#wait_dialog').dialog('close')
+		$('#gameWrapper').css('background-image', 'none')
+
+		$('#growHeight').removeClass('hide').click(function() {
+			build.extendTreeHeigth()
+		})
+		$('#growWidth').removeClass('hide').click(function() {
+			build.extendTreeWidth()
+		})
+		$('#growFoliageDense').removeClass('hide').click(function() {
+			build.extendLeafDensity()
+		})
+		$('#growRootsDense').removeClass('hide').click(function() {
+			build.extendRootDensity()
+		})
+		$('#strengthRoots').removeClass('hide').click(function() {
+			build.extendRootWidth()
+		})
 	})
 
 	socket.on('battleField', function(data) {
