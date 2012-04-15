@@ -244,6 +244,17 @@ var Game = function() {
 		that.storm(that.environment.getStormTicks() > 0)
 		that.environment.decreaseTicks();
 
+		var playerTrees = []
+		for (i = 0; i < players.length; i++) {
+			// decrease resources by the cost the tree takes
+			playerTree = trees[players[i].getName()]
+			playerTrees.push({
+				playerName: players[i].getName(),
+				height: playerTree.getTreeHeigth(),
+				width: playerTree.getTreeWidth()
+			})
+		}
+
 		// update player's tree resources and stuff
 		for (i = 0; i < players.length; i++) {
 			// decrease resources by the cost the tree takes
@@ -259,7 +270,8 @@ var Game = function() {
 				rootDensity: playerTree.getRootWidth(),
 				rootStrength: playerTree.getRootStrength(),
 				leafDensity: playerTree.getLeafDensity(),
-				battleField: that.battleFieldToArray()
+				battleField: that.battleFieldToArray(),
+				trees: playerTrees
 			})
 
 			var envStates = []
