@@ -82,7 +82,10 @@ io.sockets.on('connection', function(socket) {
 		}
 	})
 	socket.on('placeTreeGame', function(data) {
-		game.placeTree(data.x, player)
+		game.placeTree(player, data.x)
+	})
+	socket.on('growRootGame', function(data) {
+		game.growRoot(player, data.x, data.y)
 	})
 
 	socket.on('build', function(data) {
@@ -130,14 +133,14 @@ io.sockets.on('connection', function(socket) {
 	})
 	socket.on('summonColdSnap', function() {
 		console.log('summoning cold snap by %s', player.getName())
-		game.getEnvironment().coldSnap()
+		game.getEnvironment().setColdSnap()
 	})
-	socket.on('summonDrouth', function() {
+	socket.on('summonDrought', function() {
 		console.log('summoning drouth by %s', player.getName())
-		game.getEnvironment().drouth()
+		game.getEnvironment().setDrought()
 	})
 	socket.on('summonStorm', function() {
 		console.log('summoning storm by %s', player.getName())
-		game.getEnvironment().storm()
+		game.getEnvironment().setStorm()
 	})
 })

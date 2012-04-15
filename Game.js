@@ -43,9 +43,9 @@ var Game = function() {
 		return that.environment
 	}
 
-	this.placeTree = function(x, player) {
+	this.placeTree = function(player, x) {
 		if (!that.battleField.isAvailable(x)) {
-			console.log('There is already placed a tree here')
+			console.log('You cant place your tree here')
 			return false
 		}
 
@@ -55,9 +55,29 @@ var Game = function() {
 		}
 
 		console.log('player %s placed tree at %s', player.getName(), x)
-		that.battleField.markTileAsUsed(player.getName(), x)
+		that.battleField.markTileAsUsed(player, x)
 		trees[player.getName()] = require('./Tree.js').Tree()
+
+		that.placeRoot(player, x, that.battleField.airHeight)
+		that.placeRoot(player, x+1, that.battleField.airHeight)
+
 		return true
+	}
+
+	this.placeRoot = function(player, x, y) {
+		that.battleField.getBattleTile(x,y).setPlayerName(player.getName())
+	}
+
+	this.growRoot = function(player, x, y) {
+
+	}
+
+	this.strengthRoot = function(player) {
+
+	}
+
+	this.branchRoot = function(player) {
+
 	}
 
 	this.gameLoop = function() {
@@ -67,10 +87,13 @@ var Game = function() {
 
 		// environment updates needed to do every tick
 		if (that.environment.getRainTicks()) {
-			that.rain();
+			that.rain(that.environment.getRainTicks() > 0);
 		}
 		that.sunshine(that.environment.getSunshineTicks() > 0)
 		that.spring(that.environment.getSpringTicks() > 0)
+		that.coldSnap(that.environment.getColdSnapTicks() > 0)
+		that.drought(that.environment.getDroughtTicks() > 0)
+		that.storm(that.environment.getStormTicks() > 0)
 		that.environment.decreaseTicks();
 
 		// update player's tree resources and stuff
@@ -86,19 +109,26 @@ var Game = function() {
 			// TODO: send the battlefield to the clients on every tick
 			players[i].getSocket().emit('battleField', {battleField: that.battleField.toArray()})
 
-			var envState = null
-			var envTicks = 0
-			if (that.environment.getSunshineTicks() > 0) {
-				envState = 'Sunshine'
-				envTicks = that.environment.getSunshineTicks()
-			} else if (that.environment.getSpringTicks() > 0) {
-				envState = 'Spring'
-				envTicks = that.environment.getSpringTicks()
-			} else if (that.environment.getRainTicks() > 0) {
-				envState = 'Rain'
-				envTicks = that.environment.getRainTicks()
+			var envStates = []
+			if (that.environment.getRainTicks() > 0) {
+				envStates.push({name: 'Rain', ticks: that.environment.getRainTicks()})
 			}
-			players[i].getSocket().emit('updateCurrentEnvironment', {state: envState, ticks: envTicks})
+			if (that.environment.getSunshineTicks() > 0) {
+				envStates.push({name: 'Sunshine', ticks: that.environment.getSunshineTicks()})
+			}
+			if (that.environment.getSpringTicks() > 0) {
+				envStates.push({name: 'Spring', ticks: that.environment.getSpringTicks()})
+			}
+			if (that.environment.getColdSnapTicks() > 0) {
+				envStates.push({name: 'Cold Snap', ticks: that.environment.getColdSnapTicks()})
+			}
+			if (that.environment.getDroughtTicks() > 0) {
+				envStates.push({name: 'Drought', ticks: that.environment.getDroughtTicks()})
+			}
+			if (that.environment.getStormTicks() > 0) {
+				envStates.push({name: 'Storm', ticks: that.environment.getStormTicks()})
+			}
+			players[i].getSocket().emit('updateCurrentEnvironment', {states: envStates})
 		}
 	}
 
@@ -115,18 +145,34 @@ var Game = function() {
 		if (active) {
 			console.log('its shining')
 		}
-		that.battleField.setSunshineActive(active)
 	}
 
 	this.spring = function(active) {
 		if (active) {
 			console.log('its spring')
 		}
-		that.battleField.setSpringActive(active)
+	}
+
+	this.coldSnap = function(active) {
+		if (active) {
+			console.log('its cold')
+		}
+	}
+
+	this.drought = function(active) {
+		if (active) {
+			console.log('its droughn')
+		}
+	}
+
+	this.storm = function(active) {
+		if (active) {
+			console.log('its stormy')
+		}
 	}
 
 	this.bg = function() {
-		var line = ''
+		var line = 'y \\ x '
 		for (var x = 0; x < that.battleField.fieldLength; x++) {
 			line += that.lpad(x, 5) + ' '
 		}
@@ -134,17 +180,58 @@ var Game = function() {
 
 		var content;
 		for (var y = 0; y < that.battleField.airHeight + that.battleField.groundDepth; y++) {
-			line = ''
+			line = that.lpad(y, 5) + ' '
 			for (var x = 0; x < that.battleField.fieldLength; x++) {
+				// present Players
+				content = that.getPresentPlayersAtCoord(x,y)
+				if (typeof content == 'object') {
+					content = content.join(',')
+					if (!content.length) {
+						line += that.lpad('-', 5) + ' '
+						continue
+					}
+				}
+				if (typeof content == 'undefined') {
+					line += that.lpad('-', 5) + ' '
+					continue
+				}
+
+				// Root
 				if (that.battleField.getBattleTile(x,y).getType()) {
 					content = that.battleField.getBattleTile(x,y).getMoisture();
 				} else {
 					content = '.';
 				}
+
+				// Moisture
+//				if (that.battleField.getBattleTile(x,y).getType()) {
+//					content = that.battleField.getBattleTile(x,y).getMoisture();
+//				} else {
+//					content = '.';
+//				}
+
 				line += that.lpad(content, 5) + ' '
 			}
 			console.log(line)
 		}
+	}
+
+	this.getPresentPlayersAtCoord = function(x,y) {
+		if (that.battleField.getBattleTile(x,y).getType()) {
+			return that.battleField.getBattleTile(x,y).getPlayerName()
+		}
+		var players = []
+		var playerName
+		for (var bx = 0; bx < that.battleField.fieldLength; bx++) {
+			playerName = that.battleField.getBattleTile(bx, that.battleField.airHeight - 1).getPlayerName()
+			if (typeof playerName != 'undefined') {
+				var tree = trees[playerName]
+				if ((x - bx) < tree.getTreeWidth() - 1 && (bx - x) < tree.getTreeWidth() - 1 && y > that.battleField.airHeight - tree.getTreeHeigth() - 1) {
+					players.push(playerName)
+				}
+			}
+		}
+		return players
 	}
 
 	this.lpad = function(str, length, pad) {

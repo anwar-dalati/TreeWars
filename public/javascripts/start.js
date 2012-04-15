@@ -92,8 +92,13 @@ $(function() {
 	})
 
 	socket.on('updateCurrentEnvironment', function(data) {
-		console.log('Environment: ' + (data.state ? data.state : 'None active') + ' Left: ' + data.ticks)
-		$('#resources #environment').html((data.state ? data.state : 'None active') + ' (' + data.ticks + ')')
+		console.log(data)
+		$('#uiWrapper .weather').remove()
+
+		for (var i = 0; i < data.states.length; i++) {
+			var state = data.states[i]
+			$('#uiWrapper').append($('<div class="noImage weather">' + state.name + ' (' + state.ticks + ')' + '</div>'))
+		}
 	})
 
 	startDialog()
@@ -115,4 +120,7 @@ var next = function() {
 }
 var placeTree = function(x) {
 	socket.emit('placeTreeGame', {x:x})
+}
+var growRoot = function(x,y) {
+	socket.emit('growRoot', {x:x, y:y})
 }
