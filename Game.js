@@ -120,6 +120,7 @@ var Game = function() {
 	this.placeRoot = function(player, x, y) {
 		that.battleField.getBattleTile(x,y).setPlayerName(player.getName())
 		trees[player.getName()].changeRootsCount(1)
+		
 	}
 
 	this.growRoot = function(player, x, y) {
@@ -133,6 +134,9 @@ var Game = function() {
 		tile.setPlayerName(player.getName())
 		tile.setStrength(trees[player.getName()].getRootStrength())
 		tile.setBranches(trees[player.getName()].getRootWidth())
+		
+		//loose nutrients
+		trees[player.getName()].changeNutrients(-8);
 	}
 
 	this.canRootGrowHere = function(player, x,y) {
@@ -190,6 +194,10 @@ var Game = function() {
 				};
 			}
 		}
+		
+		//loose nutrients
+		trees[player.getName()].changeNutrients(-45);		
+		
 	}
 
 	this.branchesRoot = function(player) {
@@ -204,6 +212,9 @@ var Game = function() {
 				};
 			}
 		}
+		
+		//loose nutrients
+		trees[player.getName()].changeNutrients(-60);
 	}
 
 
@@ -214,14 +225,20 @@ var Game = function() {
 
 	this.growTreeWidth = function(player) {
 		trees[player.getName()].extendTreeWidth(that.battleField.maxTreeWidth)
+		//loose nutrients
+		trees[player.getName()].changeNutrients(-15);
 	}
 
 	this.growTreeHeight = function(player) {
 		trees[player.getName()].extendTreeHeigth(that.battleField.maxTreeHeight)
+		//loose nutrients
+		trees[player.getName()].changeNutrients(-15);
 	}
 
 	this.growLeafDensity = function(player) {
 		trees[player.getName()].extendLeafDensity(that.battleField.maxLeafDensity)
+		//loose nutrients
+		trees[player.getName()].changeNutrients(-8);
 	}
 
 	this.gameLoop = function() {
@@ -272,6 +289,7 @@ var Game = function() {
 			var waterCost = playerTree.getTreeHeigth() * playerTree.getTreeWidth() * playerTree.getLeafDensity()
 			playerTree.changeSun(-sunCost)
 			playerTree.changeWater(-waterCost)
+            playerTree.changeWeatherPoints(0.05)
 
        		//generate Nutrients
             var generatedNutrients = that.resourceCalculator.calculateNutrientReward(playerTree.getSun(), playerTree.getWater(), that.environment.getSpringTicks())
@@ -551,7 +569,8 @@ var Game = function() {
 				healthPoints: playerTree.getHealthPoints(),
 				sun: playerTree.getSun(),
 				water: playerTree.getWater(),
-				nutrients: playerTree.getNutrients()
+				nutrients: playerTree.getNutrients(),
+                weatherPoints: playerTree.getWeatherPoints()
 			})
 		}
 	}

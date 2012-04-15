@@ -60,6 +60,7 @@ var Environment = function() {
 			rainTicks -= (sunshineToTick - sunshineTicks)
 			sunshineTicks = 0
 		}
+		
 	}
 
 	this.setSunshine = function() {

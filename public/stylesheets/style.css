@@ -159,7 +159,7 @@ input {
 	background-position: 0px -432px;
 }
 
-#uiWrapper #weather .weather.Storm {
+#uiWrapper #weather .weather.Storm, #weatherpoints {
 	background-position: 0px -384px;
 }
 
