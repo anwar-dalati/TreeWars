@@ -44,6 +44,7 @@ var PlayerTree = function(startLeafDensity, startRootDensity, startPosition, pos
 	
 	this.drawTree = function()
 	{
+		
 		if(typeof tw.states != "undefinded")
 		{
 			$('#gameWrapper').css('background-image', 'url(/images/background/normal.jpg)')
@@ -114,12 +115,13 @@ var PlayerTree = function(startLeafDensity, startRootDensity, startPosition, pos
 		+that.LeafDensity+'Center'+Math.floor(Math.random()*6)+ '"></div>')
 			}
 			
-			
+			//draw right1
 			$('#tileWrapper').append('<div style="top:'+ (480 - (heightIndex * 60))+'px; left:'
 		+ ((that.worldPosition + that.positionChangeToScreenPosition)+ Math.floor(that.width/2)) * 60 + 'px;" class="tree'
 		+that.LeafDensity+'Right'+1+ '"></div>')		
 		
 		}		
+		
 		
 			for(var specialIndex = 1; specialIndex<heightModifier; specialIndex++)
 		{
@@ -131,7 +133,7 @@ var PlayerTree = function(startLeafDensity, startRootDensity, startPosition, pos
 			//draw centerpieces
 			for(var centerIndex = 1; centerIndex < that.width -1; centerIndex++)
 			{
-			$('#tileWrapper').append('<div style="top:'+ (480 - ((that.height)* 60))+'px; left:'
+			$('#tileWrapper').append('<div style="top:'+ (480 - ((that.height +heightModifier)* 60))+'px; left:'
 		+ ((that.worldPosition + that.positionChangeToScreenPosition)- Math.floor(that.width/2)+centerIndex) * 60 + 'px;" class="tree'
 		+that.LeafDensity+'Center'+/*Math.floor(Math.random()*6)*/ 3+ '"></div>')
 			}
@@ -176,9 +178,9 @@ var PlayerTree = function(startLeafDensity, startRootDensity, startPosition, pos
 				$('#tileWrapper').append('<div style="top:'+ (480 - (that.height- heightModifier) * 60)+'px; left:'
 		+ ((that.worldPosition + that.positionChangeToScreenPosition)+ Math.floor(that.width/2)- xPositionmodifier) * 60 + 'px;" class="tree'
 		+that.LeafDensity+'Right'+0+ '"></div>')
-			}			
-			else
-			{		
+		}			
+		else
+		{		
 			$('#tileWrapper').append('<div style="top:'+ (480 - (that.height- heightModifier) * 60)+'px; left:'
 		+ ((that.worldPosition + that.positionChangeToScreenPosition)+ Math.floor(that.width/2)- xPositionmodifier) * 60 + 'px;" class="tree'
 		+that.LeafDensity+'Top'+2+ '"></div>')
