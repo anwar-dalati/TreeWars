@@ -23,14 +23,47 @@ var Game = function() {
 	}
 
 	this.join = function(player) {
+		// inform all players that a player has joined the game
+		for (var i = 0; i < players.length; i++) {
+			players[i].getSocket().emit('playerJoined', {playerName: player.getName()})
+		}
+
 		players.push(player)
 		console.log('%s joined game with code %s', player.getName(), that.code)
 	}
 
 	this.start = function() {
+		// inform all players that the game is starting
+		for (var i = 0; i < players.length; i++) {
+			players[i].getSocket().emit('startingGame')
+		}
+
+		// player positions hardcoded for now
+		if (players.length == 4) {
+			that.placeTree(players[0], 10)
+			that.placeTree(players[1], 14)
+			that.placeTree(players[2], 18)
+			that.placeTree(players[3], 22)
+		} else if (players.length == 3) {
+			that.placeTree(players[0], 11)
+			that.placeTree(players[1], 16)
+			that.placeTree(players[2], 21)
+		} else if (players.length == 2) {
+			that.placeTree(players[0], 13)
+			that.placeTree(players[1], 19)
+		}
+
 		setInterval(function() {
 			that.gameLoop()
 		}, 1000)
+	}
+
+	this.getPlayers = function() {
+		return players
+	}
+
+	this.countPlayers = function() {
+		return players.length
 	}
 
 	this.nextTick = function() {
@@ -78,7 +111,7 @@ var Game = function() {
 			return false
 		}
 
-		console.log('player %s groth roots to %s:%s', player.getName(), x, y)
+		console.log('player %s grows roots to %s:%s', player.getName(), x, y)
 
 		var tile = that.battleField.getBattleTile(x,y)
 		tile.setPlayerName(player.getName())
@@ -155,6 +188,18 @@ var Game = function() {
 				};
 			}
 		}
+	}
+
+	this.growTreeWidth = function(player) {
+		trees[player.getName()].extendTreeWidth()
+	}
+
+	this.growTreeHeight = function(player) {
+		trees[player.getName()].extendTreeHeigth()
+	}
+
+	this.growLeafDensity = function(player) {
+		trees[player.getName()].extendLeafDensity()
 	}
 
 	this.gameLoop = function() {

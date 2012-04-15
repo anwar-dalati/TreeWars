@@ -33,8 +33,10 @@ var GameManager = function() {
 			}
 		}
 
-		if (game !== null) {
+		if (game !== null && game.countPlayers() < 4) {
 			game.join(player)
+		} else {
+			game = null
 		}
 
 		return game
