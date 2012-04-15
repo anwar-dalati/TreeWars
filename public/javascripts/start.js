@@ -119,6 +119,7 @@ $(function() {
 		$('#wait_dialog').dialog('close')
 		$('#gameWrapper').css('background-image', 'none')
 
+		// build buttons
 		$('#growHeight').removeClass('hide').click(function() {
 			build.extendTreeHeigth()
 		})
@@ -135,7 +136,25 @@ $(function() {
 			build.extendRootWidth()
 		})
 
-
+		// weather / hazard buttons
+		$('#uiWrapper #weather .weather.Rain').click(function() {
+			env.rain()
+		})
+		$('#uiWrapper #weather .weather.Sunshine').click(function() {
+			env.sunshine()
+		})
+		$('#uiWrapper #weather .weather.Spring').click(function() {
+			env.spring()
+		})
+		$('#uiWrapper #weather .weather.ColdSnap').click(function() {
+			env.coldSnap()
+		})
+		$('#uiWrapper #weather .weather.Drought').click(function() {
+			env.drought()
+		})
+		$('#uiWrapper #weather .weather.Storm').click(function() {
+			env.storm()
+		})
 	})
 
 	socket.on('battleField', function(data) {
@@ -178,16 +197,9 @@ $(function() {
 	// TODO: implement weather icons
 	socket.on('updateCurrentEnvironment', function(data) {
 		console.log(data)
-		$('#uiWrapper #weather .weather').remove()
-
 		for (var i = 0; i < data.states.length; i++) {
 			var state = data.states[i]
-			$('#uiWrapper #weather').append($('<div class="weather ' + state.name + '" title="' + state.name + '">' + state.ticks + '</div>'))
-		}
-		if (i > 0) {
-			$('#uiWrapper #weather').attr('class', 'noImage')
-		} else {
-			$('#uiWrapper #weather').attr('class', 'noImage hide')
+			$('#uiWrapper #weather .weather.' + state.name).html(state.ticks > 0 ? state.ticks : '')
 		}
 	})
 
