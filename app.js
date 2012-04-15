@@ -142,6 +142,7 @@ io.sockets.on('connection', function(socket) {
 		game.strengthRoot(player2)
 		game.growRoot(player2, 13,11)
 		game.bg(player)
+		game.cleanRoots()
 	})
 
 	socket.on('build', function(data) {
