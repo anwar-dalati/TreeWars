@@ -68,6 +68,7 @@ var Game = function() {
 
 	this.placeRoot = function(player, x, y) {
 		that.battleField.getBattleTile(x,y).setPlayerName(player.getName())
+		trees[player.getName()].changeRootsCount(1)
 	}
 
 	this.growRoot = function(player, x, y) {
@@ -162,6 +163,41 @@ var Game = function() {
 		that.storm(that.environment.getStormTicks() > 0)
 		that.environment.decreaseTicks();
 
+		// update player's tree resources and stuff
+		for (i = 0; i < players.length; i++) {
+			// decrease resources by the cost the tree takes
+			playerTree = trees[players[i].getName()]
+			var sunCost = Math.pow(playerTree.getTreeHeigth() * 0.5, 0.8745)
+			var waterCost = Math.pow(playerTree.getTreeHeigth(), 1.65) / 10
+			playerTree.changeSun(-sunCost)
+			playerTree.changeWater(-waterCost)
+
+			// just for testing purposes
+			// TODO: send the battlefield to the clients on every tick
+			players[i].getSocket().emit('battleField', {battleField: that.battleField.toArray()})
+
+			var envStates = []
+			if (that.environment.getRainTicks() > 0) {
+				envStates.push({name: 'Rain', ticks: that.environment.getRainTicks()})
+			}
+			if (that.environment.getSunshineTicks() > 0) {
+				envStates.push({name: 'Sunshine', ticks: that.environment.getSunshineTicks()})
+			}
+			if (that.environment.getSpringTicks() > 0) {
+				envStates.push({name: 'Spring', ticks: that.environment.getSpringTicks()})
+			}
+			if (that.environment.getColdSnapTicks() > 0) {
+				envStates.push({name: 'Cold Snap', ticks: that.environment.getColdSnapTicks()})
+			}
+			if (that.environment.getDroughtTicks() > 0) {
+				envStates.push({name: 'Drought', ticks: that.environment.getDroughtTicks()})
+			}
+			if (that.environment.getStormTicks() > 0) {
+				envStates.push({name: 'Storm', ticks: that.environment.getStormTicks()})
+			}
+			players[i].getSocket().emit('updateCurrentEnvironment', {states: envStates})
+		}
+
 		var tile = null
 		// ground tile loop
 		for (var x = 0; x < that.battleField.length; x++) {
@@ -229,42 +265,7 @@ var Game = function() {
 			}
 		}
 
-		// update player's tree resources and stuff
-		for (i = 0; i < players.length; i++) {
-			// decrease resources by the cost the tree takes
-			playerTree = trees[players[i].getName()]
-			var sunCost = Math.pow(playerTree.getTreeHeigth() * 0.5, 0.8745)
-			var waterCost = Math.pow(playerTree.getTreeHeigth(), 1.65) / 10
-			playerTree.changeSun(-sunCost)
-			playerTree.changeWater(-waterCost)
-
-			that.updatePlayerResources()
-
-			// just for testing purposes
-			// TODO: send the battlefield to the clients on every tick
-			players[i].getSocket().emit('battleField', {battleField: that.battleField.toArray()})
-
-			var envStates = []
-			if (that.environment.getRainTicks() > 0) {
-				envStates.push({name: 'Rain', ticks: that.environment.getRainTicks()})
-			}
-			if (that.environment.getSunshineTicks() > 0) {
-				envStates.push({name: 'Sunshine', ticks: that.environment.getSunshineTicks()})
-			}
-			if (that.environment.getSpringTicks() > 0) {
-				envStates.push({name: 'Spring', ticks: that.environment.getSpringTicks()})
-			}
-			if (that.environment.getColdSnapTicks() > 0) {
-				envStates.push({name: 'Cold Snap', ticks: that.environment.getColdSnapTicks()})
-			}
-			if (that.environment.getDroughtTicks() > 0) {
-				envStates.push({name: 'Drought', ticks: that.environment.getDroughtTicks()})
-			}
-			if (that.environment.getStormTicks() > 0) {
-				envStates.push({name: 'Storm', ticks: that.environment.getStormTicks()})
-			}
-			players[i].getSocket().emit('updateCurrentEnvironment', {states: envStates})
-		}
+		that.updatePlayerResources()
 	}
 
 	this.rain = function() {
