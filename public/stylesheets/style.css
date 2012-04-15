@@ -62,9 +62,7 @@ input {
 	right: 10px;
 }
 
-#resources div {
-	width: 180px;
-	height: 48px;
+#resources div, #sound {
 	line-height: 48px;
 	margin: 0 0 10px 0;
 	padding: 0 10px;
@@ -78,12 +76,30 @@ input {
 	border-radius: 10px;
 }
 
+#sound {
+	position: absolute;
+	top: 10px;
+	left: 10px;
+	background-position: 0 48px;
+	width: 48px;
+	height: 48px;
+	padding: 0;
+	cursor: pointer;
+}
+
+#resources div {
+	width: 180px;
+	height: 48px;
+	float: right;
+	margin: 0 0 0 10px;
+}
+
 #resources #health, #resources #environment {
 	background-image: none;
 }
 
 #sun {
-	background-position: 0 96px;
+	background-position: 0 144px;
 }
 
 #water {
@@ -91,5 +107,5 @@ input {
 }
 
 #nutrients {
-	background-position: 0 48px;
+	background-position: 0 96px;
 }

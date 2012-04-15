@@ -1,5 +1,29 @@
 $(function() {
 
+	soundManager.url = '../swf/';
+	soundManager.flashVersion = 8;
+	soundManager.useFlashBlock = false;
+	soundManager.debugMode = false;
+
+	soundManager.onready(function() {
+		var music = soundManager.createSound({
+			id: 'music',
+			url: '../sounds/at-rest.mp3'
+		});
+		var twitter = soundManager.createSound({
+			id: 'twitter',
+			url: '../sounds/evening-in-the-forest.mp3'
+		});
+		
+		twitter.play();
+		music.play();
+	});
+	
+	$('#sound').click(function() {
+		soundManager.togglePause('twitter');
+		soundManager.togglePause('music');
+	});
+	
 	var startDialog = function() {
 		var buttons = {};
 		buttons['Ok'] = function() {
