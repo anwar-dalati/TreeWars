@@ -103,7 +103,7 @@ $(function() {
 		$('#wait_dialog .joinedPlayers').append(', ' + data.playerName)
 	})
 
-	var pTree = new PlayerTree(2,2,10,0, 3, 4, 0);
+	//var pTree = new PlayerTree(2,2,10,0, 3, 4, 0);
 	socket.on('startingGame', function(data) {
 		tw.startingPoints = data.startingPoints
 
@@ -123,16 +123,16 @@ $(function() {
 			build.extendRootDensity()
 		})
 		$('#strengthRoots').removeClass('hide').click(function() {
-			build.extendRootWidth()			
+			build.extendRootWidth()
 		})
-		
-		
+
+
 	})
 
 	socket.on('battleField', function(data) {
-		console.log(data.battleField[0][0])
+		console.log(data)
 
-		pTree.drawTree();		
+		//pTree.drawTree();
 
 		for (var x = 0; x < data.battleField.length; x++) {
 			for (var y = 0; y < data.battleField[x].length; y++) {
@@ -166,7 +166,7 @@ $(function() {
 
 		for (var i = 0; i < data.states.length; i++) {
 			var state = data.states[i]
-			$('#uiWrapper #weather').append($('<img class="weather ' + data.state + '" />'))
+			$('#uiWrapper #weather').append($('<div class="weather ' + state.name + '" title="' + state.name + '">' + state.ticks + '</div>'))
 		}
 		if (i > 0) {
 			$('#uiWrapper #weather').attr('class', 'noImage')
