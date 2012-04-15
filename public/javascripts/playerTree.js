@@ -65,8 +65,26 @@ var PlayerTree = function(startLeafDensity, startRootDensity, startPosition, pos
 			}
 		}
 		
+		//draw shadows
+			$('#tileWrapper').append('<div style="top:540px; left:'
+		+ ((that.worldPosition + that.positionChangeToScreenPosition)- Math.floor(that.width/2)) * 60 + 'px;" class="shadow0"></div>')
+		
+			//draw centerpieces
+			for(var centerIndex = 1; centerIndex < that.width -1; centerIndex++)
+			{
+				if(centerIndex != Math.floor(that.width/2))
+						{
+			$('#tileWrapper').append('<div style="top:540px; left:'
+		+ ((that.worldPosition + that.positionChangeToScreenPosition)- Math.floor(that.width/2)+centerIndex) * 60 + 'px;" class="shadow1"></div>')
+						}
+			}
+			
+			$('#tileWrapper').append('<div style="top:540px; left:'
+		+ ((that.worldPosition + that.positionChangeToScreenPosition)+ Math.floor(that.width/2)) * 60 + 'px;" class="shadow2"></div>')		
+
+		
 		//draw trunk position y-2
-		$('#tileWrapper').append('<div style="top:480px; left:'+ (that.worldPosition + that.positionChangeToScreenPosition) * 60 + 'px;" class="tree'+that.LeafDensity+'Trunk'+Math.ceil(that.width/2)+ '"></div>')
+		$('#tileWrapper').append('<div style="top:480px; left:'+ (that.worldPosition + that.positionChangeToScreenPosition) * 60 + 'px;" class="tree'+that.LeafDensity+'Trunk'+Math.min(4,Math.floor(that.width/2) - 1)+ '"></div>')
 		//start&draw at left2 go right
 		$('#tileWrapper').append('<div style="top:480px; left:'
 		+ ((that.worldPosition + that.positionChangeToScreenPosition)- Math.floor(that.width/2)) * 60 + 'px;" class="tree'
