@@ -119,6 +119,7 @@ var Game = function() {
 	this.placeRoot = function(player, x, y) {
 		that.battleField.getBattleTile(x,y).setPlayerName(player.getName())
 		trees[player.getName()].changeRootsCount(1)
+		
 	}
 
 	this.growRoot = function(player, x, y) {
@@ -132,6 +133,9 @@ var Game = function() {
 		tile.setPlayerName(player.getName())
 		tile.setStrength(trees[player.getName()].getRootStrength())
 		tile.setBranches(trees[player.getName()].getRootWidth())
+		
+		//loose nutrients
+		trees[player.getName()].changeNutrients(-8);
 	}
 
 	this.canRootGrowHere = function(player, x,y) {
@@ -189,6 +193,10 @@ var Game = function() {
 				};
 			}
 		}
+		
+		//loose nutrients
+		trees[player.getName()].changeNutrients(-45);		
+		
 	}
 
 	this.branchesRoot = function(player) {
@@ -203,6 +211,9 @@ var Game = function() {
 				};
 			}
 		}
+		
+		//loose nutrients
+		trees[player.getName()].changeNutrients(-60);
 	}
 
 
@@ -213,14 +224,20 @@ var Game = function() {
 
 	this.growTreeWidth = function(player) {
 		trees[player.getName()].extendTreeWidth(that.battleField.maxTreeWidth)
+		//loose nutrients
+		trees[player.getName()].changeNutrients(-15);
 	}
 
 	this.growTreeHeight = function(player) {
 		trees[player.getName()].extendTreeHeigth(that.battleField.maxTreeHeight)
+		//loose nutrients
+		trees[player.getName()].changeNutrients(-15);
 	}
 
 	this.growLeafDensity = function(player) {
 		trees[player.getName()].extendLeafDensity(that.battleField.maxLeafDensity)
+		//loose nutrients
+		trees[player.getName()].changeNutrients(-8);
 	}
 
 	this.gameLoop = function() {
