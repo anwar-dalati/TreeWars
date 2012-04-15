@@ -111,10 +111,25 @@ $(function() {
 	socket.on('startingGame', function(data) {
 		tw.startingPoints = data.startingPoints
 
-		playerTrees.push(new PlayerTree(0,0,10,0, 3, 4, 0));
-		playerTrees.push(new PlayerTree(0,0,14,0, 3, 4, 1));
-		playerTrees.push(new PlayerTree(0,0,18,0, 3, 4, 2));
-		playerTrees.push(new PlayerTree(0,0,22,0, 3, 4, 3));
+		var startingPoints = [], i = 0
+
+		$(data.startingPoints).each(function() {
+			startingPoints[i++] = $(this)
+		})
+
+		if (startingPoints.length == 4) {
+			playerTrees.push(new PlayerTree(10,-5, startingPoints[0]['playerName']));
+			playerTrees.push(new PlayerTree(14,-7, startingPoints[1]['playerName']));
+			playerTrees.push(new PlayerTree(18,-9, startingPoints[2]['playerName']));
+			playerTrees.push(new PlayerTree(22,-11, startingPoints[3]['playerName']));
+		} else if (startingPoints.length == 3) {
+			playerTrees.push(new PlayerTree(11,-5, startingPoints[0]['playerName']));
+			playerTrees.push(new PlayerTree(16,-8, startingPoints[1]['playerName']));
+			playerTrees.push(new PlayerTree(21,-11, startingPoints[2]['playerName']));
+		} else if (startingPoints.length == 2) {
+			playerTrees.push(new PlayerTree(13,-6, startingPoints[0]['playerName']));
+			playerTrees.push(new PlayerTree(19,-10, startingPoints[1]['playerName']));
+		}
 
 		$('#wait_dialog').dialog('close')
 		$('#gameWrapper').css('background-image', 'none')
@@ -155,6 +170,8 @@ $(function() {
 		$('#uiWrapper #weather .weather.Storm').click(function() {
 			env.storm()
 		})
+
+		playerRoots.initGrid()
 	})
 
 	socket.on('battleField', function(data) {
@@ -199,7 +216,6 @@ $(function() {
 		$('#nutrients').html('Nutrients: ' + Math.floor(data.nutrients))
 	})
 
-	// TODO: implement weather icons
 	socket.on('updateCurrentEnvironment', function(data) {
 		console.log(data)
 		tw.states = data.states
@@ -240,4 +256,7 @@ var brancheRoot = function() {
 }
 var batch = function() {
 	socket.emit('batch')
+}
+var initGrid = function() {
+	playerRoots.initGrid()
 }
