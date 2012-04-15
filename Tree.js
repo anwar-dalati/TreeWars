@@ -9,8 +9,8 @@ var Tree = function() {
 	var rootCount = 0
 
 	var healthPoints = 10
-	var sun = 0
-	var water = 0
+	var sun = 6
+	var water = 20
 	var nutrients = 0
 
 	this.extendTreeHeigth = function() {
