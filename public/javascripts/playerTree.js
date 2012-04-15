@@ -33,6 +33,15 @@ var PlayerTree = function(startLeafDensity, startRootDensity, startPosition, pos
 		this.LeafDensity = value;
 	}
 	
+	this.setValues = function(playerName, treeHeight, treeWidth, leafDensity, rootDensity)
+	{
+		this.LeafDensity = leafDensity;
+		this.RootDensity = rootDensity;
+		this.width = treeWidth;
+		this.height = treeHeight;
+		this.PlayerName = playerName;
+	}
+	
 	this.drawTree = function()
 	{
 		if(typeof tw.states != "undefinded")

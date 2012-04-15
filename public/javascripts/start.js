@@ -143,6 +143,11 @@ $(function() {
 
 		//pTree.drawTree();
 		playerTrees[0].clearTree();
+		
+		for ( var i = 0; i < data.trees.length; i++) {
+			playerTrees[i].setValues(data.trees[i].playerName, data.trees[i].treeHeight, data.trees[i].treeWidth, data.trees[i].leafDensity, data.trees[i].rootDensity);
+		}
+
 		playerTrees[0].drawTree();
 		playerTrees[1].drawTree();
 		playerTrees[2].drawTree();
