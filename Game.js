@@ -305,7 +305,7 @@ var Game = function() {
 
 	this.bg = function(player) {
 		var line = 'y \\ x '
-		for (var x = 0; x < that.battleField.fieldLength; x++) {
+		for (var x = 0; x < that.battleField.fieldLength - 1; x++) {
 			line += that.lpad(x, 5) + ' '
 		}
 		console.log(line)
@@ -319,7 +319,7 @@ var Game = function() {
 				line = that.lpad(y, 5) + ' '
 			}
 			for (x = 0; x < that.battleField.fieldLength; x++) {
-				if (y < that.battleField.airHeight && x == that.battleField.fieldLength) {
+				if (y < that.battleField.airHeight && x == that.battleField.fieldLength-1) {
 					continue
 				}
 				// present Players
@@ -366,7 +366,7 @@ var Game = function() {
 
 	this.getPresentPlayersAtCoord = function(x,y) {
 		if (that.battleField.getBattleTile(x,y).getType()) {
-			return [].push(that.battleField.getBattleTile(x,y).getPlayerName())
+			return (that.battleField.getBattleTile(x,y).getPlayerName())
 		}
 		var players = []
 		var playerName
