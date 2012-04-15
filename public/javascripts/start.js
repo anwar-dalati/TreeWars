@@ -1,4 +1,6 @@
 $(function() {
+	
+	var playerTrees = [];
 
 	soundManager.url = '../swf/';
 	soundManager.flashVersion = 8;
@@ -104,9 +106,11 @@ $(function() {
 		$('#wait_dialog .joinedPlayers').append(', ' + data.playerName)
 	})
 
-	var pTree = new PlayerTree(2,2,10,0, 3, 4, 0);
+	//PlayerTree(2,2,10,0, 3, 4, 0);
 	socket.on('startingGame', function(data) {
 		tw.startingPoints = data.startingPoints
+		
+		playerTrees.push(new PlayerTree(2,2,10,0, 3, 4, 0));
 
 		$('#wait_dialog').dialog('close')
 		$('#gameWrapper').css('background-image', 'none')
@@ -133,7 +137,7 @@ $(function() {
 	socket.on('battleField', function(data) {
 		console.log(data.battleField[0][0])
 
-		pTree.drawTree();		
+		playerTrees[0].drawTree();		
 
 		for (var x = 0; x < data.battleField.length; x++) {
 			for (var y = 0; y < data.battleField[x].length; y++) {
