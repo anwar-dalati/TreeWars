@@ -182,12 +182,8 @@ $(function() {
 
 		for ( var i = 0; i < data.trees.length; i++) {
 			playerTrees[i].setValues(data.trees[i].playerName, data.trees[i].treeHeight, data.trees[i].treeWidth, data.trees[i].leafDensity, data.trees[i].rootDensity);
+			playerTrees[i].drawTree();
 		}
-
-		playerTrees[0].drawTree();
-		playerTrees[1].drawTree();
-		playerTrees[2].drawTree();
-		playerTrees[3].drawTree();
 
 		for (var x = 0; x < data.battleField.length; x++) {
 			for (var y = 0; y < data.battleField[x].length; y++) {
