@@ -89,7 +89,7 @@ var Game = function() {
 	this.canRootGrowHere = function(player, x,y) {
 		var rootStrength = trees[player.getName()].getRootStrength()
 		var tile = that.battleField.getBattleTile(x,y)
-		
+
 		if (!tile.getType() || (typeof tile.getPlayerName() != 'undefined' && tile.getPlayerName() == player.getName()) || (tile.getStrength() > rootStrength)) {
 			return false
 		}
@@ -163,6 +163,8 @@ var Game = function() {
 		}
 		var i = 0
 		var playerTree = null
+
+		that.battleField.cleanRoots()
 
 		// environment updates needed to do every tick
 		if (that.environment.getRainTicks()) {
