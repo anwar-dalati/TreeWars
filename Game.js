@@ -60,8 +60,7 @@ var Game = function() {
 
 			startingPoints.push({
 				playerName: tile.getPlayerName(),
-				x: x,
-				y: y
+				startPosition: x
 			})
 		}
 
