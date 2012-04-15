@@ -113,7 +113,7 @@ io.sockets.on('connection', function(socket) {
 	})
 	socket.on('buildPlaceRoot', function(data) {
 		console.log('place root of player %s to x: %s, y: %s', player.getName(), data.x, data.y)
-		player.getTree().placeRoot(data.x, data.y)
+		game.placeRoot(player, data.x, data.y)
 	})
 	socket.on('buildExtendRootDensity', function() {
 		console.log('extend root density of player %s', player.getName())
