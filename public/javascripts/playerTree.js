@@ -12,6 +12,8 @@ var PlayerTree = function(startLeafDensity, startRootDensity, startPosition, pos
 	this.height = startHeight;
 	this.PlayerName = associatedPlayer;
 	this.rootPositions = {};
+	
+	this.centerType = Math.floor(Math.random()*6);
 		
 	/*
 	 * adds root position in worldCoordinates (converted to screen coords)
@@ -92,10 +94,10 @@ var PlayerTree = function(startLeafDensity, startRootDensity, startPosition, pos
 		
 		//repeat if(width == 3) until height-1
 		//else until height -2
-		var heightModifier = 2;
+		var heightModifier = 3;
 		if(that.width == 3)
 		{
-			heightModifier = 1;			
+			heightModifier = 2;			
 		}
 			
 		
@@ -111,7 +113,7 @@ var PlayerTree = function(startLeafDensity, startRootDensity, startPosition, pos
 			{
 			$('#tileWrapper').append('<div style="top:'+ (480 - (heightIndex * 60))+'px; left:'
 		+ ((that.worldPosition + that.positionChangeToScreenPosition)- Math.floor(that.width/2)+centerIndex) * 60 + 'px;" class="tree'
-		+that.LeafDensity+'Center'+Math.floor(Math.random()*6)+ '"></div>')
+		+that.LeafDensity+'Center'+that.centerType+ '"></div>')
 			}
 			
 			//draw right1
@@ -122,22 +124,22 @@ var PlayerTree = function(startLeafDensity, startRootDensity, startPosition, pos
 		}		
 		
 		
-			for(var specialIndex = 1; specialIndex<heightModifier; specialIndex++)
+		for(var specialIndex = 2; specialIndex<heightModifier; specialIndex++)
 		{
 			//draw left0
-			$('#tileWrapper').append('<div style="top:'+ (480 - (1) * 60)+'px; left:'
+			$('#tileWrapper').append('<div style="top:'+ (480 - (that.height - heightModifier) * 60)+'px; left:'
 		+ ((that.worldPosition + that.positionChangeToScreenPosition)- Math.floor(that.width/2)) * 60 + 'px;" class="tree'
 		+that.LeafDensity+'Left'+0+ '"></div>')
 		
 			//draw centerpieces
 			for(var centerIndex = 1; centerIndex < that.width -1; centerIndex++)
 			{
-			$('#tileWrapper').append('<div style="top:'+ (480 - ((that.height +heightModifier)* 60))+'px; left:'
+			$('#tileWrapper').append('<div style="top:'+ (480 - ((that.height -heightModifier)* 60))+'px; left:'
 		+ ((that.worldPosition + that.positionChangeToScreenPosition)- Math.floor(that.width/2)+centerIndex) * 60 + 'px;" class="tree'
-		+that.LeafDensity+'Center'+/*Math.floor(Math.random()*6)*/ 3+ '"></div>')
+		+that.LeafDensity+'Center'+that.centerType+ '"></div>')
 			}
 			
-			$('#tileWrapper').append('<div style="top:'+ (480 - ((1)*60))+'px; left:'
+			$('#tileWrapper').append('<div style="top:'+ (480 - ((that.height - heightModifier)*60))+'px; left:'
 		+ ((that.worldPosition + that.positionChangeToScreenPosition)+ Math.floor(that.width/2)) * 60 + 'px;" class="tree'
 		+that.LeafDensity+'Right'+0+ '"></div>')
 		}
@@ -152,21 +154,21 @@ var PlayerTree = function(startLeafDensity, startRootDensity, startPosition, pos
 	
 		if(xPositionmodifier == 0)
 		{
-			$('#tileWrapper').append('<div style="top:'+ (480 - (that.height- heightModifier) * 60)+'px; left:'
+			$('#tileWrapper').append('<div style="top:'+ (480 - (that.height- 2) * 60)+'px; left:'
 		+ ((that.worldPosition + that.positionChangeToScreenPosition)- Math.floor(that.width/2)+ xPositionmodifier) * 60 + 'px;" class="tree'
 		+that.LeafDensity+'Left'+0+ '"></div>')
 			
 		}
 		else
 		{
-		$('#tileWrapper').append('<div style="top:'+ (480 - (that.height- heightModifier) * 60)+'px; left:'
+		$('#tileWrapper').append('<div style="top:'+ (480 - (that.height- 2) * 60)+'px; left:'
 		+ ((that.worldPosition + that.positionChangeToScreenPosition)- Math.floor(that.width/2)+ xPositionmodifier) * 60 + 'px;" class="tree'
 		+that.LeafDensity+'Top'+0+ '"></div>')
 		}
 		
-		for(var topIndex = 1 + xPositionmodifier; topIndex < that.width - xPositionmodifier*2; topIndex++)
+		for(var topIndex = 1 + xPositionmodifier; topIndex < that.width - xPositionmodifier -1; topIndex++)
 		{
-				$('#tileWrapper').append('<div style="top:'+ (480 - (that.height- heightModifier) * 60)+'px; left:'
+				$('#tileWrapper').append('<div style="top:'+ (480 - (that.height- 2) * 60)+'px; left:'
 		+ ((that.worldPosition + that.positionChangeToScreenPosition)- Math.floor(that.width/2)+ topIndex) * 60 + 'px;" class="tree'
 		+that.LeafDensity+'Top'+1+ '"></div>')
 	
@@ -174,17 +176,19 @@ var PlayerTree = function(startLeafDensity, startRootDensity, startPosition, pos
 		
 		if(xPositionmodifier == 0)
 		{
-				$('#tileWrapper').append('<div style="top:'+ (480 - (that.height- heightModifier) * 60)+'px; left:'
+				$('#tileWrapper').append('<div style="top:'+ (480 - (that.height- 2) * 60)+'px; left:'
 		+ ((that.worldPosition + that.positionChangeToScreenPosition)+ Math.floor(that.width/2)- xPositionmodifier) * 60 + 'px;" class="tree'
 		+that.LeafDensity+'Right'+0+ '"></div>')
 		}			
 		else
-		{		
-			$('#tileWrapper').append('<div style="top:'+ (480 - (that.height- heightModifier) * 60)+'px; left:'
+		{	
+			$('#tileWrapper').append('<div style="top:'+ (480 - (that.height- 2) * 60)+'px; left:'
 		+ ((that.worldPosition + that.positionChangeToScreenPosition)+ Math.floor(that.width/2)- xPositionmodifier) * 60 + 'px;" class="tree'
 		+that.LeafDensity+'Top'+2+ '"></div>')
 		}
 	
+		
+		
 		
 		//if(width!=3) go right one
 		//start&draw at top0 go right
