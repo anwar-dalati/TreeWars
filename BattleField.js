@@ -35,7 +35,11 @@ var BattleField = function() {
 		var sideWidth = (that.maxTreeWidth - 1) / 2
 		if (x - sideWidth <= 0
 			|| x + sideWidth >= that.fieldLength
-			|| typeof that.getBattleTile(x, that.airHeight).getPlayerName() != 'undefined'
+			|| typeof that.getBattleTile(x, that.airHeight-1).getPlayerName() != 'undefined'
+			|| typeof that.getBattleTile(x+1, that.airHeight-1).getPlayerName() != 'undefined'
+			|| typeof that.getBattleTile(x+2, that.airHeight-1).getPlayerName() != 'undefined'
+			|| typeof that.getBattleTile(x-1, that.airHeight-1).getPlayerName() != 'undefined'
+			|| typeof that.getBattleTile(x-2, that.airHeight-1).getPlayerName() != 'undefined'
 		) {
 			return false
 		}
@@ -48,7 +52,10 @@ var BattleField = function() {
 	}
 
 	this.getBattleTile = function(x,y) {
-		return battleField[x][y]
+		if (typeof battleField[x] == 'undefined') {
+			return null
+		}
+		return (typeof battleField[x][y] != 'undefined') ? battleField[x][y] : null
 	}
 
 	this.setBattleTile = function(x,y,tile) {

@@ -12,10 +12,6 @@ var Build = function() {
 		socket.emit('buildExtendLeafDensity')
 	}
 
-	this.placeRoot = function(x, y) {
-		socket.emit('buildPlaceRoot', {x: x, y: y})
-	}
-
 	this.extendRootDensity = function() {
 		socket.emit('buildExtendRootDensity')
 	}

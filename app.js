@@ -73,7 +73,7 @@ io.sockets.on('connection', function(socket) {
 	})
 	socket.on('bgGame', function() {
 		if (player.isHost()) {
-			game.bg()
+			game.bg(player)
 		}
 	})
 	socket.on('nextGame', function() {
@@ -86,12 +86,6 @@ io.sockets.on('connection', function(socket) {
 	})
 	socket.on('growRootGame', function(data) {
 		game.growRoot(player, data.x, data.y)
-	})
-	socket.on('strengthRoot', function(data) {
-		game.strengthRoot(player, data.x, data.y)
-	})
-	socket.on('branchRoot', function(data) {
-		game.branchRoot(player, data.x, data.y)
 	})
 
 	socket.on('build', function(data) {
@@ -111,17 +105,15 @@ io.sockets.on('connection', function(socket) {
 		console.log('extend leaf density of player %s', player.getName())
 		player.getTree().extendLeafDensity()
 	})
-	socket.on('buildPlaceRoot', function(data) {
-		console.log('place root of player %s to x: %s, y: %s', player.getName(), data.x, data.y)
-		player.getTree().placeRoot(data.x, data.y)
-	})
-	socket.on('buildExtendRootDensity', function() {
+	socket.on('buildExtendRootStrength', function() {
 		console.log('extend root density of player %s', player.getName())
-		player.getTree().extendRootDensity()
+		game.strengthRoot(player)
+		player.getTree().extendRootStrength()
 	})
 	socket.on('buildExtendRootWidth', function() {
 		console.log('extend root width of player %s', player.getName())
 		player.getTree().extendRootWidth()
+		game.branchRoot(player)
 	})
 
 	// environment calls

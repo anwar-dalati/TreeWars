@@ -3,7 +3,6 @@ var Player = function() {
 	var that = this
 	var socket = null
 	var name
-	var tree = null
 	var host = false
 
 	this.create = function(name, socket) {
@@ -22,10 +21,6 @@ var Player = function() {
 
 	this.getName = function() {
 		return that.name
-	}
-
-	this.getTree = function() {
-		return that.tree
 	}
 
 	this.setHost = function(host) {

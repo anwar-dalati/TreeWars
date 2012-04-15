@@ -3,7 +3,7 @@ var Tree = function() {
 	var that = this
 	var treeHeigth = 3
 	var treeWidth = 3
-	var rootDensity = 0
+	var rootStrength = 0
 	var leafDensity = 0
 	var rootWidth = 0
 
@@ -40,13 +40,13 @@ var Tree = function() {
 		return leafDensity
 	}
 
-	this.extendRootDensity = function() {
-		rootDensity++
-		console.log('extended root density to %s', rootDensity)
+	this.extendRootStrength = function() {
+		rootStrength++
+		console.log('extended root density to %s', rootStrength)
 	}
 
-	this.getRootDensity = function() {
-		return rootDensity
+	this.getRootStrength = function() {
+		return rootStrength
 	}
 
 	this.extendRootWidth = function() {
@@ -84,6 +84,10 @@ var Tree = function() {
 
 	this.changeNutrients = function(amount) {
 		nutrients += amount
+	}
+
+	this.setRootStrength = function(strength) {
+		rootStrength = strength
 	}
 }
 

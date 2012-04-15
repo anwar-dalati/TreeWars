@@ -58,6 +58,8 @@ var Game = function() {
 		that.battleField.markTileAsUsed(player, x)
 		trees[player.getName()] = require('./Tree.js').Tree()
 
+		trees[player.getName()].setRootStrength(1)
+
 		that.placeRoot(player, x, that.battleField.airHeight)
 		that.placeRoot(player, x+1, that.battleField.airHeight)
 
@@ -69,9 +71,51 @@ var Game = function() {
 	}
 
 	this.growRoot = function(player, x, y) {
-		console.log('player %s groth roots to %s:%s', player.getName(), x, y)
-		
+		if (!that.canRootGrowHere(x,y)) {
+			return false
+		}
 
+		console.log('player %s groth roots to %s:%s', player.getName(), x, y)
+	}
+
+	this.canRootGrowHere = function(player, x,y) {
+		var rootStrength = trees[player.getName()].getRootStrength()
+		var tile = that.battleField.getBattleTile(x,y)
+		if (!tile.getType() || (typeof tile.getPlayerName() != 'undefined' && tile.getPlayerName() == player.getName()) || (tile.getStrength() > rootStrength)) {
+			return false
+		}
+
+		tile = that.battleField.getBattleTile(x,that.battleField.airHeight - 1)
+		if (typeof tile.getPlayerName() != 'undefined' && tile.getPlayerName() != player.getName()) {
+			return false
+		}
+
+		tile = that.battleField.getBattleTile(x-1,that.battleField.airHeight - 1)
+		if (tile != null && typeof tile.getPlayerName() != 'undefined' && tile.getPlayerName() != player.getName()) {
+			return false
+		}
+
+		tile = that.battleField.getBattleTile(x,y-1)
+		if (tile != null && typeof tile != 'undefined' && tile.getType() && typeof tile.getPlayerName() != 'undefined' && tile.getPlayerName() == player.getName()) {
+			return true
+		}
+
+		tile = that.battleField.getBattleTile(x,y+1)
+		if (tile != null && typeof tile != 'undefined' && tile.getType() && typeof tile.getPlayerName() != 'undefined' && tile.getPlayerName() == player.getName()) {
+			return true
+		}
+
+		tile = that.battleField.getBattleTile(x-1,y)
+		if (tile != null && typeof tile != 'undefined' && tile.getType() && typeof tile.getPlayerName() != 'undefined' && tile.getPlayerName() == player.getName()) {
+			return true
+		}
+
+		tile = that.battleField.getBattleTile(x+1,y)
+		if (tile != null && typeof tile != 'undefined' && tile.getType() && typeof tile.getPlayerName() != 'undefined' && tile.getPlayerName() == player.getName()) {
+			return true
+		}
+
+		return false
 	}
 
 	this.strengthRoot = function(player) {
@@ -191,7 +235,7 @@ var Game = function() {
 		}
 	}
 
-	this.bg = function() {
+	this.bg = function(player) {
 		var line = 'y \\ x '
 		for (var x = 0; x < that.battleField.fieldLength; x++) {
 			line += that.lpad(x, 5) + ' '
@@ -201,33 +245,40 @@ var Game = function() {
 		var content
 		var tile
 		for (var y = 0; y < that.battleField.airHeight + that.battleField.groundDepth; y++) {
-			line = that.lpad(y, 5) + ' '
+			if (y >= that.battleField.airHeight) {
+				line = ' ' + y
+			} else {
+				line = that.lpad(y, 5) + ' '
+			}
 			for (x = 0; x < that.battleField.fieldLength; x++) {
+				if (y < that.battleField.airHeight && x == that.battleField.fieldLength) {
+					continue
+				}
 				// present Players
-//				content = that.getPresentPlayersAtCoord(x,y)
-//				if (typeof content == 'object') {
-//					content = content.join(',')
-//					if (!content.length) {
-//						line += that.lpad('-', 5) + ' '
-//						continue
-//					}
-//				}
-//				if (typeof content == 'undefined') {
-//					line += that.lpad('-', 5) + ' '
-//					continue
-//				}
+				content = that.getPresentPlayersAtCoord(x,y)
+				if (typeof content == 'object') {
+					content = content.join(',')
+					if (!content.length) {
+						line += that.lpad('-', 5) + ' '
+						continue
+					}
+				}
+				if (typeof content == 'undefined') {
+					line += that.lpad('-', 5) + ' '
+					continue
+				}
 
 				// Root
-				if (that.battleField.getBattleTile(x,y).getType()) {
-					tile = that.battleField.getBattleTile(x,y)
-					if (typeof tile.getPlayerName() != 'undefined') {
-						content = tile.getStrength() + ':' + tile.getBranches() + ':' + tile.getStorage()
-					} else {
-						content = '.'
-					}
-				} else {
-					content = '.'
-				}
+//				if (that.battleField.getBattleTile(x,y).getType()) {
+//					tile = that.battleField.getBattleTile(x,y)
+//					if (typeof tile.getPlayerName() != 'undefined') {
+//						content = tile.getStrength() + ':' + tile.getBranches() + ':' + tile.getStorage()
+//					} else {
+//						content = '.'
+//					}
+//				} else {
+//					content = '.'
+//				}
 
 				// Moisture
 //				if (that.battleField.getBattleTile(x,y).getType()) {
@@ -235,6 +286,9 @@ var Game = function() {
 //				} else {
 //					content = '.';
 //				}
+
+				// can root grow
+//				content =  (that.canRootGrowHere(player,x,y)) ? '1': content = '.'
 
 				line += that.lpad(content, 5) + ' '
 			}
