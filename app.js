@@ -67,6 +67,17 @@ io.sockets.on('connection', function(socket) {
 		player = playerManager.addPlayer(data.playerName, socket)
 		game = gameManager.joinGame(data.code, player)
 		socket.emit('joinGameSuccess', {success: game !== null})
+
+		if (game === null) {
+			return
+		}
+
+		for (var i = 0; i < game.getPlayers().length; i++) {
+			if (game.getPlayers()[i].getName() == player.getName()) {
+				continue
+			}
+			player.getSocket().emit('playerJoined', {playerName: game.getPlayers()[i].getName()})
+		}
 	})
 	socket.on('startGame', function() {
 		if (player.isHost()) {
