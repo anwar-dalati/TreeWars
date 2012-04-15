@@ -3,8 +3,17 @@
 #role_dialog(title="Game Role", class="dialog") Choose whether you want to create a new server for your friends to join or join a friend's server yourself.
 #join_dialog(title="Join Game", class="dialog") Type the game identifier below to join the game.<br />
 	input(type="text", id="joinGameCode")
+#wait_dialog(title="Wait for game start", class="dialog") Waiting for the host to start the game. Game code: 
+	span(title="Game code", class="gameCode")
+	span The following players have joined the game so far:<br />
+	span(title="Joined players", class="joinedPlayers")
 
 #gameWrapper
+	#growHeight(title="Grow your tree in height", class="button hide")
+	#growWidth(title="Grow your tree in width", class="button hide")
+	#growFoliageDense(title="Grow your foliage dense", class="button hide")
+	#growRootsDense(title="Grow your root dense", class="button hide")
+	#strengthRoots(title="Grow your root strength", class="button hide")
 
 #uiWrapper
 	#health(title="Health", class="noImage") Health: 10

@@ -1,4 +1,6 @@
 $(function() {
+	
+	var playerTrees = [];
 
 	soundManager.url = '../swf/';
 	soundManager.flashVersion = 8;
@@ -65,22 +67,76 @@ $(function() {
 		})
 	}
 
+	var waitDialog = function() {
+		var buttons = {};
+
+		if (tw.host) {
+			buttons['Start'] = function() {
+				$(this).dialog('close')
+				socket.emit('startGame')
+			}
+		}
+
+		$('#wait_dialog .joinedPlayers').html(tw.playerName)
+		$('#wait_dialog .gameCode').html('<strong>' + tw.gameCode + '</strong><br />')
+		$('#wait_dialog').dialog({
+			buttons: buttons
+		})
+	}
+
 	socket.on('createGameCode', function(data) {
 		console.log('game code: %s', data.code)
 		tw.gameCode = data.code
 		tw.host = true
+		waitDialog()
 	})
 	socket.on('joinGameSuccess', function(data) {
 		console.log('joining game with code %s %s', $('#joinGameCode').val(), data.success ? 'succeeded' : 'failed')
 		if (data.success) {
 			tw.gameCode = $('#joinGameCode').val()
+			waitDialog()
 		} else {
 			joinDialog()
 		}
 	})
 
+	socket.on('playerJoined', function(data) {
+		console.log('player %s joined the game', data.playerName)
+		$('#wait_dialog .joinedPlayers').append(', ' + data.playerName)
+	})
+
+	//PlayerTree(2,2,10,0, 3, 4, 0);
+	socket.on('startingGame', function(data) {
+		tw.startingPoints = data.startingPoints
+		
+		playerTrees.push(new PlayerTree(2,2,10,0, 3, 4, 0));
+
+		$('#wait_dialog').dialog('close')
+		$('#gameWrapper').css('background-image', 'none')
+
+		$('#growHeight').removeClass('hide').click(function() {
+			build.extendTreeHeigth()
+		})
+		$('#growWidth').removeClass('hide').click(function() {
+			build.extendTreeWidth()
+		})
+		$('#growFoliageDense').removeClass('hide').click(function() {
+			build.extendLeafDensity()
+		})
+		$('#growRootsDense').removeClass('hide').click(function() {
+			build.extendRootDensity()
+		})
+		$('#strengthRoots').removeClass('hide').click(function() {
+			build.extendRootWidth()			
+		})
+		
+		
+	})
+
 	socket.on('battleField', function(data) {
 		console.log(data.battleField[0][0])
+
+		playerTrees[0].drawTree();		
 
 		for (var x = 0; x < data.battleField.length; x++) {
 			for (var y = 0; y < data.battleField[x].length; y++) {
@@ -114,7 +170,7 @@ $(function() {
 
 		for (var i = 0; i < data.states.length; i++) {
 			var state = data.states[i]
-			$('#uiWrapper #weather').append($('<div class="noImage weather">' + state.name + ' (' + state.ticks + ')' + '</div>'))
+			$('#uiWrapper #weather').append($('<img class="weather ' + data.state + '" />'))
 		}
 		if (i > 0) {
 			$('#uiWrapper #weather').attr('class', 'noImage')

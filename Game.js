@@ -23,14 +23,63 @@ var Game = function() {
 	}
 
 	this.join = function(player) {
+		// inform all players that a player has joined the game
+		for (var i = 0; i < players.length; i++) {
+			players[i].getSocket().emit('playerJoined', {playerName: player.getName()})
+		}
+
 		players.push(player)
 		console.log('%s joined game with code %s', player.getName(), that.code)
 	}
 
 	this.start = function() {
+		// player positions hardcoded for now
+		if (players.length == 4) {
+			that.placeTree(players[0], 10)
+			that.placeTree(players[1], 14)
+			that.placeTree(players[2], 18)
+			that.placeTree(players[3], 22)
+		} else if (players.length == 3) {
+			that.placeTree(players[0], 11)
+			that.placeTree(players[1], 16)
+			that.placeTree(players[2], 21)
+		} else if (players.length == 2) {
+			that.placeTree(players[0], 13)
+			that.placeTree(players[1], 19)
+		}
+
+		// inform all players that the game is starting
+		var y = that.battleField.airHeight - 1
+		var startingPoints = []
+
+		for (var x = 0; x < that.battleField.fieldLength; x++) {
+			var tile = that.battleField.getBattleTile(x, y)
+			if (typeof tile.getPlayerName() == 'undefined') {
+				continue
+			}
+
+			startingPoints.push({
+				playerName: tile.getPlayerName(),
+				x: x,
+				y: y
+			})
+		}
+
+		for (var i = 0; i < players.length; i++) {
+			players[i].getSocket().emit('startingGame', {startingPoints: startingPoints})
+		}
+
 		setInterval(function() {
 			that.gameLoop()
 		}, 1000)
+	}
+
+	this.getPlayers = function() {
+		return players
+	}
+
+	this.countPlayers = function() {
+		return players.length
 	}
 
 	this.nextTick = function() {
@@ -78,7 +127,7 @@ var Game = function() {
 			return false
 		}
 
-		console.log('player %s groth roots to %s:%s', player.getName(), x, y)
+		console.log('player %s grows roots to %s:%s', player.getName(), x, y)
 
 		var tile = that.battleField.getBattleTile(x,y)
 		tile.setPlayerName(player.getName())
@@ -157,9 +206,22 @@ var Game = function() {
 		}
 	}
 
+
 	this.cleanRoots = function() {
 		console.log('game.cleanRoots')
 		that.battleField.cleanRoots()
+	}
+
+	this.growTreeWidth = function(player) {
+		trees[player.getName()].extendTreeWidth()
+	}
+
+	this.growTreeHeight = function(player) {
+		trees[player.getName()].extendTreeHeigth()
+	}
+
+	this.growLeafDensity = function(player) {
+		trees[player.getName()].extendLeafDensity()
 	}
 
 	this.gameLoop = function() {
@@ -211,7 +273,7 @@ var Game = function() {
 				envStates.push({name: 'Spring', ticks: that.environment.getSpringTicks()})
 			}
 			if (that.environment.getColdSnapTicks() > 0) {
-				envStates.push({name: 'Cold Snap', ticks: that.environment.getColdSnapTicks()})
+				envStates.push({name: 'ColdSnap', ticks: that.environment.getColdSnapTicks()})
 			}
 			if (that.environment.getDroughtTicks() > 0) {
 				envStates.push({name: 'Drought', ticks: that.environment.getDroughtTicks()})

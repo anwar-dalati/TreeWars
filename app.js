@@ -67,9 +67,20 @@ io.sockets.on('connection', function(socket) {
 		player = playerManager.addPlayer(data.playerName, socket)
 		game = gameManager.joinGame(data.code, player)
 		socket.emit('joinGameSuccess', {success: game !== null})
+
+		if (game === null) {
+			return
+		}
+
+		for (var i = 0; i < game.getPlayers().length; i++) {
+			if (game.getPlayers()[i].getName() == player.getName()) {
+				continue
+			}
+			player.getSocket().emit('playerJoined', {playerName: game.getPlayers()[i].getName()})
+		}
 	})
 	socket.on('startGame', function() {
-		if (player.isHost()) {
+		if (player.isHost() && game.getPlayers().length > 1) {
 			console.log('game started by %s', player.getName())
 			game.start()
 		}
@@ -152,25 +163,23 @@ io.sockets.on('connection', function(socket) {
 	// build calls
 	socket.on('buildExtendTreeHeigth', function() {
 		console.log('extend heigth of player %s', player.getName())
-		player.getTree().extendTreeHeigth()
+		game.growTreeHeight(player)
 	})
 	socket.on('buildExtendTreeWidth', function() {
 		console.log('extend width of player %s', player.getName())
-		player.getTree().extendTreeWidth()
+		game.growTreeWidth(player)
 	})
 	socket.on('buildExtendLeafDensity', function() {
 		console.log('extend leaf density of player %s', player.getName())
-		player.getTree().extendLeafDensity()
+		game.growLeafDensity(player)
 	})
 	socket.on('buildExtendRootStrength', function() {
 		console.log('extend root density of player %s', player.getName())
 		game.strengthRoot(player)
-		player.getTree().extendRootStrength()
 	})
 	socket.on('buildExtendRootWidth', function() {
 		console.log('extend root width of player %s', player.getName())
-		player.getTree().extendRootWidth()
-		game.branchRoot(player)
+		game.branchesRoot(player)
 	})
 
 	// environment calls
