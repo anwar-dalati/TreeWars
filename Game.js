@@ -157,6 +157,11 @@ var Game = function() {
 		}
 	}
 
+	this.cleanRoots = function() {
+		console.log('game.cleanRoots')
+		that.battleField.cleanRoots()
+	}
+
 	this.gameLoop = function() {
 		if (++ticks % 5 == 0) {
 			console.log('tick %s', ticks)
