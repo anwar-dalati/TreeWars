@@ -284,6 +284,7 @@ var Game = function() {
 			var waterCost = playerTree.getTreeHeigth() * playerTree.getTreeWidth() * playerTree.getLeafDensity()
 			playerTree.changeSun(-sunCost)
 			playerTree.changeWater(-waterCost)
+            playerTree.changeWeatherPoints(0.05)
 
        		//generate Nutrients
             var generatedNutrients = that.resourceCalculator.calculateNutrientReward(playerTree.getSun(), playerTree.getWater(), that.environment.getSpringTicks())
@@ -530,7 +531,8 @@ var Game = function() {
 				healthPoints: playerTree.getHealthPoints(),
 				sun: playerTree.getSun(),
 				water: playerTree.getWater(),
-				nutrients: playerTree.getNutrients()
+				nutrients: playerTree.getNutrients(),
+                weatherPoints: playerTree.getWeatherPoints()
 			})
 		}
 	}
