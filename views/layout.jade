@@ -14,11 +14,14 @@ html
 		script(src='/javascripts/level/HexagonField.js')
 		script(src='/javascripts/level/SquareField.js')
 		script(src='/javascripts/level/level.js')
+		script(src='/javascripts/soundmanager2-nodebug-jsmin.js')
+		script(src='/javascripts/ImageManager.js')
 		script
 			var tw = {gameCode: null, host: false, running: false}
 			var socket = io.connect();
 			var build = new Build();
 			var env = new Environment();
+			var imgMg = new ImageManager();
 		script(src='/javascripts/start.js')
 
 	body!= body

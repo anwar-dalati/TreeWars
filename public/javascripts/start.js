@@ -1,5 +1,29 @@
 $(function() {
 
+	soundManager.url = '../swf/';
+	soundManager.flashVersion = 8;
+	soundManager.useFlashBlock = false;
+	soundManager.debugMode = false;
+
+	soundManager.onready(function() {
+		var music = soundManager.createSound({
+			id: 'music',
+			url: '../sounds/at-rest.mp3'
+		});
+		var twitter = soundManager.createSound({
+			id: 'twitter',
+			url: '../sounds/evening-in-the-forest.mp3'
+		});
+
+		twitter.play();
+		music.play();
+	});
+
+	$('#sound').click(function() {
+		soundManager.togglePause('twitter');
+		soundManager.togglePause('music');
+	});
+
 	var startDialog = function() {
 		var buttons = {};
 		buttons['Ok'] = function() {
@@ -67,13 +91,19 @@ $(function() {
 		$('#resources #nutrients').html('Nutrients: ' + data.nutrients)
 	})
 
+	// TODO: implement weather icons
 	socket.on('updateCurrentEnvironment', function(data) {
 		console.log(data)
-		$('#uiWrapper .weather').remove()
+		$('#uiWrapper #weather .weather').remove()
 
 		for (var i = 0; i < data.states.length; i++) {
 			var state = data.states[i]
-			$('#uiWrapper').append($('<div class="noImage weather">' + state.name + ' (' + state.ticks + ')' + '</div>'))
+			$('#uiWrapper #weather').append($('<div class="noImage weather">' + state.name + ' (' + state.ticks + ')' + '</div>'))
+		}
+		if (i > 0) {
+			$('#uiWrapper #weather').attr('class', 'noImage')
+		} else {
+			$('#uiWrapper #weather').attr('class', 'noImage hide')
 		}
 	})
 
