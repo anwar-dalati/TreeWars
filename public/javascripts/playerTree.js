@@ -36,8 +36,15 @@ var PlayerTree = function(startLeafDensity, startRootDensity, startPosition, pos
 	this.drawTree = function()
 	{
 		//draw trunk position y-2
-		$('#gameWrapper').append('<div style="top:540px; left:'+ (that.worldPosition + that.positionChangeToScreenPosition) * 60 + 'px;" class="tree'+that.LeafDensity+'Trunk'+Math.ceil(that.width/2)+ '"></div>')
+		$('#gameWrapper').append('<div style="top:480px; left:'
+		+ (that.worldPosition + that.positionChangeToScreenPosition) * 60 + 'px;" class="tree'
+		+that.LeafDensity+'Trunk'+Math.ceil(that.width/2)+ '"></div>')
 		//start&draw at left2 go right
+		$('#gameWrapper').append('<div style="top:420px; left:'
+		+ (that.worldPosition + that.positionChangeToScreenPosition) * 60 + 'px;" class="tree'
+		+that.LeafDensity+'Left'+2+ '"></div>')
+		
+		
 		//draw bottom0 until reaching trunk-position
 		//draw bottom1 after reaching trunk-position
 		//or randombottom

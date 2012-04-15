@@ -218,6 +218,7 @@ input {
 	background-image: url('/images/sprite.png');
 	width: 60px;
 	height: 60px;
+	position: absolute;
 }
 
 div.rootD0B0{
@@ -938,64 +939,64 @@ div.treeDroughtCenter5{
 
 #gameWrapper div.tree0Trunk0{
 	background-position: -60px -300px;
-	height = 120;
+	height : 120px;
 }
 
 #gameWrapper div.tree0Trunk1{
 	background-position: -120px -300px;
-	height = 120;
+	height : 120px;
 }
 
 #gameWrapper div.tree0Trunk2{
 	background-position: -180px -300px;
-	height = 120;
+	height : 120px;
 }
 
 #gameWrapper div.tree0Trunk3{
 	background-position: -240px -300px;
-	height = 120;
+	height : 120px;
 }
 
 #gameWrapper div.tree0Trunk4{
 	background-position: -300px -300px;
-	height = 120;
+	height : 120px;
 }
 
 #gameWrapper div.tree0Trunk5{
 	background-position: -360px -300px;
-	height = 120;
+	height : 120px;
 }
 
 
 
 #gameWrapper div.tree1Trunk0{
 	background-position: -420px -300px;
-	height = 120;
+	height : 120px;
 }
 
 #gameWrapper div.tree1Trunk1{
 	background-position: -480px -300px;
-	height = 120;
+	height : 120px;
 }
 
 #gameWrapper div.tree1Trunk2{
 	background-position: -540px -300px;
-	height = 120;
+	height : 120px;
 }
 
 #gameWrapper div.tree1Trunk3{
 	background-position: -600px -300px;
-	height = 120;
+	height : 120px;
 }
 
 #gameWrapper div.tree1Trunk4{
 	background-position: -660px -300px;
-	height = 120;
+	height : 120px;
 }
 
 #gameWrapper div.tree1Trunk5{
 	background-position: -720px -300px;
-	height = 120;
+	height : 120px;
 }
 
 
@@ -1003,93 +1004,93 @@ div.treeDroughtCenter5{
 
 #gameWrapper div.tree2Trunk0{
 	background-position: -780px -300px;
-	height = 120;
+	height : 120px;
 }
 
 #gameWrapper div.tree2Trunk1{
 	background-position: -840px -300px;
-	height = 120;
+	height : 120px;
 }
 
 #gameWrapper div.tree2Trunk2{
 	background-position: -900px -300px;
-	height = 120;
+	height : 120px;
 }
 
 #gameWrapper div.tree2Trunk3{
 	background-position: -960px -300px;
-	height = 120;
+	height : 120px;
 }
 
 #gameWrapper div.tree2Trunk4{
 	background-position: -1020px -300px;
-	height = 120;
+	height : 120px;
 }
 
 #gameWrapper div.tree2Trunk5{
 	background-position: -1080px -300px;
-	height = 120;
+	height : 120px;
 }
 
 
 #gameWrapper div.tree3Trunk0{
 	background-position: -1140px -300px;
-	height = 120;
+	height : 120px;
 }
 
 #gameWrapper div.tree3Trunk1{
 	background-position: -1200px -300px;
-	height = 120;
+	height : 120px;
 }
 
 #gameWrapper div.tree3Trunk2{
 	background-position: -1260px -300px;
-	height = 120;
+	height : 120px;
 }
 
 #gameWrapper div.tree3Trunk3{
 	background-position: -1320px -300px;
-	height = 120;
+	height : 120px;
 }
 
 #gameWrapper div.tree3Trunk4{
 	background-position: -1380px -300px;
-	height = 120;
+	height : 120px;
 }
 
 #gameWrapper div.tree3Trunk5{
 	background-position: -1440px -300px;
-	height = 120;
+	height : 120px;
 }
 
 
 
 #gameWrapper div.tree4Trunk0{
 	background-position: -1500px -300px;
-	height = 120;
+	height : 120px;
 }
 
 #gameWrapper div.tree4Trunk1{
 	background-position: -1560px -300px;
-	height = 120;
+	height : 120px;
 }
 
 #gameWrapper div.tree4Trunk2{
 	background-position: -1620px -300px;
-	height = 120;
+	height : 120px;
 }
 
 #gameWrapper div.tree4Trunk3{
 	background-position: -1680px -300px;
-	height = 120;
+	height : 120px;
 }
 
 #gameWrapper div.tree4Trunk4{
 	background-position: -1740px -300px;
-	height = 120;
+	height : 120px;
 }
 
 #gameWrapper div.tree4Trunk5{
 	background-position: -1800px -300px;
-	height = 120;
+	height : 120px;
 }
