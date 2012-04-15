@@ -81,14 +81,30 @@ $(function() {
 
 	socket.on('battleField', function(data) {
 		console.log(data.battleField[0][0])
+
+		for (var x = 0; x < data.battleField.length; x++) {
+			for (var y = 0; y < data.battleField[x].length; y++) {
+				var tile = data.battleField[x][y]
+				// data.rootDensity
+				// data.rootStrength
+				// data.leafDensity
+				// tile.playerNames
+				//$('<img id="img_x_y" src="" class="tree0Center0" />')
+				$('#img_x_y').attr('class', 'tree0Center0')
+
+				if (tile.type == 1 && typeof tile.playerNames != 'undefined' && tile.playerNames.length) { // ground
+					// theres a root
+				}
+			}
+		}
 	})
 
 	socket.on('updatePlayerResources', function(data) {
 		console.log(data)
-		$('#resources #health').html('Health: ' + data.healthPoints)
-		$('#resources #sun').html('Sun: ' +  data.sun)
-		$('#resources #water').html('Water: ' + data.water)
-		$('#resources #nutrients').html('Nutrients: ' + data.nutrients)
+		$('#health').html('Health: ' + data.healthPoints)
+		$('#sun').html('Sun: ' +  Math.ceil(data.sun))
+		$('#water').html('Water: ' + Math.ceil(data.water))
+		$('#nutrients').html('Nutrients: ' + Math.ceil(data.nutrients))
 	})
 
 	// TODO: implement weather icons

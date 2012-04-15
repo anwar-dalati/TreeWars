@@ -148,6 +148,8 @@ var Game = function() {
 		if (++ticks % 5 == 0) {
 			console.log('tick %s', ticks)
 		}
+		var i = 0
+		var playerTree = null
 
 		// environment updates needed to do every tick
 		if (that.environment.getRainTicks()) {
@@ -160,12 +162,78 @@ var Game = function() {
 		that.storm(that.environment.getStormTicks() > 0)
 		that.environment.decreaseTicks();
 
+		var tile = null
+		// ground tile loop
+		for (var x = 0; x < that.battleField.length; x++) {
+			for (var y = 0; y < that.battleField[x].length; y++) {
+				tile = that.battleField.getBattleTile(x, y)
+				if (tile.getType() != 1) { // no ground tile
+					continue
+				}
+
+				// TODO: get root and fill its water reserve
+			}
+		}
+
+		// air tile loop
+		for (x = 0; x < that.battleField.fieldLength; x++) {
+			// initial light value for that column
+			var light = that.environment.getSunStrength()
+			var playersAbsorbed = []
+
+			for (y = 0; y < that.battleField.airHeight + that.battleField.groundDepth; y++) {
+				tile = that.battleField.getBattleTile(x, y)
+				if (tile.getType() != 0) { // no air tile
+					continue
+				}
+
+				var playersAtCoord = that.getPresentPlayersAtCoord(x, y)
+
+				// skip row in that column which has no tiles
+				if (!playersAtCoord.length) {
+					continue
+				}
+
+				var splittedLight = light / playersAtCoord.length
+				for (i = 0; i < playersAtCoord.length; i++) {
+					// player can only get light once for each row
+					var playerAbsorbedAlready = false
+					for (var j = 0; j < playersAbsorbed.length; j++) {
+						if (playersAbsorbed[j] == playersAtCoord[i]) {
+							splittedLight += light / playersAtCoord.length
+							playerAbsorbedAlready = true
+							break
+						}
+					}
+					if (playerAbsorbedAlready) {
+						continue
+					}
+
+					playerTree = trees[playersAtCoord[i]]
+
+					// TODO: CALCULATION
+					var absorbPercentage = (((playerTree.getLeafDensity() + 1) * 11) + 34)
+					var absorbedLight = splittedLight * (absorbPercentage / 100)
+					playerTree.changeSun(absorbedLight)
+					light -= absorbedLight
+					playersAbsorbed.push(playersAtCoord[i])
+				}
+
+				// step to the next column if no light is left over
+				if (light <= 0) {
+					break
+				}
+			}
+		}
+
 		// update player's tree resources and stuff
-		for (var i = 0; i < players.length; i++) {
-			// DUMMY RESOURCE ADDING
-			// TODO: later to be calculated by the ResourceCalculator using the battleField
-			players[i].getTree().changeSun(1)
-			players[i].getTree().changeWater(1)
+		for (i = 0; i < players.length; i++) {
+			// decrease resources by the cost the tree takes
+			playerTree = trees[players[i].getName()]
+			var sunCost = Math.pow(playerTree.getTreeHeigth() * 0.5, 0.8745)
+			var waterCost = Math.pow(playerTree.getTreeHeigth(), 1.65) / 10
+			playerTree.changeSun(-sunCost)
+			playerTree.changeWater(-waterCost)
 
 			that.updatePlayerResources()
 
@@ -298,7 +366,7 @@ var Game = function() {
 
 	this.getPresentPlayersAtCoord = function(x,y) {
 		if (that.battleField.getBattleTile(x,y).getType()) {
-			return that.battleField.getBattleTile(x,y).getPlayerName()
+			return [].push(that.battleField.getBattleTile(x,y).getPlayerName())
 		}
 		var players = []
 		var playerName
@@ -336,11 +404,12 @@ var Game = function() {
 
 	this.updatePlayerResources = function() {
 		for (var i = 0; i < players.length; i++) {
+			var playerTree = trees[players[i].getName()]
 			players[i].getSocket().emit('updatePlayerResources', {
-				healthPoints: players[i].getTree().getHealthPoints(),
-				sun: players[i].getTree().getSun(),
-				water: players[i].getTree().getWater(),
-				nutrients: players[i].getTree().getNutrients()
+				healthPoints: playerTree.getHealthPoints(),
+				sun: playerTree.getSun(),
+				water: playerTree.getWater(),
+				nutrients: playerTree.getNutrients()
 			})
 		}
 	}

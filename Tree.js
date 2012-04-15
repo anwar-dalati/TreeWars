@@ -76,14 +76,17 @@ var Tree = function() {
 
 	this.changeSun = function(amount) {
 		sun += amount
+		console.log('changed sun by %s', amount)
 	}
 
 	this.changeWater = function(amount) {
 		water += amount
+		console.log('changed water by %s', amount)
 	}
 
 	this.changeNutrients = function(amount) {
 		nutrients += amount
+		console.log('changed nutrients by %s', amount)
 	}
 
 	this.setRootStrength = function(strength) {
