@@ -111,6 +111,7 @@ var BattleField = function() {
 
 		return tiles
 	}
+
 }
 
 module.exports.BattleField = function() {

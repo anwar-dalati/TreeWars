@@ -85,15 +85,15 @@ $(function() {
 		for (var x = 0; x < data.battleField.length; x++) {
 			for (var y = 0; y < data.battleField[x].length; y++) {
 				var tile = data.battleField[x][y]
-				// data.rootDensity
-				// data.rootStrength
-				// data.leafDensity
+				var rootDensity = data.rootDensity
+				var rootStrength = data.rootStrength
+				var leafDensity = data.leafDensity
 				// tile.playerNames
 				//$('<img id="img_x_y" src="" class="tree0Center0" />')
 				$('#img_x_y').attr('class', 'tree0Center0')
 
-				if (tile.type == 1 && typeof tile.playerNames != 'undefined' && tile.playerNames.length) { // ground
-					// theres a root
+				if (tile.type == 1 && typeof tile.playerNames != 'undefined' && typeof tile.playerNames != 'object') { // ground
+					console.log('root at x: %s, y: %s', x, y)
 				}
 			}
 		}

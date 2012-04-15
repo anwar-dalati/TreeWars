@@ -188,7 +188,12 @@ var Game = function() {
 
 			// just for testing purposes
 			// TODO: send the battlefield to the clients on every tick
-			players[i].getSocket().emit('battleField', {battleField: that.battleField.toArray()})
+			players[i].getSocket().emit('battleField', {
+				rootDensity: playerTree.getRootWidth(),
+				rootStrength: playerTree.getRootStrength,
+				leafDensity: playerTree.getLeafDensity,
+				battleField: that.battleFieldToArray()
+			})
 
 			var envStates = []
 			if (that.environment.getRainTicks() > 0) {
@@ -434,6 +439,27 @@ var Game = function() {
 				nutrients: playerTree.getNutrients()
 			})
 		}
+	}
+
+	this.battleFieldToArray = function() {
+		var tiles = []
+
+		for (var x = 0; x < that.battleField.fieldLength; x++) {
+			for (var y = 0; y < that.battleField.airHeight + that.battleField.groundDepth; y++) {
+				var tile = that.battleField.getBattleTile(x, y)
+				if (typeof tiles[x] == 'undefined') {
+					tiles[x] = []
+				}
+
+				tiles[x][y] = {
+					moisture: tile.getMoisture(),
+					playerNames: that.getPresentPlayersAtCoord(x, y),// tile.getPlayerName(),
+					type: tile.getType()
+				}
+			}
+		}
+
+		return tiles
 	}
 }
 
