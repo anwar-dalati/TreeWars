@@ -5,6 +5,7 @@ var Game = function() {
 	var players = []
 	var environment = null
 	var battleField = null
+	var resourceCalculator = null
 	var ticks = 0
 	var trees = []
 
@@ -16,6 +17,7 @@ var Game = function() {
 		that.code = code
 		that.environment = require('./Environment.js').Environment()
 		that.battleField = battleField
+		that.resourceCalculator = require('./ResourceCalculator.js').ResourceCalculator()
 
 		return that
 	}
@@ -68,6 +70,7 @@ var Game = function() {
 
 	this.placeRoot = function(player, x, y) {
 		that.battleField.getBattleTile(x,y).setPlayerName(player.getName())
+		trees[player.getName()].changeRootsCount(1)
 	}
 
 	this.growRoot = function(player, x, y) {
@@ -172,70 +175,6 @@ var Game = function() {
 		that.storm(that.environment.getStormTicks() > 0)
 		that.environment.decreaseTicks();
 
-		var tile = null
-		// ground tile loop
-		for (var x = 0; x < that.battleField.length; x++) {
-			for (var y = 0; y < that.battleField[x].length; y++) {
-				tile = that.battleField.getBattleTile(x, y)
-				if (tile.getType() != 1) { // no ground tile
-					continue
-				}
-
-				// TODO: get root and fill its water reserve
-			}
-		}
-
-		// air tile loop
-		for (x = 0; x < that.battleField.fieldLength; x++) {
-			// initial light value for that column
-			var light = that.environment.getSunStrength()
-			var playersAbsorbed = []
-
-			for (y = 0; y < that.battleField.airHeight + that.battleField.groundDepth; y++) {
-				tile = that.battleField.getBattleTile(x, y)
-				if (tile.getType() != 0) { // no air tile
-					continue
-				}
-
-				var playersAtCoord = that.getPresentPlayersAtCoord(x, y)
-
-				// skip row in that column which has no tiles
-				if (!playersAtCoord.length) {
-					continue
-				}
-
-				var splittedLight = light / playersAtCoord.length
-				for (i = 0; i < playersAtCoord.length; i++) {
-					// player can only get light once for each row
-					var playerAbsorbedAlready = false
-					for (var j = 0; j < playersAbsorbed.length; j++) {
-						if (playersAbsorbed[j] == playersAtCoord[i]) {
-							splittedLight += light / playersAtCoord.length
-							playerAbsorbedAlready = true
-							break
-						}
-					}
-					if (playerAbsorbedAlready) {
-						continue
-					}
-
-					playerTree = trees[playersAtCoord[i]]
-
-					// TODO: CALCULATION
-					var absorbPercentage = (((playerTree.getLeafDensity() + 1) * 11) + 34)
-					var absorbedLight = splittedLight * (absorbPercentage / 100)
-					playerTree.changeSun(absorbedLight)
-					light -= absorbedLight
-					playersAbsorbed.push(playersAtCoord[i])
-				}
-
-				// step to the next column if no light is left over
-				if (light <= 0) {
-					break
-				}
-			}
-		}
-
 		// update player's tree resources and stuff
 		for (i = 0; i < players.length; i++) {
 			// decrease resources by the cost the tree takes
@@ -244,8 +183,6 @@ var Game = function() {
 			var waterCost = Math.pow(playerTree.getTreeHeigth(), 1.65) / 10
 			playerTree.changeSun(-sunCost)
 			playerTree.changeWater(-waterCost)
-
-			that.updatePlayerResources()
 
 			// just for testing purposes
 			// TODO: send the battlefield to the clients on every tick
@@ -272,6 +209,79 @@ var Game = function() {
 			}
 			players[i].getSocket().emit('updateCurrentEnvironment', {states: envStates})
 		}
+
+		var tile = null
+		// ground tile loop
+		for (var x = 0; x < that.battleField.fieldLength; x++) {
+			for (var y = 0; y < that.battleField.airHeight + that.battleField.groundDepth; y++) {
+				tile = that.battleField.getBattleTile(x, y)
+				if (tile.getType() != 1 || typeof tile.getPlayerName() == 'undefined') { // no ground tile
+					continue
+				}
+				playerTree = trees[tile.getPlayerName()]
+
+				var absorbedWater = that.resourceCalculator.calculateWaterReward(tile.moisture, playerTree.getRootWidth())
+				playerTree.changeWater(absorbedWater)
+				tile.decreaseMoisture(playerTree.getRootWidth())
+			}
+		}
+
+		// air tile loop
+		for (x = 0; x < that.battleField.fieldLength; x++) {
+			// initial light value for that column
+			var light = that.environment.getSunStrength()
+			var playersAbsorbed = []
+
+			for (y = 0; y < that.battleField.airHeight + that.battleField.groundDepth; y++) {
+				tile = that.battleField.getBattleTile(x, y)
+				if (tile.getType() != 0) { // no air tile
+					continue
+				}
+
+				var playersAtCoord = that.getPresentPlayersAtCoord(x, y)
+				if (typeof playersAtCoord != 'object' && typeof playersAtCoord != 'undefined') {
+					playersAtCoord = [].push(playersAtCoord)
+				}
+
+				// skip row in that column which has no tiles
+				if (!playersAtCoord.length) {
+					continue
+				}
+
+				var splittedLight = light / playersAtCoord.length
+				for (i = 0; i < playersAtCoord.length; i++) {
+					// player can only get light once for each row
+					var playerAbsorbedAlready = false
+					for (var j = 0; j < playersAbsorbed.length; j++) {
+						if (playersAbsorbed[j] == playersAtCoord[i]) {
+							splittedLight += light / playersAtCoord.length
+							playerAbsorbedAlready = true
+							break
+						}
+					}
+					if (playerAbsorbedAlready) {
+						continue
+					}
+
+					playerTree = trees[playersAtCoord[i]]
+
+					var absorbedLight = that.resourceCalculator.calculateSunReward(splittedLight, playerTree.getLeafDensity())
+					playerTree.changeSun(absorbedLight)
+					light -= absorbedLight
+
+					playersAbsorbed.push(playersAtCoord[i])
+				}
+
+				// step to the next column if no light is left over
+				if (light <= 0) {
+					break
+				}
+			}
+		}
+
+		// TODO: dead?
+
+		that.updatePlayerResources()
 	}
 
 	this.rain = function() {
