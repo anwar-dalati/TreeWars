@@ -13,18 +13,19 @@ var Tree = function() {
 	var water = 20
 	var nutrients = 0
 
-	this.extendTreeHeigth = function() {
+	this.extendTreeHeigth = function(maxTreeHeigth) {
 		treeHeigth++
-		console.log('extended tree heigth to %s', treeHeigth)
+		treeHeigth = Math.min(maxTreeHeigth, treeHeigth)
+		console.log('extended tree heigth to %s (max: %s)', treeHeigth, maxTreeHeigth)
 	}
 
 	this.getTreeHeigth = function() {
 		return treeHeigth
 	}
 
-	this.extendTreeWidth = function() {
-		treeWidth++
-		treeWidth++
+	this.extendTreeWidth = function(maxTreeWidth) {
+		treeWidth+=2
+		treeWidth = Math.min(maxTreeWidth, treeWidth)
 		console.log('extended tree width to %s', treeWidth)
 	}
 
@@ -32,8 +33,9 @@ var Tree = function() {
 		return treeWidth
 	}
 
-	this.extendLeafDensity = function() {
+	this.extendLeafDensity = function(maxLeafDensity) {
 		leafDensity++
+		leafDensity = Math.min(maxLeafDensity, leafDensity)
 		console.log('extended leaf density to %s', leafDensity)
 	}
 
