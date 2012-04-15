@@ -174,7 +174,7 @@ input {
 	left: 10px;
 }
 
-#growWidth:hover {
+#growWidth:hover, #strengthRoots:hover {
 	background-position: 0 -240px;
 }
 
@@ -196,6 +196,12 @@ input {
 
 #growRootsDense:hover {
 	background-position: 0 -336px;
+}
+
+#strengthRoots {
+	background-position: 0 -48px;
+	top: 700px;
+	left: 10px;
 }
 
 /************************************************************
