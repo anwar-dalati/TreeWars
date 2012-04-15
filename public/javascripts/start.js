@@ -81,6 +81,7 @@ $(function() {
 
 	socket.on('battleField', function(data) {
 		console.log(data.battleField[0][0])
+		
 
 		for (var x = 0; x < data.battleField.length; x++) {
 			for (var y = 0; y < data.battleField[x].length; y++) {
