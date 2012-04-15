@@ -36,9 +36,7 @@ var PlayerTree = function(startLeafDensity, startRootDensity, startPosition, pos
 	this.drawTree = function()
 	{
 		//draw trunk position y-2
-		$('#gameWrapper').append('<div style="top:480px; left:'
-		+ (that.worldPosition + that.positionChangeToScreenPosition) * 60 + 'px;" class="tree'
-		+that.LeafDensity+'Trunk'+Math.ceil(that.width/2)+ '"></div>')
+		$('#tileWrapper').append('<div style="top:480px; left:'+ (that.worldPosition + that.positionChangeToScreenPosition) * 60 + 'px;" class="tree'+that.LeafDensity+'Trunk'+Math.ceil(that.width/2)+ '"></div>')
 		//start&draw at left2 go right
 		$('#gameWrapper').append('<div style="top:420px; left:'
 		+ (that.worldPosition + that.positionChangeToScreenPosition) * 60 + 'px;" class="tree'
@@ -68,5 +66,9 @@ var PlayerTree = function(startLeafDensity, startRootDensity, startPosition, pos
 		
 			
 		
+	}
+	
+	this.clearTree = function() {
+		$('#tileWrapper').empty();
 	}
 }

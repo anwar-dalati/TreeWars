@@ -66,29 +66,64 @@ var BattleField = function() {
 	}
 
 	this.cleanRoots = function() {
-		var targetTile, tempTile
-		var x,y,z
-		for (var z in that.fieldLength) {
-			targetTile = that.getBattleTile(z, that.airHeight-1)
-			if (typeof targetTile.getPlayerName() != 'undefined') {
-				for (x=0;x<=that.fieldLength;x++) {
-					for (y=that.airHeight;y<=that.airHeight+that.groundDepth;y++) {
-						tempTile = that.getBattleTile(x,y)
-						if (typeof tempTile.getPlayerName() != 'undefined'
-							&& tempTile.getPlayerName() == targetTile.getPlayerName()
-							&& !that.isRootConnected(x,y)) {
-							tempTile.setPlayerName(null)
-							that.setBattleTile(x,y,tempTile)
-						}
+		console.log('battleField.cleanRoots')
+		var tile
+		var x,y
+
+		for (x=0;x<=that.fieldLength;x++) {
+			for (y=that.airHeight;y<=that.airHeight+that.groundDepth;y++) {
+				tile = that.getBattleTile(x,y)
+				if (tile != null && tile.getPlayerName() != null && typeof tile.getPlayerName() != 'undefined') {
+					if (!that.isRootConnected(x,y,tile)) {
+						tile.setPlayerName(undefined)
+						that.setBattleTile(x,y,tile)
 					}
 				}
 			}
 		}
 	}
 
-	this.isRootConnected = function(x,y) {
+	this.isRootConnected = function(x,y,target,coords) {
+		var tile
+
+		var n,s,o,w
+
+		if (coords == null) {
+			coords = []
+			coords[x] = []
+			coords[x][y] = true
+		} else if (typeof coords[x] == 'undefined') {
+			coords[x] = []
+			coords[x][y] = true
+		} else if (typeof coords[x][y] == 'undefined') {
+			coords[x][y] = true
+		} else {
+			return false
+		}
+
+		tile = that.getBattleTile(x,y-1)
+		if (tile != null && target.getPlayerName() == tile.getPlayerName()) {
+			return true
+		}
+		tile = that.getBattleTile(x-1,y)
+		if (tile != null && target.getPlayerName() == tile.getPlayerName()) {
+			w = that.isRootConnected(x-1,y,target,coords)
+		}
+		tile = that.getBattleTile(x+1,y)
+		if (tile != null && target.getPlayerName() == tile.getPlayerName()) {
+			o = that.isRootConnected(x+1,y,target,coords)
+		}
+		tile = that.getBattleTile(x,y-1)
+		if (tile != null && target.getPlayerName() == tile.getPlayerName()) {
+			n = that.isRootConnected(x,y-1,target,coords)
+		}
+		tile = that.getBattleTile(x,y+1)
+		if (tile != null && target.getPlayerName() == tile.getPlayerName()) {
+			s = that.isRootConnected(x,y+1,target,coords)
+		}
 		console.log('%s:%s', x,y)
-		return false
+
+		return s||n||o||w
 	}
 
 	this.toArray = function() {

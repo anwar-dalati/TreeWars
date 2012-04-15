@@ -17,8 +17,9 @@ $(function() {
 			url: '../sounds/evening-in-the-forest.mp3'
 		});
 
-		twitter.play();
-		music.play();
+		//twitter.play();
+		//music.play();
+		
 	});
 
 	$('#sound').click(function() {
@@ -136,6 +137,7 @@ $(function() {
 	socket.on('battleField', function(data) {
 		console.log(data.battleField[0][0])
 
+		playerTrees[0].clearTree();
 		playerTrees[0].drawTree();		
 
 		for (var x = 0; x < data.battleField.length; x++) {
