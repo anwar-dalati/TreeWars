@@ -87,6 +87,12 @@ io.sockets.on('connection', function(socket) {
 	socket.on('growRootGame', function(data) {
 		game.growRoot(player, data.x, data.y)
 	})
+	socket.on('strengthRoot', function(data) {
+		game.strengthRoot(player, data.x, data.y)
+	})
+	socket.on('branchRoot', function(data) {
+		game.branchRoot(player, data.x, data.y)
+	})
 
 	socket.on('build', function(data) {
 		console.log(player.getName())

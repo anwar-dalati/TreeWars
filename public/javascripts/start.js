@@ -100,3 +100,9 @@ var placeTree = function(x) {
 var growRoot = function(x,y) {
 	socket.emit('growRoot', {x:x, y:y})
 }
+var strengthRoot = function() {
+	socket.emit('strengthRoot', {player: tw.player})
+}
+var branchRoot = function() {
+	socket.emit('branchRoot', {player: tw.player})
+}

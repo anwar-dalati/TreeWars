@@ -21,6 +21,9 @@ var BattleField = function() {
 				} else {
 					tile.setType(1)
 					tile.setMoisture(50)
+					tile.setBranches(1)
+					tile.setStrength(1)
+					tile.setStorage(0)
 				}
 
 				that.setBattleTile(x,y,tile)

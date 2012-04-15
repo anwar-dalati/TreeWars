@@ -21,6 +21,18 @@ var Tile = function() {
 		return that.type
 	}
 
+	this.getStrength = function() {
+		return that.strength
+	}
+
+	this.getBranches = function() {
+		return that.branches
+	}
+
+	this.getStorage = function() {
+		return that.storage
+	}
+
 	this.setMoisture = function(moisture) {
 		that.moisture = moisture
 	}
@@ -33,12 +45,48 @@ var Tile = function() {
 		that.type = type
 	}
 
+	this.setStrength = function(strength) {
+		that.strength = strength
+	}
+
+	this.setBranches = function(branches) {
+		that.branches = branches
+	}
+
+	this.setStorage = function(storage) {
+		that.storage = storage
+	}
+
 	this.decreaseMoisture = function(amount) {
 		that.moisture = Math.max(0, that.moisture - amount)
 	}
 
 	this.increaseMoisture = function(amount) {
 		that.moisture = Math.min(100, that.moisture + amount)
+	}
+
+	this.decreaseBranches = function(amount) {
+		that.branches = Math.max(1, that.branches - amount)
+	}
+
+	this.increaseBranches = function(amount) {
+		that.branches = Math.min(5, that.branches + amount)
+	}
+
+	this.decreaseStorage = function(amount) {
+		that.storage = Math.max(0, that.storage - amount)
+	}
+
+	this.increaseStorage = function(amount) {
+		that.storage = Math.min(10, that.storage + amount)
+	}
+
+	this.decreaseStrength = function(amount) {
+		that.strength = Math.max(1, that.strength - amount)
+	}
+
+	this.increaseStrength = function(amount) {
+		that.strength = Math.min(5, that.strength + amount)
 	}
 
 }
