@@ -139,7 +139,7 @@ var Game = function() {
 		var rootStrength = trees[player.getName()].getRootStrength()
 		var tile = that.battleField.getBattleTile(x,y)
 
-		if (!tile.getType() || (typeof tile.getPlayerName() != 'undefined' && tile.getPlayerName() == player.getName()) || (tile.getStrength() > rootStrength)) {
+		if (tile == null || !tile.getType() || (typeof tile.getPlayerName() != 'undefined' && tile.getPlayerName() == player.getName()) || (tile.getStrength() > rootStrength)) {
 			return false
 		}
 
@@ -213,15 +213,15 @@ var Game = function() {
 	}
 
 	this.growTreeWidth = function(player) {
-		trees[player.getName()].extendTreeWidth()
+		trees[player.getName()].extendTreeWidth(that.battleField.maxTreeWidth)
 	}
 
 	this.growTreeHeight = function(player) {
-		trees[player.getName()].extendTreeHeigth()
+		trees[player.getName()].extendTreeHeigth(that.battleField.maxTreeHeight)
 	}
 
 	this.growLeafDensity = function(player) {
-		trees[player.getName()].extendLeafDensity()
+		trees[player.getName()].extendLeafDensity(that.battleField.maxLeafDensity)
 	}
 
 	this.gameLoop = function() {
@@ -232,6 +232,9 @@ var Game = function() {
 		var playerTree = null
 
 		that.battleField.cleanRoots()
+		for (i = 0; i < players.length; i++) {
+			trees[players[i].getName()].setRootCount(trees[players[i].getName()].countRootsAtBattleField(players[i].getName(), that.battleField))
+		}
 
 		// environment updates needed to do every tick
 		if (that.environment.getRainTicks()) {
@@ -243,6 +246,19 @@ var Game = function() {
 		that.drought(that.environment.getDroughtTicks() > 0)
 		that.storm(that.environment.getStormTicks() > 0)
 		that.environment.decreaseTicks();
+
+		var playerTrees = []
+		for (i = 0; i < players.length; i++) {
+			// decrease resources by the cost the tree takes
+			playerTree = trees[players[i].getName()]
+			playerTrees.push({
+				playerName: players[i].getName(),
+				treeHeight: playerTree.getTreeHeigth(),
+				treeWidth: playerTree.getTreeWidth(),
+				leafDensity: playerTree.getLeafDensity(),
+				rootDensity: playerTree.getRootStrength()
+			})
+		}
 
 		// update player's tree resources and stuff
 		for (i = 0; i < players.length; i++) {
@@ -257,30 +273,19 @@ var Game = function() {
 			// TODO: send the battlefield to the clients on every tick
 			players[i].getSocket().emit('battleField', {
 				rootDensity: playerTree.getRootWidth(),
-				rootStrength: playerTree.getRootStrength,
-				leafDensity: playerTree.getLeafDensity,
-				battleField: that.battleFieldToArray()
+				rootStrength: playerTree.getRootStrength(),
+				leafDensity: playerTree.getLeafDensity(),
+				battleField: that.battleFieldToArray(),
+				trees: playerTrees
 			})
 
 			var envStates = []
-			if (that.environment.getRainTicks() > 0) {
-				envStates.push({name: 'Rain', ticks: that.environment.getRainTicks()})
-			}
-			if (that.environment.getSunshineTicks() > 0) {
-				envStates.push({name: 'Sunshine', ticks: that.environment.getSunshineTicks()})
-			}
-			if (that.environment.getSpringTicks() > 0) {
-				envStates.push({name: 'Spring', ticks: that.environment.getSpringTicks()})
-			}
-			if (that.environment.getColdSnapTicks() > 0) {
-				envStates.push({name: 'ColdSnap', ticks: that.environment.getColdSnapTicks()})
-			}
-			if (that.environment.getDroughtTicks() > 0) {
-				envStates.push({name: 'Drought', ticks: that.environment.getDroughtTicks()})
-			}
-			if (that.environment.getStormTicks() > 0) {
-				envStates.push({name: 'Storm', ticks: that.environment.getStormTicks()})
-			}
+			envStates.push({name: 'Rain', ticks: that.environment.getRainTicks()})
+			envStates.push({name: 'Sunshine', ticks: that.environment.getSunshineTicks()})
+			envStates.push({name: 'Spring', ticks: that.environment.getSpringTicks()})
+			envStates.push({name: 'ColdSnap', ticks: that.environment.getColdSnapTicks()})
+			envStates.push({name: 'Drought', ticks: that.environment.getDroughtTicks()})
+			envStates.push({name: 'Storm', ticks: that.environment.getStormTicks()})
 			players[i].getSocket().emit('updateCurrentEnvironment', {states: envStates})
 		}
 

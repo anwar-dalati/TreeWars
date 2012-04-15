@@ -1,5 +1,5 @@
 $(function() {
-	
+
 	var playerTrees = [];
 
 	soundManager.url = '../swf/';
@@ -19,7 +19,7 @@ $(function() {
 
 		//twitter.play();
 		//music.play();
-		
+
 	});
 
 	$('#sound').click(function() {
@@ -106,15 +106,20 @@ $(function() {
 		$('#wait_dialog .joinedPlayers').append(', ' + data.playerName)
 	})
 
+	//var pTree = new PlayerTree(2,2,10,0, 3, 4, 0);
 	//PlayerTree(2,2,10,0, 3, 4, 0);
 	socket.on('startingGame', function(data) {
 		tw.startingPoints = data.startingPoints
-		
+
 		playerTrees.push(new PlayerTree(2,2,10,0, 3, 4, 0));
+		playerTrees.push(new PlayerTree(2,2,14,0, 3, 4, 1));
+		playerTrees.push(new PlayerTree(2,2,18,0, 3, 4, 2));
+		playerTrees.push(new PlayerTree(2,2,22,0, 3, 4, 3));
 
 		$('#wait_dialog').dialog('close')
 		$('#gameWrapper').css('background-image', 'none')
 
+		// build buttons
 		$('#growHeight').removeClass('hide').click(function() {
 			build.extendTreeHeigth()
 		})
@@ -128,17 +133,44 @@ $(function() {
 			build.extendRootDensity()
 		})
 		$('#strengthRoots').removeClass('hide').click(function() {
-			build.extendRootWidth()			
+			build.extendRootWidth()
 		})
-		
-		
+
+		// weather / hazard buttons
+		$('#uiWrapper #weather .weather.Rain').click(function() {
+			env.rain()
+		})
+		$('#uiWrapper #weather .weather.Sunshine').click(function() {
+			env.sunshine()
+		})
+		$('#uiWrapper #weather .weather.Spring').click(function() {
+			env.spring()
+		})
+		$('#uiWrapper #weather .weather.ColdSnap').click(function() {
+			env.coldSnap()
+		})
+		$('#uiWrapper #weather .weather.Drought').click(function() {
+			env.drought()
+		})
+		$('#uiWrapper #weather .weather.Storm').click(function() {
+			env.storm()
+		})
 	})
 
 	socket.on('battleField', function(data) {
-		console.log(data.battleField[0][0])
+		console.log(data)
 
+		//pTree.drawTree();
 		playerTrees[0].clearTree();
-		playerTrees[0].drawTree();		
+
+		for ( var i = 0; i < data.trees.length; i++) {
+			playerTrees[i].setValues(data.trees[i].playerName, data.trees[i].treeHeight, data.trees[i].treeWidth, data.trees[i].leafDensity, data.trees[i].rootDensity);
+		}
+
+		playerTrees[0].drawTree();
+		playerTrees[1].drawTree();
+		playerTrees[2].drawTree();
+		playerTrees[3].drawTree();
 
 		for (var x = 0; x < data.battleField.length; x++) {
 			for (var y = 0; y < data.battleField[x].length; y++) {
@@ -146,11 +178,13 @@ $(function() {
 				var rootDensity = data.rootDensity
 				var rootStrength = data.rootStrength
 				var leafDensity = data.leafDensity
+
 				// tile.playerNames
 				//$('<img id="img_x_y" src="" class="tree0Center0" />')
 				$('#img_x_y').attr('class', 'tree0Center0')
 
 				if (tile.type == 1 && typeof tile.playerNames != 'undefined' && typeof tile.playerNames != 'object') { // ground
+					$('#tileWrapper').append('<div style="top:'+y*60+'px; left:'+x*60+ 'px;" class="rootD'+(rootStrength - 1)+'B'+(rootDensity - 1)+ '"></div>')
 					console.log('root at x: %s, y: %s', x, y)
 				}
 			}
@@ -168,16 +202,10 @@ $(function() {
 	// TODO: implement weather icons
 	socket.on('updateCurrentEnvironment', function(data) {
 		console.log(data)
-		$('#uiWrapper #weather .weather').remove()
-
+		tw.states = data.states
 		for (var i = 0; i < data.states.length; i++) {
 			var state = data.states[i]
-			$('#uiWrapper #weather').append($('<img class="weather ' + data.state + '" />'))
-		}
-		if (i > 0) {
-			$('#uiWrapper #weather').attr('class', 'noImage')
-		} else {
-			$('#uiWrapper #weather').attr('class', 'noImage hide')
+			$('#uiWrapper #weather .weather.' + state.name).html(state.ticks > 0 ? state.ticks : '')
 		}
 	})
 
