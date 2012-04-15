@@ -64,6 +64,54 @@ var BattleField = function() {
 		}
 		battleField[x][y] = tile
 	}
+
+	this.cleanRoots = function() {
+		var targetTile, tempTile
+		var x,y,z
+		for (var z in that.fieldLength) {
+			targetTile = that.getBattleTile(z, that.airHeight-1)
+			if (typeof targetTile.getPlayerName() != 'undefined') {
+				for (x=0;x<=that.fieldLength;x++) {
+					for (y=that.airHeight;y<=that.airHeight+that.groundDepth;y++) {
+						tempTile = that.getBattleTile(x,y)
+						if (typeof tempTile.getPlayerName() != 'undefined'
+							&& tempTile.getPlayerName() == targetTile.getPlayerName()
+							&& !that.isRootConnected(x,y)) {
+							tempTile.setPlayerName(null)
+							that.setBattleTile(x,y,tempTile)
+						}
+					}
+				}
+			}
+		}
+	}
+
+	this.isRootConnected = function(x,y) {
+		console.log('%s:%s', x,y)
+		return false
+	}
+
+	this.toArray = function() {
+		var tiles = []
+
+		for (var x = 0; x < battleField.length; x++) {
+			for (var y = 0; y < battleField[x].length; y++) {
+				var tile = that.getBattleTile(x, y)
+				if (typeof tiles[x] == 'undefined') {
+					tiles[x] = []
+				}
+
+				tiles[x][y] = {
+					moisture: 100,//tile.getMoisture(),
+					playerName: 'test',// tile.getPlayerName(),
+					type: 1// tile.getType()
+				}
+			}
+		}
+
+		return tiles
+	}
+
 }
 
 module.exports.BattleField = function() {
