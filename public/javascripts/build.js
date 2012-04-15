@@ -22,5 +22,6 @@ var Build = function() {
 
 	this.growRoot = function(x, y) {
 		socket.emit('growRootGame', {x: x, y: y})
+		console.log('building root at x: %s, y: %s', x, y)
 	}
 }

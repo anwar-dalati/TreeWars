@@ -155,6 +155,8 @@ $(function() {
 		$('#uiWrapper #weather .weather.Storm').click(function() {
 			env.storm()
 		})
+
+		playerRoots.initGrid()
 	})
 
 	socket.on('battleField', function(data) {
