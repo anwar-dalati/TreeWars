@@ -105,6 +105,22 @@ $(function() {
 	socket.on('startingGame', function() {
 		$('#wait_dialog').dialog('close')
 		$('#gameWrapper').css('background-image', 'none')
+
+		$('#growHeight').removeClass('hide').click(function() {
+			build.extendTreeHeigth()
+		})
+		$('#growWidth').removeClass('hide').click(function() {
+			build.extendTreeWidth()
+		})
+		$('#growFoliageDense').removeClass('hide').click(function() {
+			build.extendLeafDensity()
+		})
+		$('#growRootsDense').removeClass('hide').click(function() {
+			build.extendRootDensity()
+		})
+		$('#strengthRoots').removeClass('hide').click(function() {
+			build.extendRootWidth()
+		})
 	})
 
 	socket.on('battleField', function(data) {

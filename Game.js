@@ -38,6 +38,21 @@ var Game = function() {
 			players[i].getSocket().emit('startingGame')
 		}
 
+		// player positions hardcoded for now
+		if (players.length == 4) {
+			that.placeTree(players[0], 10)
+			that.placeTree(players[1], 14)
+			that.placeTree(players[2], 18)
+			that.placeTree(players[3], 22)
+		} else if (players.length == 3) {
+			that.placeTree(players[0], 11)
+			that.placeTree(players[1], 16)
+			that.placeTree(players[2], 21)
+		} else if (players.length == 2) {
+			that.placeTree(players[0], 13)
+			that.placeTree(players[1], 19)
+		}
+
 		setInterval(function() {
 			that.gameLoop()
 		}, 1000)
@@ -173,6 +188,18 @@ var Game = function() {
 				};
 			}
 		}
+	}
+
+	this.growTreeWidth = function(player) {
+		trees[player.getName()].extendTreeWidth()
+	}
+
+	this.growTreeHeight = function(player) {
+		trees[player.getName()].extendTreeHeigth()
+	}
+
+	this.growLeafDensity = function(player) {
+		trees[player.getName()].extendLeafDensity()
 	}
 
 	this.gameLoop = function() {

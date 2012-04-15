@@ -13,7 +13,7 @@ var Build = function() {
 	}
 
 	this.extendRootDensity = function() {
-		socket.emit('buildExtendRootDensity')
+		socket.emit('buildExtendRootStrength')
 	}
 
 	this.extendRootWidth = function() {
