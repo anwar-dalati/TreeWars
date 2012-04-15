@@ -15,8 +15,9 @@ $(function() {
 			url: '../sounds/evening-in-the-forest.mp3'
 		});
 
-		twitter.play();
-		music.play();
+		//twitter.play();
+		//music.play();
+		
 	});
 
 	$('#sound').click(function() {
